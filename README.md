@@ -16,12 +16,6 @@ An interactive bilingual platform for exploring, analyzing, and assessing the ma
 
 ---
 
-## Preview
-
-_Add a screenshot or an animated GIF of the application here._
-
----
-
 ## Key Features
 
 - **PESTEL Analysis Framework** – Explore **58 World Bank indicators** organized into six strategic dimensions: Political, Economic, Social, Technological, Environmental, and Legal & Governance.
