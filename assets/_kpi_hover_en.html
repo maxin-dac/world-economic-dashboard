@@ -1,0 +1,54 @@
+<script>
+(function(){
+  var doc = window.parent && window.parent.document;
+  if(!doc) return;
+  var tip = doc.getElementById('__kpi_tip__');
+  if(!tip){
+    tip = doc.createElement('div');
+    tip.id = '__kpi_tip__';
+    tip.style.cssText = 'position:fixed;z-index:2147483647;pointer-events:none;opacity:0;'
+      + 'transform:translateY(6px);transition:opacity .15s ease,transform .15s ease;max-width:300px;'
+      + 'padding:9px 13px;border-radius:11px;background:rgba(13,22,38,.97);color:#eaf1fb;'
+      + 'border:1px solid rgba(46,141,224,.45);box-shadow:0 12px 30px rgba(8,16,32,.45);'
+      + 'backdrop-filter:blur(6px);font:600 12.5px/1.45 Manrope,system-ui,sans-serif;letter-spacing:.01em;';
+    doc.body.appendChild(tip);
+  }
+  function textOf(card){
+    if(card.matches && card.matches('[data-testid="stMetric"]')){
+      var l = card.querySelector('[data-testid="stMetricLabel"]');
+      var v = card.querySelector('[data-testid="stMetricValue"]');
+      var d = card.querySelector('[data-testid="stMetricDelta"]');
+      var s = (l ? l.innerText.trim() : '');
+      if(v) s += '  ·  ' + v.innerText.trim();
+      if(d && d.innerText.trim()) s += '  (' + d.innerText.trim() + ')';
+      return s;
+    }
+    var p = card.querySelector('p');
+    return (p ? p.innerText : card.innerText).trim();
+  }
+  function place(e){
+    var r = tip.getBoundingClientRect();
+    var x = e.clientX + 16, y = e.clientY + 18;
+    if(x + r.width + 8 > window.innerWidth) x = e.clientX - r.width - 16;
+    if(y + r.height + 8 > window.innerHeight) y = window.innerHeight - r.height - 8;
+    tip.style.left = Math.max(8, x) + 'px';
+    tip.style.top = Math.max(8, y) + 'px';
+  }
+  function bind(el){
+    if(el.__tb) return; el.__tb = 1; el.style.cursor = 'default';
+    el.addEventListener('mouseenter', function(e){
+      var tx = textOf(el);
+      if(!tx){ tip.style.opacity = '0'; return; }
+      tip.textContent = tx; tip.style.opacity = '1'; tip.style.transform = 'translateY(0)'; place(e);
+    });
+    el.addEventListener('mousemove', function(e){ if(tip.style.opacity === '1') place(e); });
+    el.addEventListener('mouseleave', function(){ tip.style.opacity = '0'; tip.style.transform = 'translateY(6px)'; });
+  }
+  function scan(){
+    var n = doc.querySelectorAll('[data-testid="stMetric"], [data-testid="stPopoverButton"] button, button[data-testid="stPopoverButton"]');
+    for(var i = 0; i < n.length; i++) bind(n[i]);
+  }
+  scan(); setTimeout(scan, 300); setTimeout(scan, 1200);
+  new MutationObserver(function(){ scan(); }).observe(doc.body, {childList:true, subtree:true});
+})();
+</script>
