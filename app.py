@@ -47,13 +47,23 @@ pio.templates.default = "app_theme"
 
 # ── Load external CSS ──────────────────────────────────────────────────────
 import pathlib
+import os
 
-CSS_PATH = pathlib.Path(__file__).parent / "assets" / "style.css"
+# Get the directory where app.py is located
+BASE_DIR = pathlib.Path(__file__).parent.resolve()
+CSS_PATH = BASE_DIR / "assets" / "style.css"
+
 if CSS_PATH.exists():
-    css_content = CSS_PATH.read_text(encoding="utf-8")
-    st.markdown(f"<style>{css_content}</style>", unsafe_allow_html=True)
+    try:
+        css_content = CSS_PATH.read_text(encoding="utf-8")
+        st.markdown(f"<style>{css_content}</style>", unsafe_allow_html=True)
+    except Exception as e:
+        st.error(f"❌ Error loading CSS: {e}")
+        st.info("Make sure assets/style.css exists and is readable.")
 else:
-    st.warning(f"CSS file not found at `{CSS_PATH}`. Using default styling.")
+    st.error(f"❌ CSS file not found at: {CSS_PATH}")
+    st.info(f"Current directory: {os.getcwd()}")
+    st.info("Expected location: assets/style.css")
 
 # ── Constants ───────────────────────────────────────────────────────────────
 INCOME_ORDER = ["High income", "Upper middle income", "Lower middle income", "Low income"]
