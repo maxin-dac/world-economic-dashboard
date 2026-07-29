@@ -1,6 +1,6 @@
-# 🌍 World Economic Intelligence Dashboard
+# 🌍 Tableau de Bord d'Intelligence Économique Mondiale
 
-Une plateforme bilingue interactive permettant d'explorer, d'analyser et d'évaluer l'environnement macroéconomique de **217 pays**, sur la période **2000 à 2024**.
+Une plateforme interactive et bilingue pour explorer l'environnement macroéconomique et stratégique de **217 pays**, de **2000 à 2024** — structurée autour du cadre **PESTEL** et alimentée par **58 indicateurs réels de la Banque Mondiale**.
 
 <p align="left">
   <img src="https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white" alt="Python" />
@@ -8,8 +8,8 @@ Une plateforme bilingue interactive permettant d'explorer, d'analyser et d'éval
   <img src="https://img.shields.io/badge/Plotly-3F4F75?style=flat&logo=plotly&logoColor=white" alt="Plotly" />
   <img src="https://img.shields.io/badge/Pandas-150458?style=flat&logo=pandas&logoColor=white" alt="Pandas" />
   <img src="https://img.shields.io/badge/NumPy-013243?style=flat&logo=numpy&logoColor=white" alt="NumPy" />
-  <img src="https://img.shields.io/badge/statsmodels-6A5ACD?style=flat" alt="statsmodels" />
   <img src="https://img.shields.io/badge/World%20Bank%20API-0072BC?style=flat" alt="World Bank API" />
+  <img src="https://img.shields.io/badge/Licence-MIT-green?style=flat" alt="Licence MIT" />
 </p>
 
 > 🇬🇧 **English version:** [README-en-us.md](README-en-us.md)
@@ -18,203 +18,160 @@ Une plateforme bilingue interactive permettant d'explorer, d'analyser et d'éval
 
 ## Aperçu
 
-_Ajoutez ici une capture d'écran ou un GIF animé de l'application._
+![alt text](image-1.png)
 
----
+## Pourquoi ce tableau de bord ?
 
-## Fonctionnalités clés
+La plupart des outils macroéconomiques disponibles en libre accès vous obligent à choisir entre l'étendue (beaucoup de pays, peu d'indicateurs) et la profondeur (analyses riches, un seul pays à la fois). Ce tableau de bord fait les deux.
 
-- **Cadre d'analyse PESTEL** – Explorez **58 indicateurs de la Banque Mondiale** organisés selon six dimensions stratégiques : Politique, Économique, Social, Technologique, Environnemental et Légal & Gouvernance.
-- **Cartographies mondiales interactives** – Basculez entre des cartes choroplèthes et des cartes à bulles avec des échelles de couleurs adaptées (rognage par percentile pour un meilleur contraste) afin d'identifier rapidement les disparités régionales.
-- **Analyse des tendances et des corrélations** – Analysez les évolutions historiques par région ou groupe de revenu et identifiez les relations entre indicateurs grâce à une régression intégrée OLS (Ordinary Least Squares), avec annotations des événements historiques (2008, 2020, 2022).
-- **Profils pays détaillés** – Accédez à une vue analytique complète pour chaque pays comprenant :
-  - Une carte interactive avec zoom automatique sur le pays sélectionné
-  - Un radar de performance PESTEL (les indicateurs inverses sont correctement inversés)
-  - Une cascade de la balance commerciale
-  - Un graphique en aires empilées 100 % de l'évolution sectorielle
-  - Une carte de chaleur normalisée des indicateurs (10 dernières années)
-  - Un graphique à double axe PIB vs inflation
-  - Les indicateurs clés de performance (KPIs) avec variation annuelle
-  - La structure sectorielle de l'économie (graphique en donut)
-- **Comparaison multi-pays** – Comparez jusqu'à 12 pays simultanément sur n'importe quel indicateur disponible, avec un graphique temporel, des barres de classement et un tableau de synthèse avec variations annuelles.
-- **Analyse économique structurelle** – Visualisez la contribution des secteurs (Agriculture, Industrie, Services) grâce aux Treemaps, analysez la distribution des indicateurs avec des Violin Plots et parcourez les classements Top/Bottom 10.
-- **Explorateur de données interactif** – Parcourez l'ensemble du dataset grâce à des filtres avancés (année, région, pilier PESTEL), une mise en forme conditionnelle qui respecte les cellules vides, et une exportation CSV en un clic.
-- **Interface entièrement bilingue** – Basculez instantanément l'ensemble de l'application — graphiques, étiquettes, légendes, infobulles et en-têtes de tableau — entre le français et l'anglais sans rechargement de la page. Les **180+ clés de traduction** sont centralisées dans un seul fichier `translations.py`, avec un validateur de parité intégré.
-- **Code source 100 % en anglais** – Tous les noms de variables, commentaires, docstrings et noms de fonctions sont rédigés en anglais. Seul le texte visible par l'utilisateur est bilingue, géré via la couche de traduction.
+Il combine **58 indicateurs de la Banque Mondiale** couvrant toutes les dimensions PESTEL, des données issues de l'API officielle de la Banque Mondiale, et un ensemble de visualisations conçues pour l'analyse stratégique — le tout dans une interface bilingue, aussi efficace pour une recherche rapide sur un pays que pour une étude comparative rigoureuse.
 
----
+## Fonctionnalités
+
+### 🗺️ Carte mondiale
+
+- Basculez entre **carte choroplèthe** (pays colorés) et **carte à bulles** (cercles proportionnels) pour n'importe lequel des 58 indicateurs
+- Échelle logarithmique pour le PIB par habitant — chaque groupe de revenu est visuellement distinguable, pas seulement les extrêmes
+- Rognage par percentile pour un meilleur contraste sur les distributions asymétriques
+- Cartes de médiane régionale affichées directement sous la carte
+
+### 📈 Tendances et corrélations
+
+- Séries temporelles groupées par **région** ou **groupe de revenu** (2000–2024)
+- Lignes verticales annotées pour la **crise financière de 2008**, le **COVID-19 (2020)** et la **vague d'inflation de 2022**
+- **Scatter OLS** entre deux indicateurs quelconques, avec taille des bulles proportionnelle au poids économique
+- Bandeau contextuel par indicateur expliquant ce que le chiffre signifie et comment l'interpréter
+
+### 🔎 Profil pays
+
+Le module le plus complet. Pour chacun des 217 pays :
+
+- **Carte géographique** avec zoom automatique centré sur le pays sélectionné, mis en évidence dans la couleur de son groupe de revenu
+- **Radar PESTEL** sur 6 piliers — avec les indicateurs inverses (inflation, dette, chômage…) automatiquement inversés pour que le radar se lise toujours "vers l'extérieur = meilleur"
+- **Graphique double axe PIB vs Inflation** — production économique et pression sur les prix sur la même chronologie
+- **Graphique en aires empilées 100%** de l'évolution sectorielle (Agriculture / Industrie / Services) dans le temps
+- **Waterfall balance commerciale** — exportations et importations côte à côte, solde net clairement affiché
+- **Heatmap normalisée sur 10 ans** — tous les indicateurs disponibles de la dernière décennie, standardisés (z-score) par colonne pour faire ressortir les performances relatives
+- **Donut sectoriel** pour la dernière année disponible
+- **Cartes KPI** avec variations annuelles, comparaison à la médiane mondiale et interprétation dynamique en langage naturel (ex. : « IDH : très élevé », « au-dessus de la médiane mondiale (défavorable) »)
+- **Infobulles** sur chaque carte KPI avec définition bilingue statique et conseil de lecture
+
+### ↔️ Comparaison de pays
+
+- Sélection jusqu'à **12 pays** simultanément
+- Graphique temporel en courbes, histogramme de classement et tableau de synthèse avec variations annuelles
+- Fonctionne pour n'importe lequel des 58 indicateurs disponibles
+
+### 🏗️ Structure économique
+
+- **Treemap** de la composition sectorielle (Agriculture / Industrie / Services) par région et groupe de revenu
+- **Violin plot** de la distribution du PIB par habitant (échelle log) — montre la dispersion, les concentrations et les valeurs aberrantes par groupe de revenu
+- **Classement Top 10 / Bottom 10** pour n'importe quel indicateur
+- **Graphique animé** de l'évolution sectorielle par région dans le temps
+
+### 📋 Explorateur de données
+
+- Jeu de données complet navigable avec filtres
+- Mise en forme conditionnelle null-safe, avec dégradés de couleurs sémantiquement corrects : vert = mieux, rouge = pire, les indicateurs inverses sont automatiquement gérés
+- **Export CSV** en un clic de n'importe quelle vue filtrée
 
 ## Cadre PESTEL
 
-Le tableau de bord organise **58 indicateurs de la Banque Mondiale** selon six dimensions stratégiques couramment utilisées dans l'analyse de l'environnement macroéconomique et stratégique.
+Les 58 indicateurs sont organisés en six dimensions stratégiques utilisées dans l'analyse de l'environnement macroéconomique et concurrentiel.
 
-| Dimension          | Nb | Exemples d'indicateurs                                                                  |
-| ------------------ | -- | --------------------------------------------------------------------------------------- |
-| Politique          | 5  | Dépenses militaires, Aide publique au développement, Efficacité de l'État, Stabilité politique |
-| Économique         | 18 | PIB, PIB par habitant, Croissance du PIB, Inflation, Dette, Commerce, IDE, Réserves, Valeur ajoutée sectorielle |
-| Social             | 14 | Population, Chômage, Chômage des jeunes, Espérance de vie, Indice de Gini, IDH, Alphabétisation, Dépenses de santé et d'éducation |
-| Technologique      | 8  | Dépenses en R&D, Demandes de brevets, Exportations de haute technologie, Accès Internet, Abonnements mobiles et fixe |
-| Environnemental    | 8  | Émissions CO₂ et GES, Énergies renouvelables, Surface forestière et terres arables, Accès à l'électricité, Rendement céréalier |
-| Légal & Gouvernance| 5  | Perception de la corruption (IPC), État de droit, Délais de création d'entreprise, Femmes au parlement |
+| Pilier | # | Exemples d'indicateurs |
+|---|---|---|
+| **Politique** | 4 | Dépenses militaires (% PIB & % budget), Efficacité gouvernementale (WGI), Stabilité politique (WGI) |
+| **Économique** | 20 | PIB, PIB/hab. (USD & PPA), Croissance, Inflation, Dette publique, Ouverture commerciale, IDE, Compte courant, Transferts, Réserves de change, Valeur ajoutée sectorielle |
+| **Social** | 16 | Population, Espérance de vie, IDH, Indice de Gini, Chômage, Chômage des jeunes, Alphabétisation, Mortalité infantile, Fécondité, Assainissement, Dépenses de santé et d'éducation |
+| **Technologique** | 7 | Dépenses R&D, Chercheurs/million, Exportations haute technologie, Utilisateurs internet, Abonnements mobiles et haut débit, Détention d'un compte bancaire |
+| **Environnemental** | 4 | Pollution PM2,5, Accès à l'électricité, Pertes en réseau, Rendement céréalier |
+| **Légal & Gouvernance** | 7 | Contrôle de la corruption, État de droit, Qualité réglementaire, Voix et responsabilité (tous WGI), IPC (Transparency Intl.), Score de transparence, Femmes au parlement |
 
-> **Note :** Les indicateurs pour lesquels une valeur *élevée* est *défavorable* (inflation, dette, chômage, CO₂, etc.) sont marqués comme **indicateurs inverses**. Ils sont automatiquement inversés dans le radar PESTEL, colorés avec une échelle « élevé = défavorable » et classés dans le bon sens.
-
----
+> **Indicateurs inverses** — pour lesquels une valeur élevée est défavorable (inflation, dette, PM2,5, chômage…) — sont gérés automatiquement dans toute l'application : inversés dans le radar PESTEL, colorés avec une échelle « plus élevé = pire » et classés dans le bon sens.
 
 ## Structure du projet
 
-```text
+```
 world-economic-dashboard/
-├── app.py                  # Application Streamlit principale (code anglais, interface bilingue)
-├── translations.py         # Dictionnaire centralisé des traductions EN/FR (180+ clés) + validateur
-├── requirements.txt        # Dépendances Python
-├── data/
-│   ├── world_economic.csv  # Dataset agrégé (217 pays × 2000–2024)
-│   └── fetch_data.py       # Script de collecte via l'API Banque Mondiale
-├── README-en-us.md         # Documentation anglaise
-└── README-fr.md            # Ce fichier — documentation française
+├── __pycache__/                    # Cache Python (généré automatiquement)
+│   ├── app.cpython-313.pyc
+│   └── translations.cpython-313.pyc
+│
+├── .streamlit/                     # Configuration Streamlit
+│   ── config.toml                 # Thème et paramètres de l'app
+│
+├── assets/                         # Ressources statiques (CSS, HTML)
+│   ├── _kpi_hover_en.html          # Template tooltip EN (généré)
+│   ├── _kpi_hover_fr.html          # Template tooltip FR (généré)
+│   └── style.css                   # Feuille de style personnalisée
+│
+├── data/                           # Données et scripts de collecte
+│   ├── fetch_data.py               # Script de collecte API Banque Mondiale
+│   └── world_economic.csv          # Dataset agrégé (217 pays × 2000-2024)
+│
+├── .gitignore                      # Fichiers à ignorer par Git
+├── app.py                          # Application Streamlit principale
+├── translations.py                 # Dictionnaire de traductions EN/FR
+├── requirements.txt                # Dépendances Python
+├── README-en-us.md                 # Documentation anglaise
+└── README-fr.md                    # Ce fichier, Documentation française
 ```
 
----
+## Sources des données
 
-## Démarrage rapide
+| Source | Couverture | Accès |
+|---|---|---|
+| [Banque Mondiale — World Development Indicators (WDI)](https://databank.worldbank.org/source/world-development-indicators) | 56 indicateurs · 217 pays · 2000–2024 | API REST gratuite (`api.worldbank.org/v2`) |
+| [Our World in Data — IDH](https://ourworldindata.org/human-development-index) | Indice de développement humain | Téléchargement CSV gratuit (CC BY) |
+| [Our World in Data — IPC](https://ourworldindata.org/corruption) | Indice de perception de la corruption | Téléchargement CSV gratuit (CC BY) |
 
-### 1. Cloner le dépôt
+Toutes les données sont ouvertes et librement accessibles. Les données de la Banque Mondiale sont utilisées selon les [conditions d'utilisation des données ouvertes de la Banque Mondiale](https://www.worldbank.org/en/about/legal/terms-of-use-for-datasets).
 
-```bash
-git clone https://github.com/maxin-dac/world-economic-dashboard.git
-cd world-economic-dashboard
-```
+## Disponibilité des données & limitations
 
-### 2. Créer un environnement virtuel
+### Pourquoi certaines données sont-elles manquantes pour certains pays ?
 
-```bash
-# Linux / macOS
-python -m venv venv
-source venv/bin/activate
+Plusieurs facteurs expliquent les lacunes dans le dataset :
 
-# Windows
-python -m venv venv
-venv\Scripts\activate
-```
+1. **Capacités statistiques nationales variables** — Les pays en développement peuvent manquer des ressources ou des infrastructures nécessaires à une collecte de données régulière et standardisée, ce qui entraîne des rapports irréguliers ou absents.
+2. **Création et dissolution de pays** — Certains pays n'existaient tout simplement pas avant certaines dates. Le Soudan du Sud, par exemple, a été créé en 2011 ; les données pour les années antérieures sont structurellement absentes.
+3. **Conflits et instabilité politique** — Les guerres, crises et fragilités étatiques interrompent les chaînes de collecte et de publication des données, parfois pendant plusieurs années.
+4. **Délais de publication** — Les organisations internationales prennent généralement 12 à 18 mois pour valider, harmoniser et publier les données officielles. L'année civile la plus récente n'est presque jamais intégralement couverte.
+5. **Couverture spécifique à certains indicateurs** — Certains indicateurs ne s'appliquent qu'à des sous-ensembles de pays : le score de transparence CPIA, par exemple, ne concerne que les pays éligibles à l'IDA ; l'indice de Gini est mesuré de façon irrégulière et avec une fréquence variable selon les pays.
+6. **Différences méthodologiques** — Les pays peuvent utiliser des normes de calcul différentes qui ne sont pas directement comparables d'un pays à l'autre, conduisant à des exclusions intentionnelles lors de l'harmonisation.
 
-### 3. Installer les dépendances
+Le tableau de bord affiche toutes les données disponibles de manière transparente. Les cellules manquantes sont indiquées par un marqueur neutre « None » sans mise en forme colorée, afin que les lacunes ne soient jamais confondues avec des valeurs faibles.
 
-```bash
-pip install -r requirements.txt
-```
+### Pourquoi la période d'analyse se termine-t-elle en 2024 ?
 
-### 4. (Optionnel) Actualiser le dataset
+1. **Disponibilité des données** — 2024 représente les données validées les plus récentes publiées par la Banque Mondiale au moment du développement.
+2. **Cycle de publication de la Banque Mondiale** — Les données sont publiées avec un décalage de 12 à 18 mois. La couverture complète des indicateurs pour 2024 ne sera pas disponible avant fin 2025 ou 2026, selon l'indicateur.
+3. **Cohérence** — Fixer 2024 comme année de fin garantit que les 58 indicateurs disposent d'une couverture comparable et validée, plutôt que de mélanger chiffres préliminaires et définitifs.
+4. **Mise à jour facile** — Le script `fetch_data.py` peut être relancé à tout moment.
 
-Le projet contient déjà un dataset prétraité dans `data/world_economic.csv`.
-
-> **Note :** Ce fichier est généré à partir de données réelles de l'API Banque Mondiale. Les valeurs sont exactes. Pour récupérer les derniers chiffres :
-
-```bash
-python data/fetch_data.py
-```
-
-Ce script appelle directement l'API REST v2 de la Banque Mondiale (sans bibliothèque tierce), gère la pagination automatiquement et écrase `world_economic.csv`. Comptez 3 à 5 minutes pour la collecte complète (~58 indicateurs × 217 pays).
-
-### 5. Lancer l'application
-
-```bash
-streamlit run app.py
-```
-
-Ouvrez votre navigateur à l'adresse `http://localhost:8501`.
-
-### 6. (Optionnel) Valider les traductions
-
-```bash
-python translations.py
-```
-
-Cette commande exécute le validateur de parité intégré et signale toute clé manquante ou mal formée entre les dictionnaires anglais et français.
-
----
-
-## Dépendances
-
-| Bibliothèque | Version | Rôle                                                    |
-| ------------ | ------- | ------------------------------------------------------- |
-| streamlit    | ≥ 1.35  | Interface web                                           |
-| plotly       | ≥ 5.20  | Graphiques et cartes                                    |
-| pandas       | ≥ 2.0   | Chargement et manipulation des données                  |
-| numpy        | ≥ 1.26  | Calculs numériques                                      |
-| statsmodels  | ≥ 0.14  | Droites de tendance OLS dans les graphiques de dispersion |
-| matplotlib   | ≥ 3.7   | Calcul des dégradés de couleur dans le tableau de données |
-| requests     | ≥ 2.31  | Client HTTP pour les appels à l'API Banque Mondiale     |
-
-Toutes les dépendances sont déclarées dans `requirements.txt` et s'installent en une seule commande `pip install -r requirements.txt`.
-
----
-
-## Déploiement
-
-L'application est entièrement configurée pour un déploiement sur **Streamlit Community Cloud**.
-
-### Déployer en quelques étapes
-
-1. Publiez le projet sur votre dépôt GitHub.
-2. Connectez-vous à [Streamlit Community Cloud](https://share.streamlit.io).
-3. Cliquez sur **New App**.
-4. Sélectionnez le dépôt `maxin-dac/world-economic-dashboard`, branche `main`, fichier d'entrée `app.py`.
-5. Cliquez sur **Deploy**.
-
-Une fois déployé, votre tableau de bord sera accessible publiquement via une URL Streamlit dédiée — partageable sur LinkedIn, GitHub ou avec des clients.
-
----
-
-## Vue d'ensemble du tableau de bord
-
-| Onglet           | Contenu                                                                                      |
-| ---------------- | -------------------------------------------------------------------------------------------- |
-| 🗺️ Carte mondiale | Choroplèthe ou bubble map · échelle de couleur avec rognage par percentile · médianes régionales |
-| 📈 Tendances     | Séries temporelles par région ou groupe de revenu · scatter OLS · annotations d'événements (2008, 2020, 2022) |
-| 🔎 Profil pays   | Carte avec zoom géographique · radar PESTEL · cascade · aires 100 % · heatmap · double axe · KPIs · donut sectoriel |
-| ↔️ Comparaison   | Jusqu'à 12 pays · graphique temporel · barres de classement · tableau de synthèse avec variations |
-| 🏗️ Structure     | Treemap · violin plot · classement Top/Bottom 10                                             |
-| 📋 Données       | Filtre PESTEL · mise en forme conditionnelle null-safe · export CSV                          |
-
----
-
-## Source des données
-
-**World Development Indicators (WDI) — Banque Mondiale Open Data**
-
-- Endpoint API : `https://api.worldbank.org/v2/country/all/indicator/{CODE}?format=json`
-- Les données sont collectées via des appels REST directs (sans bibliothèque tierce), nettoyées et sauvegardées dans `world_economic.csv`.
-- Licence : [Conditions d'utilisation des données ouvertes de la Banque Mondiale](https://www.worldbank.org/en/about/legal/terms-of-use-for-datasets)
-
----
+> **Note :** Un bouton **Rafraîchir depuis l'API** est disponible dans la barre latérale du tableau de bord. Un seul appel met à jour les 58 indicateurs pour les 217 pays en une seule passe.
 
 ## Cas d'utilisation
 
-Business Intelligence · Benchmarking pays · Analyse économique · Planification stratégique · Recherche académique · Intelligence économique · Analyse des politiques publiques · Études internationales
-
----
-
-## Améliorations futures
-
-- Recommandations pays assistées par IA
-- Prévisions et analyses prédictives
-- Détection d'anomalies temporelles
-- Export de rapports PDF et PowerPoint
-- Intégration des données OCDE et FMI
-- Constructeur de tableau de bord personnalisé
-
----
+- **Business Intelligence** — scoring de risque pays, évaluation d'entrée sur un marché
+- **Planification stratégique** — analyse environnementale PESTEL pour tout pays ou région
+- **Benchmarking pays** — comparaison côte à côte de jusqu'à 12 pays
+- **Recherche académique** — 25 ans de données World Bank harmonisées, exportables en CSV
+- **Intelligence économique** — suivi des tendances macroéconomiques dans les marchés émergents
+- **Analyse des politiques publiques** — monitoring des indicateurs de gouvernance, développement et durabilité
+- **Enseignement** — exploration interactive des données économiques mondiales
 
 ## Auteur
 
 **Maxime NDACLEU** — Data Analyst & Business Intelligence Analyst
 
-- GitHub : [github.com/maxin-dac](https://github.com/maxin-dac)
-- LinkedIn : [linkedin.com/in/maximendacleu](https://www.linkedin.com/in/maximendacleu)
+[![GitHub](https://img.shields.io/badge/GitHub-maxin--dac-181717?style=flat&logo=github&logoColor=white)](https://github.com/maxin-dac)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-maximendacleu-0A66C2?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/maximendacleu)
 
 ---
 
 ## Licence
 
-Ce projet est distribué sous la licence **MIT**. Les données utilisées sont fournies par la Banque Mondiale selon sa licence Open Data.
+Distribué sous **licence MIT**.
+Données fournies par la **Banque Mondiale** (licence Open Data) et **Our World in Data** (CC BY).
