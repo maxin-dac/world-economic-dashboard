@@ -12,7 +12,11 @@ Une plateforme interactive et bilingue pour explorer l'environnement macroécono
   <img src="https://img.shields.io/badge/Licence-MIT-green?style=flat" alt="Licence MIT" />
 </p>
 
-> 🇬🇧 **English version:** [README-en-us.md](README-en-us.md)
+## 🚀 Lien de l'appli
+
+***Cliquez sur ce bouton pour lancer l'application***
+
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://world-bi-dashboard.streamlit.app/)
 
 ---
 

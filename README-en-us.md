@@ -12,7 +12,11 @@ An interactive bilingual platform for exploring the macroeconomic and strategic 
   <img src="https://img.shields.io/badge/License-MIT-green?style=flat" alt="MIT License" />
 </p>
 
-> 🇫🇷 **French version:** [README-fr.md](README-fr.md)
+## 🚀 App Link
+
+***Click on this button to launch the application***
+
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://world-bi-dashboard.streamlit.app/)
 
 ---
 
