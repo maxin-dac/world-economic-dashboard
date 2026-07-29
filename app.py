@@ -273,8 +273,6 @@ ALL_YEARS = sorted(df_all["year"].unique())
 with st.sidebar:
     lang = st.radio("🌐 Language / Langue", ["EN", "FR"], horizontal=True, index=0, key="lang_choice").lower()
     st.markdown(f"## {t('sidebar_title', lang)}")
-    st.caption(t("sidebar_caption", lang, n=df_all["country"].nunique(), ymin=YEAR_MIN, ymax=YEAR_MAX))
-    st.divider()
     default_years = [y for y in ALL_YEARS if y >= 2010]
     sel_years = st.multiselect(t("years_label", lang), ALL_YEARS, default=default_years)
     if not sel_years:
