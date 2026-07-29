@@ -284,3 +284,62 @@ button[data-testid="stTooltipIcon"] [data-testid="stIconMaterial"] {
     background: var(--blue) !important;
     color: #ffffff !important;
 }
+
+/* ── FORCE NAVY TABS ────────────────────────────────────────────────────── */
+/* Override ALL tab styles to match sidebar navy */
+[data-baseweb="tab-list"] {
+    background: #0B2540 !important;
+    border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+    box-shadow: none !important;
+}
+
+[data-baseweb="tab"] {
+    background: transparent !important;
+    color: #8fa6bd !important;
+    border: 1px solid transparent !important;
+    border-bottom: none !important;
+}
+
+[data-baseweb="tab"] p {
+    color: #8fa6bd !important;
+    font-weight: 700 !important;
+}
+
+[data-baseweb="tab"]:hover {
+    background: rgba(255,255,255,0.06) !important;
+    color: #dbe7f3 !important;
+}
+
+[data-baseweb="tab"]:hover p {
+    color: #dbe7f3 !important;
+}
+
+[data-baseweb="tab"][aria-selected="true"] {
+    background: #1a3a5c !important;
+    border-color: rgba(255,255,255,0.1) !important;
+    box-shadow: 0 -2px 14px rgba(0,0,0,0.15) !important;
+}
+
+[data-baseweb="tab"][aria-selected="true"] p {
+    color: #ffffff !important;
+    font-weight: 800 !important;
+}
+
+[data-baseweb="tab"][aria-selected="true"]::after {
+    content: "" !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 55% !important;
+    height: 3px !important;
+    border-radius: 3px 3px 0 0 !important;
+    background: linear-gradient(90deg, #2E8DE0, #22d3ee) !important;
+}
+
+/* Force tab container background */
+.stTabs [data-baseweb="tab-list"] {
+    background: #0B2540 !important;
+    padding: 8px 8px 0 8px !important;
+    border-radius: 12px 12px 0 0 !important;
+}
