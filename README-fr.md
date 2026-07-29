@@ -1,6 +1,6 @@
 # 🌍 Tableau de Bord d'Intelligence Économique Mondiale
 
-Une plateforme interactive et bilingue pour explorer l'environnement macroéconomique et stratégique de **217 pays**, de **2000 à 2024** — structurée autour du cadre **PESTEL** et alimentée par **58 indicateurs réels de la Banque Mondiale**.
+Une plateforme interactive et bilingue pour explorer l'environnement macroéconomique et stratégique de **217 pays**, de **2010 à 2024** — structurée autour du cadre **PESTEL** et alimentée par **58 indicateurs réels de la Banque Mondiale**.
 
 <p align="left">
   <img src="https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white" alt="Python" />
@@ -41,8 +41,8 @@ Il combine **58 indicateurs de la Banque Mondiale** couvrant toutes les dimensio
 
 ### 📈 Tendances et corrélations
 
-- Séries temporelles groupées par **région** ou **groupe de revenu** (2000–2024)
-- Lignes verticales annotées pour la **crise financière de 2008**, le **COVID-19 (2020)** et la **vague d'inflation de 2022**
+- Séries temporelles groupées par **région** ou **groupe de revenu** (2010–2024)
+- Lignes verticales annotées pour le **COVID-19 (2020)** et la **vague d'inflation de 2022**
 - **Scatter OLS** entre deux indicateurs quelconques, avec taille des bulles proportionnelle au poids économique
 - Bandeau contextuel par indicateur expliquant ce que le chiffre signifie et comment l'interpréter
 
@@ -112,7 +112,7 @@ world-economic-dashboard/
 │
 ├── data/                           # Données et scripts de collecte
 │   ├── fetch_data.py               # Script de collecte API Banque Mondiale
-│   └── world_economic.csv          # Dataset agrégé (217 pays × 2000-2024)
+│   └── world_economic.csv          # Dataset agrégé (217 pays × 2010-2024)
 │
 ├── .gitignore                      # Fichiers à ignorer par Git
 ├── app.py                          # Application Streamlit principale
@@ -126,7 +126,7 @@ world-economic-dashboard/
 
 | Source | Couverture | Accès |
 |---|---|---|
-| [Banque Mondiale — World Development Indicators (WDI)](https://databank.worldbank.org/source/world-development-indicators) | 56 indicateurs · 217 pays · 2000–2024 | API REST gratuite (`api.worldbank.org/v2`) |
+| [Banque Mondiale — World Development Indicators (WDI)](https://databank.worldbank.org/source/world-development-indicators) | 56 indicateurs · 217 pays · 2010–2024 | API REST gratuite (`api.worldbank.org/v2`) |
 | [Our World in Data — IDH](https://ourworldindata.org/human-development-index) | Indice de développement humain | Téléchargement CSV gratuit (CC BY) |
 | [Our World in Data — IPC](https://ourworldindata.org/corruption) | Indice de perception de la corruption | Téléchargement CSV gratuit (CC BY) |
 
@@ -161,7 +161,7 @@ Le tableau de bord affiche toutes les données disponibles de manière transpare
 - **Business Intelligence** — scoring de risque pays, évaluation d'entrée sur un marché
 - **Planification stratégique** — analyse environnementale PESTEL pour tout pays ou région
 - **Benchmarking pays** — comparaison côte à côte de jusqu'à 12 pays
-- **Recherche académique** — 25 ans de données World Bank harmonisées, exportables en CSV
+- **Recherche académique** — 15 ans de données World Bank harmonisées, exportables en CSV
 - **Intelligence économique** — suivi des tendances macroéconomiques dans les marchés émergents
 - **Analyse des politiques publiques** — monitoring des indicateurs de gouvernance, développement et durabilité
 - **Enseignement** — exploration interactive des données économiques mondiales

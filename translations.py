@@ -12,6 +12,7 @@ TRANSLATIONS = {
         "app_caption": "**{n} countries** selected · Period: {y0}–{y1} · Latest year: **{ly}**",
         "footer": "🌍 Global Economic Intelligence Dashboard",
         "loading_data": "Loading data…",
+        "data_lag_note": "Latest available validated data (up to 2024)",
 
         # ── Sidebar ─────────────────────────────────────────────────────────
         "sidebar_title": "🌍 Global Economic Intelligence Dashboard",
@@ -236,6 +237,7 @@ TRANSLATIONS = {
         "app_caption": "**{n} pays** sélectionnés · Période : {y0}–{y1} · Dernière année : **{ly}**",
         "footer": "🌍 Tableau de Bord d'Intelligence Économique Mondiale",
         "loading_data": "Chargement des données…",
+        "data_lag_note": "Dernières données validées disponibles (jusqu'en 2024)",
 
         # ── Sidebar ─────────────────────────────────────────────────────────
         "sidebar_title": "🌍 Tableau de Bord d'Intelligence Économique Mondiale",
