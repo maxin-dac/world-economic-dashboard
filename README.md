@@ -22,7 +22,7 @@ An interactive bilingual platform for exploring the macroeconomic and strategic 
 
 ## Overview
 
-![alt text](image.png)
+<img width="1353" height="637" alt="image" src="https://github.com/user-attachments/assets/42e13df1-e5e0-49f2-b396-e76c2a7144ab" />
 
 ## Why this dashboard?
 
