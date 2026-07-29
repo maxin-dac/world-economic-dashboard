@@ -31,6 +31,42 @@ html, body, [class*="css"], .stMarkdown, .stText, h1, h2, h3, h4, h5, h6, p, spa
     font-family: var(--font) !important;
 }
 
+/* ── Tabs — same navy as sidebar ── */
+[data-baseweb="tab-list"] {
+    background: #0B2540 !important;
+    border-bottom: 1px solid rgba(255,255,255,.10) !important;
+    border-radius: var(--r-md) var(--r-md) 0 0 !important;
+    padding: 8px 8px 0 !important;
+}
+[data-baseweb="tab"] {
+    color: #8fa6bd !important;
+    background: transparent !important;
+    border: 1px solid transparent !important;
+    border-bottom: none !important;
+}
+[data-baseweb="tab"] p {
+    color: #8fa6bd !important;
+}
+[data-baseweb="tab"]:hover {
+    background: rgba(255,255,255,.06) !important;
+    color: #dbe7f3 !important;
+}
+[data-baseweb="tab"]:hover p {
+    color: #dbe7f3 !important;
+}
+[data-baseweb="tab"][aria-selected="true"] {
+    background: #1a3a5c !important;
+    border-color: rgba(255,255,255,.10) !important;
+    box-shadow: 0 -2px 14px rgba(0,0,0,.15) !important;
+}
+[data-baseweb="tab"][aria-selected="true"] p {
+    color: #ffffff !important;
+    font-weight: 800 !important;
+}
+[data-baseweb="tab"][aria-selected="true"]::after {
+    background: linear-gradient(90deg, var(--blue-bright), #22d3ee) !important;
+}
+
 /* ── Ambient canvas ── */
 .stApp {
     background: radial-gradient(1200px 600px at 85% -10%, rgba(0,103,192,.08), transparent 55%),
