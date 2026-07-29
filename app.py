@@ -304,7 +304,7 @@ df_prev = df[df["year"] == prev_year]
 
 # ── Header ──────────────────────────────────────────────────────────────────
 st.markdown(f"## {t('app_title', lang).upper()}")
-st.caption(f"{t('app_caption', lang, n=df['country'].nunique(), y0=min(sel_years), y1=max(sel_years), ly=latest_year)} · {t('data_lag_note', lang)}")
+st.caption(f"{t('app_caption', lang, n=df['country'].nunique(), y0=min(sel_years), y1=max(sel_years), ly=latest_year)}")
 st.divider()
 
 # ── Global KPIs with tooltips ───────────────────────────────────────────────
