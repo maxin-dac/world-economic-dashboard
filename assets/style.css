@@ -225,3 +225,62 @@ button[data-testid="stTooltipIcon"] [data-testid="stIconMaterial"] {
 [data-baseweb="tab"][aria-selected="true"]::after {
     background: linear-gradient(90deg, var(--blue-bright), #22d3ee) !important;
 }
+
+/* ── Form elements inside tabs — match navy theme ── */
+[data-testid="stSelectbox"] > div,
+[data-testid="stRadio"] > div,
+[data-testid="stMultiselect"] > div,
+[data-testid="stTextInput"] > div,
+[data-testid="stNumberInput"] > div {
+    background: rgba(255,255,255,.08) !important;
+    border: 1px solid rgba(255,255,255,.15) !important;
+    border-radius: var(--r-sm) !important;
+    color: #dbe7f3 !important;
+}
+
+[data-testid="stSelectbox"] > div:hover,
+[data-testid="stRadio"] > div:hover,
+[data-testid="stMultiselect"] > div:hover {
+    border-color: rgba(46,141,224,.55) !important;
+    box-shadow: 0 0 0 2px rgba(46,141,224,.2) !important;
+}
+
+[data-testid="stSelectbox"] label,
+[data-testid="stRadio"] label,
+[data-testid="stMultiselect"] label,
+[data-testid="stTextInput"] label,
+[data-testid="stNumberInput"] label {
+    color: #dbe7f3 !important;
+    font-weight: 600 !important;
+}
+
+[data-testid="stSelectbox"] [data-baseweb="select"] > div,
+[data-testid="stMultiselect"] [data-baseweb="select"] > div {
+    background: rgba(255,255,255,.08) !important;
+    color: #dbe7f3 !important;
+}
+
+[data-testid="stRadio"] [data-baseweb="radio"] > div {
+    background: rgba(255,255,255,.08) !important;
+    border-color: rgba(255,255,255,.2) !important;
+}
+
+[data-testid="stRadio"] [data-baseweb="radio"] > div[aria-checked="true"] {
+    background: var(--blue-bright) !important;
+    border-color: var(--blue-bright) !important;
+}
+
+/* Dropdown menu items */
+[data-baseweb="popover"] [data-baseweb="option"] {
+    background: #1a3a5c !important;
+    color: #dbe7f3 !important;
+}
+
+[data-baseweb="popover"] [data-baseweb="option"]:hover {
+    background: #2a4a6c !important;
+}
+
+[data-baseweb="popover"] [data-baseweb="option"][aria-selected="true"] {
+    background: var(--blue) !important;
+    color: #ffffff !important;
+}
