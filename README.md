@@ -1,6 +1,6 @@
 # 🌍 Global Economic Intelligence Dashboard
 
-An interactive bilingual platform for exploring the macroeconomic and strategic environment of **217 countries**, from **2010 to 2024** — structured around the **PESTEL framework** and powered by **58 real World Bank indicators**.
+An interactive bilingual platform for exploring the macroeconomic and strategic environment of **217 countries**, from **2000 to 2024** — structured around the **PESTEL framework** and powered by **58 real World Bank indicators**.
 
 <p align="left">
   <img src="https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white" alt="Python" />
@@ -12,13 +12,17 @@ An interactive bilingual platform for exploring the macroeconomic and strategic 
   <img src="https://img.shields.io/badge/License-MIT-green?style=flat" alt="MIT License" />
 </p>
 
-> 🇫🇷 **French version:** [README-fr.md](README-fr.md)
+## 🚀 App Link
+
+***Click on this button to launch the application***
+
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://world-bi-dashboard.streamlit.app/)
 
 ---
 
 ## Overview
 
-![alt text](image.png)
+<img width="1353" height="637" alt="image" src="https://github.com/user-attachments/assets/42e13df1-e5e0-49f2-b396-e76c2a7144ab" />
 
 ## Why this dashboard?
 
