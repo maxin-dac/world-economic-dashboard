@@ -278,10 +278,8 @@ with st.sidebar:
     if not sel_years:
         sel_years = ALL_YEARS
         st.warning(t("no_year_selected", lang))
-    st.divider()
     sel_regions = st.multiselect(t("regions", lang), ALL_REGIONS, default=ALL_REGIONS, format_func=lambda x: t(x, lang))
     sel_income = st.multiselect(t("income_levels", lang), INCOME_ORDER, default=INCOME_ORDER, format_func=lambda x: t(x, lang))
-    st.divider()
     if st.button(t("refresh_btn", lang), width="stretch"):
         with st.spinner(t("refreshing", lang)):
             try:
