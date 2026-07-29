@@ -46,10 +46,11 @@ pio.templates["app_theme"] = _build_template()
 pio.templates.default = "app_theme"
 
 # ── Load external CSS ──────────────────────────────────────────────────────
-CSS_PATH = os.path.join("assets", "style.css")
-if os.path.exists(CSS_PATH):
-    with open(CSS_PATH, "r", encoding="utf-8") as f:
-        css_content = f.read()
+import pathlib
+
+CSS_PATH = pathlib.Path(__file__).parent / "assets" / "style.css"
+if CSS_PATH.exists():
+    css_content = CSS_PATH.read_text(encoding="utf-8")
     st.markdown(f"<style>{css_content}</style>", unsafe_allow_html=True)
 else:
     st.warning(f"CSS file not found at `{CSS_PATH}`. Using default styling.")
