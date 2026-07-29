@@ -39,7 +39,7 @@
     --scroll-thumb: rgba(255, 255, 255, .2);
 }
 
-/* ─ ONE typeface everywhere ── */
+/* ── ONE typeface everywhere ── */
 html,
 body,
 [class*="css"],
@@ -71,49 +71,6 @@ small,
 [data-testid="stTable"],
 [data-testid="stPopoverButton"] button {
     font-family: var(--font) !important;
-}
-
-/* ── Tabs — same navy as sidebar ── */
-[data-baseweb="tab-list"] {
-    background: #0B2540 !important;
-    border-bottom: 1px solid rgba(255, 255, 255, .10) !important;
-    border-radius: var(--r-md) var(--r-md) 0 0 !important;
-    padding: 8px 8px 0 !important;
-}
-
-[data-baseweb="tab"] {
-    color: #8fa6bd !important;
-    background: transparent !important;
-    border: 1px solid transparent !important;
-    border-bottom: none !important;
-}
-
-[data-baseweb="tab"] p {
-    color: #8fa6bd !important;
-}
-
-[data-baseweb="tab"]:hover {
-    background: rgba(255, 255, 255, .06) !important;
-    color: #dbe7f3 !important;
-}
-
-[data-baseweb="tab"]:hover p {
-    color: #dbe7f3 !important;
-}
-
-[data-baseweb="tab"][aria-selected="true"] {
-    background: #1a3a5c !important;
-    border-color: rgba(255, 255, 255, .10) !important;
-    box-shadow: 0 -2px 14px rgba(0, 0, 0, .15) !important;
-}
-
-[data-baseweb="tab"][aria-selected="true"] p {
-    color: #ffffff !important;
-    font-weight: 800 !important;
-}
-
-[data-baseweb="tab"][aria-selected="true"]::after {
-    background: linear-gradient(90deg, var(--blue-bright), #22d3ee) !important;
 }
 
 /* ── Ambient canvas ── */
@@ -304,7 +261,7 @@ h4 {
     opacity: .8;
 }
 
-/* ── Hide sidebar collapse button ── */
+/* ─ Hide sidebar collapse button ── */
 [data-testid="collapsedControl"],
 [data-testid="stSidebarCollapseButton"],
 button[aria-label="Collapse sidebar"],
@@ -364,6 +321,7 @@ button[aria-label="Expand sidebar"] {
     line-height: 1.2 !important;
     display: -webkit-box !important;
     -webkit-line-clamp: 2 !important;
+    line-clamp: 2 !important;
     -webkit-box-orient: vertical !important;
     overflow: hidden !important;
 }
@@ -382,32 +340,23 @@ button[aria-label="Expand sidebar"] {
     font-variant-numeric: tabular-nums;
 }
 
-/* ─ Tabs ── */
+/* ── Tabs — NAVY BACKGROUND ── */
 [data-baseweb="tab-list"] {
-    gap: 4px;
-    border-bottom: 1px solid var(--edge);
-    background: var(--card);
-    backdrop-filter: blur(12px);
-    border-radius: var(--r-md) var(--r-md) 0 0;
-    padding: 6px 4px 0;
+    background: #0B2540 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, .10) !important;
+    border-radius: var(--r-md) var(--r-md) 0 0 !important;
+    padding: 8px 8px 0 !important;
 }
 
 [data-baseweb="tab"] {
-    position: relative;
-    flex: 1 1 0 !important;
-    min-width: 0 !important;
-    justify-content: center;
-    font-weight: 700 !important;
-    color: var(--ink-2);
-    background: transparent;
-    border: 1px solid transparent;
-    border-bottom: none;
-    border-radius: var(--r-sm) var(--r-sm) 0 0;
-    padding: 10px 4px 9px;
-    transition: background .22s var(--ease), color .22s var(--ease), box-shadow .22s var(--ease);
+    color: #8fa6bd !important;
+    background: transparent !important;
+    border: 1px solid transparent !important;
+    border-bottom: none !important;
 }
 
 [data-baseweb="tab"] p {
+    color: #8fa6bd !important;
     font-weight: 700 !important;
     font-size: .7rem !important;
     letter-spacing: 0 !important;
@@ -417,37 +366,41 @@ button[aria-label="Expand sidebar"] {
     white-space: normal !important;
     display: -webkit-box !important;
     -webkit-line-clamp: 2 !important;
+    line-clamp: 2 !important;
     -webkit-box-orient: vertical !important;
     overflow: hidden !important;
 }
 
 [data-baseweb="tab"]:hover {
-    background: var(--edge);
-    color: var(--ink);
+    background: rgba(255, 255, 255, .06) !important;
+    color: #dbe7f3 !important;
+}
+
+[data-baseweb="tab"]:hover p {
+    color: #dbe7f3 !important;
 }
 
 [data-baseweb="tab"][aria-selected="true"] {
-    background: var(--tab-active-bg);
-    border-color: var(--card-border);
-    box-shadow: 0 -2px 14px rgba(0, 0, 0, .08), var(--card-inset);
+    background: #1a3a5c !important;
+    border-color: rgba(255, 255, 255, .10) !important;
+    box-shadow: 0 -2px 14px rgba(0, 0, 0, .15) !important;
+}
+
+[data-baseweb="tab"][aria-selected="true"] p {
+    color: #ffffff !important;
+    font-weight: 800 !important;
 }
 
 [data-baseweb="tab"][aria-selected="true"]::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 55%;
-    height: 3px;
-    border-radius: 3px 3px 0 0;
-    background: linear-gradient(90deg, var(--blue), var(--blue-bright));
-}
-
-[data-baseweb="tab"][aria-selected="true"],
-[data-baseweb="tab"][aria-selected="true"] p {
-    color: var(--blue-bright) !important;
-    font-weight: 800 !important;
+    content: "" !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 55% !important;
+    height: 3px !important;
+    border-radius: 3px 3px 0 0 !important;
+    background: linear-gradient(90deg, var(--blue-bright), #22d3ee) !important;
 }
 
 /* ── Chart & table cards ── */
@@ -475,7 +428,7 @@ button[aria-label="Expand sidebar"] {
     box-shadow: var(--shadow-1);
 }
 
-/* ── Insight banner ─ */
+/* ── Insight banner ── */
 @keyframes bannerIn {
     from {
         opacity: 0;
@@ -549,165 +502,4 @@ button[data-testid="stTooltipIcon"] [data-testid="stIconMaterial"] {
     letter-spacing: normal !important;
     text-transform: none !important;
     line-height: 1 !important;
-}
-
-/* ── Tabs — same navy as sidebar ── */
-[data-baseweb="tab-list"] {
-    background: #0B2540 !important;
-    border-bottom: 1px solid rgba(255, 255, 255, .10) !important;
-    border-radius: var(--r-md) var(--r-md) 0 0 !important;
-    padding: 8px 8px 0 !important;
-}
-
-[data-baseweb="tab"] {
-    color: #8fa6bd !important;
-    background: transparent !important;
-    border: 1px solid transparent !important;
-    border-bottom: none !important;
-}
-
-[data-baseweb="tab"] p {
-    color: #8fa6bd !important;
-}
-
-[data-baseweb="tab"]:hover {
-    background: rgba(255, 255, 255, .06) !important;
-    color: #dbe7f3 !important;
-}
-
-[data-baseweb="tab"]:hover p {
-    color: #dbe7f3 !important;
-}
-
-[data-baseweb="tab"][aria-selected="true"] {
-    background: #1a3a5c !important;
-    border-color: rgba(255, 255, 255, .10) !important;
-    box-shadow: 0 -2px 14px rgba(0, 0, 0, .15) !important;
-}
-
-[data-baseweb="tab"][aria-selected="true"] p {
-    color: #ffffff !important;
-    font-weight: 800 !important;
-}
-
-[data-baseweb="tab"][aria-selected="true"]::after {
-    background: linear-gradient(90deg, var(--blue-bright), #22d3ee) !important;
-}
-
-/* ── Form elements inside tabs — match navy theme ── */
-[data-testid="stSelectbox"]>div,
-[data-testid="stRadio"]>div,
-[data-testid="stMultiselect"]>div,
-[data-testid="stTextInput"]>div,
-[data-testid="stNumberInput"]>div {
-    background: rgba(255, 255, 255, .08) !important;
-    border: 1px solid rgba(255, 255, 255, .15) !important;
-    border-radius: var(--r-sm) !important;
-    color: #dbe7f3 !important;
-}
-
-[data-testid="stSelectbox"]>div:hover,
-[data-testid="stRadio"]>div:hover,
-[data-testid="stMultiselect"]>div:hover {
-    border-color: rgba(46, 141, 224, .55) !important;
-    box-shadow: 0 0 0 2px rgba(46, 141, 224, .2) !important;
-}
-
-[data-testid="stSelectbox"] label,
-[data-testid="stRadio"] label,
-[data-testid="stMultiselect"] label,
-[data-testid="stTextInput"] label,
-[data-testid="stNumberInput"] label {
-    color: #dbe7f3 !important;
-    font-weight: 600 !important;
-}
-
-[data-testid="stSelectbox"] [data-baseweb="select"]>div,
-[data-testid="stMultiselect"] [data-baseweb="select"]>div {
-    background: rgba(255, 255, 255, .08) !important;
-    color: #dbe7f3 !important;
-}
-
-[data-testid="stRadio"] [data-baseweb="radio"]>div {
-    background: rgba(255, 255, 255, .08) !important;
-    border-color: rgba(255, 255, 255, .2) !important;
-}
-
-[data-testid="stRadio"] [data-baseweb="radio"]>div[aria-checked="true"] {
-    background: var(--blue-bright) !important;
-    border-color: var(--blue-bright) !important;
-}
-
-/* Dropdown menu items */
-[data-baseweb="popover"] [data-baseweb="option"] {
-    background: #1a3a5c !important;
-    color: #dbe7f3 !important;
-}
-
-[data-baseweb="popover"] [data-baseweb="option"]:hover {
-    background: #2a4a6c !important;
-}
-
-[data-baseweb="popover"] [data-baseweb="option"][aria-selected="true"] {
-    background: var(--blue) !important;
-    color: #ffffff !important;
-}
-
-/* ── FORCE NAVY TABS ────────────────────────────────────────────────────── */
-/* Override ALL tab styles to match sidebar navy */
-[data-baseweb="tab-list"] {
-    background: #0B2540 !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
-    box-shadow: none !important;
-}
-
-[data-baseweb="tab"] {
-    background: transparent !important;
-    color: #8fa6bd !important;
-    border: 1px solid transparent !important;
-    border-bottom: none !important;
-}
-
-[data-baseweb="tab"] p {
-    color: #8fa6bd !important;
-    font-weight: 700 !important;
-}
-
-[data-baseweb="tab"]:hover {
-    background: rgba(255, 255, 255, 0.06) !important;
-    color: #dbe7f3 !important;
-}
-
-[data-baseweb="tab"]:hover p {
-    color: #dbe7f3 !important;
-}
-
-[data-baseweb="tab"][aria-selected="true"] {
-    background: #1a3a5c !important;
-    border-color: rgba(255, 255, 255, 0.1) !important;
-    box-shadow: 0 -2px 14px rgba(0, 0, 0, 0.15) !important;
-}
-
-[data-baseweb="tab"][aria-selected="true"] p {
-    color: #ffffff !important;
-    font-weight: 800 !important;
-}
-
-[data-baseweb="tab"][aria-selected="true"]::after {
-    content: "" !important;
-    position: absolute !important;
-    bottom: 0 !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    width: 55% !important;
-    height: 3px !important;
-    border-radius: 3px 3px 0 0 !important;
-    background: linear-gradient(90deg, #2E8DE0, #22d3ee) !important;
-}
-
-/* Force tab container background */
-.stTabs [data-baseweb="tab-list"] {
-    background: #0B2540 !important;
-    padding: 8px 8px 0 8px !important;
-    border-radius: 12px 12px 0 0 !important;
 }
