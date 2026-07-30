@@ -12,6 +12,7 @@ Une plateforme interactive et bilingue pour explorer l'environnement macroécono
   <img src="https://img.shields.io/badge/Licence-MIT-green?style=flat" alt="Licence MIT" />
 </p>
 
+***Cliquez sur le bouton ci-dessous pour lancer l'application***
 <p align="left">
   <a href="https://world-bi-dashboard.streamlit.app/">
     <img src="https://img.shields.io/badge/D%C3%A9mo%20en%20ligne-Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Démo en ligne" />
@@ -19,14 +20,12 @@ Une plateforme interactive et bilingue pour explorer l'environnement macroécono
 </p>
 
 > 🇬🇧 **Version anglaise :** [README-en-us.md](README-en-us.md)
->
-> 🆕 **Nouveau** — un module dédié **Intelligence Investissement** : score d'attractivité composite, matrice risque/rendement, détecteur de signaux d'alerte et shortlist d'opportunités « propres ». Voir la fonctionnalité *Score d'investissement* ci-dessous.
 
 ---
 
 ## Aperçu
 
-![Aperçu du tableau de bord](image-1.png)
+![alt text](image.png)
 
 ## Pourquoi ce tableau de bord ?
 
