@@ -25,7 +25,7 @@ An interactive bilingual platform for exploring the macroeconomic and strategic 
 
 ## Overview
 
-![alt text](image-2.png)
+![alt text](image-1.png)
 
 ## Why this dashboard?
 
@@ -138,14 +138,14 @@ world-economic-dashboard/
 ├── assets/
 │   └── style.css                   # Custom stylesheet
 ├── data/
-│   ├── fetch_data.py               # World Bank API collection script
+│   ├── fetch_data.py               # World Bank & OWID API collection script
 │   └── world_economic.csv          # Aggregated dataset (217 countries × 2000-2024)
 ├── .gitignore                      # Files to ignore in Git
 ├── app.py                          # Main Streamlit application
 ├── translations.py                 # EN/FR translation dictionary
 ├── requirements.txt                # Python dependencies
 ├── LICENSE                         # MIT license
-├── README-en-us.md                 # This file, English documentation
+├── README.md                       # This file, English documentation
 └── README-fr.md                    # French documentation
 ```
 
@@ -181,16 +181,20 @@ The dashboard displays all available data transparently. Missing cells render as
 
 > **Note:** A **Refresh from API** button is available in the dashboard sidebar. A single run updates all 58 indicators for all 217 countries in one pass.
 
-## Use Cases
+## Methodological limitations & positioning
 
-- **Business Intelligence** — Country risk scoring, market entry evaluation.
-- **Investment intelligence** — Composite attractiveness scoring, risk/return quadrant mapping, and red-flag screening for market-entry and allocation decisions.
-- **Strategic Planning** — PESTEL environmental analysis for any country or region.
-- **Country Benchmarking** — Side-by-side comparison of up to 12 countries.
-- **Academic Research** — 25 years of harmonized World Bank data, exportable to CSV.
-- **Economic Intelligence** — Tracking macroeconomic trends in emerging markets.
-- **Public Policy Analysis** — Monitoring governance, development, and sustainability indicators.
-- **Education** — Interactive exploration of global economic data.
+The **Investment Score** module is a **first-pass screening tool**, not an econometrically validated attractiveness index. It is meant to narrow down a shortlist of countries worth investigating further — not to settle an allocation decision. Read it as an analytical lens, with openly acknowledged limits:
+
+- **Unvalidated weights** — the composite score's weights (20/20/15/15/10/10/5/5) are analyst choices, not calibrated against an external benchmark (actual FDI flows, sovereign spreads).
+- **Min-max normalization is outlier-sensitive** — a hyperinflation case (Venezuela, Zimbabwe) compresses the scale for everyone else; "normal" economies are poorly differentiated in the middle of the ranking.
+- **Indicator redundancy** — GDP per capita, electricity access, internet penetration and growth are highly correlated; the score partly rewards the same level of development several times over.
+- **"Return" = past growth** — the 5-year CAGR captures past dynamics, sensitive to the start year (post-2020 rebound effect), not a future investment return.
+- **Partially captured risk** — the risk/return matrix models inflation volatility only; political, currency and sovereign-default risk are not included (the PESTEL framework only captures them in part).
+- **Data gaps mask fragility** — the most fragile countries often have the most incomplete datasets, making them look safer on paper than they are.
+- **No institutional/legal context** — rule of law, contract enforcement and judicial independence are not captured, even though they are critical for investors.
+- **Static snapshot** — the red-flag logic is deterministic; it doesn't model conditional thresholds or cross-indicator interactions.
+
+**Positioning.** Existing tools fall into two camps: free but siloed data repositories (World Bank, Our World in Data) and proprietary, closed-source, single-angle attractiveness indices. This project sits between them: an **open-source, bilingual** tool that structures public indicators around the PESTEL framework and adds a decision-support layer — free and customizable, meant to be used upstream of a thorough risk assessment.
 
 ## Author
 

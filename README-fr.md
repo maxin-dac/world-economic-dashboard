@@ -138,14 +138,14 @@ world-economic-dashboard/
 ├── assets/
 │   └── style.css                   # Feuille de style personnalisée
 ├── data/
-│   ├── fetch_data.py               # Script de collecte API Banque Mondiale
+│   ├── fetch_data.py               # Script de collecte API Banque Mondiale & OWID
 │   └── world_economic.csv          # Dataset agrégé (217 pays × 2000-2024)
 ├── .gitignore                      # Fichiers à ignorer par Git
 ├── app.py                          # Application Streamlit principale
 ├── translations.py                 # Dictionnaire de traductions EN/FR
 ├── requirements.txt                # Dépendances Python
 ├── LICENSE                         # Licence MIT
-├── README-en-us.md                 # Documentation anglaise
+├── README.md                       # Documentation anglaise
 └── README-fr.md                    # Ce fichier, documentation française
 ```
 
@@ -181,16 +181,21 @@ Le tableau de bord affiche toutes les données disponibles de manière transpare
 
 > **Note :** Un bouton **Rafraîchir depuis l'API** est disponible dans la barre latérale du tableau de bord. Un seul appel met à jour les 58 indicateurs pour les 217 pays en une seule passe.
 
-## Cas d'utilisation
+## Limites méthodologiques & positionnement
 
-- **Business Intelligence** — scoring de risque pays, évaluation d'entrée sur un marché.
-- **Intelligence investissement** — scoring composite d'attractivité, positionnement risque/rendement par quadrants et criblage des signaux d'alerte pour les décisions d'entrée sur marché et d'allocation.
-- **Planification stratégique** — analyse environnementale PESTEL pour tout pays ou région.
-- **Benchmarking pays** — comparaison côte à côte de jusqu'à 12 pays.
-- **Recherche académique** — 25 ans de données World Bank harmonisées, exportables en CSV.
-- **Intelligence économique** — suivi des tendances macroéconomiques dans les marchés émergents.
-- **Analyse des politiques publiques** — monitoring des indicateurs de gouvernance, développement et durabilité.
-- **Enseignement** — exploration interactive des données économiques mondiales.
+Le module **Score d'investissement** est un outil de **criblage de premier niveau**, pas un indice d'attractivité validé économétriquement. Il sert à dégrossir un shortlist de pays à creuser, pas à trancher une décision d'allocation. À interpréter comme une grille de lecture, dont les limites sont assumées :
+
+- **Pondérations non validées** — les poids du score composite (20/20/15/15/10/10/5/5) sont des choix d'analyste, non calibrés contre une référence externe (flux d'IDE réels, spreads souverains).
+- **Normalisation min-max sensible aux extrêmes** — un cas d'hyperinflation (Venezuela, Zimbabwe) écrase l'échelle pour les autres pays ; les économies « normales » sont peu différenciées au milieu du classement.
+- **Redondance des indicateurs** — PIB/hab, accès à l'électricité, pénétration d'Internet et croissance sont fortement corrélés ; le score récompense en partie plusieurs fois le même niveau de développement.
+- **« Rendement » = croissance passée** — le TCAC sur 5 ans mesure une dynamique passée, sensible à l'année de départ (effet rebond post-2020), et non un rendement futur d'investissement.
+- **Risque partiellement capturé** — la matrice risque/rendement ne modélise que la volatilité de l'inflation ; le risque politique, de change et de défaut souverain ne sont pas intégrés (le radar PESTEL et les signaux d'alerte complètent partiellement).
+- **Seuil de dette binaire** — le drapeau « dette > 80 % du PIB » signale aussi des pays développés très sûrs (Japon, États-Unis, France), dont la dette n'a pas la même signification que celle d'un émergent endetté en devises.
+- **Biais de données manquantes** — les pays les plus fragiles ont souvent des indicateurs de gouvernance lacunaires, ce qui peut les exclure du score ou biaiser le classement vers les pays disposant de bonnes données.
+- **Absence de contexte institutionnel/légal** — l'état de droit, l'exécution des contrats et l'indépendance judiciaire ne sont pas capturés, alors qu'ils sont cruciaux pour les investisseurs.
+- **Instantané statique** — la logique de drapeau rouge est déterministe ; elle ne modélise pas de seuils conditionnels ni d'interactions entre indicateurs.
+
+**Positionnement.** Les outils existants se répartissent entre bibliothèques de données gratuites mais en silo (Banque Mondiale, Our World in Data) et indices d'attractivité propriétaires, fermés et mono-angle. Ce projet se place à leur intersection : un outil **open source et bilingue** qui structure des indicateurs publics selon le cadre PESTEL et y ajoute une couche d'aide à la décision — gratuit et personnalisable, à utiliser en amont d'une étude de risque approfondie.
 
 ## Auteur
 
@@ -200,6 +205,8 @@ Le tableau de bord affiche toutes les données disponibles de manière transpare
   <a href="https://github.com/maxin-dac"><img src="https://img.shields.io/badge/GitHub-maxin--dac-181717?style=flat&logo=github&logoColor=white" alt="GitHub" /></a>
   <a href="https://www.linkedin.com/in/maximendacleu"><img src="https://img.shields.io/badge/LinkedIn-maximendacleu-0A66C2?style=flat&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
 </p>
+
+
 
 ---
 
