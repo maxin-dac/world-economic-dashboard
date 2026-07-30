@@ -75,14 +75,14 @@ PESTEL_INDICATORS = {
     "economic": ["agriculture_pct", "cpi_index_raw", "current_account_pct_gdp", "debt_pct_gdp", "exchange_rate", "exports_pct_gdp", "fdi_pct_gdp", "gdp_growth_pct", "gdp_per_capita", "gdp_per_capita_ppp", "gdp_total_bn", "gross_fixed_capital_formation_pct_gdp", "imports_pct_gdp", "industry_pct", "inflation", "remittances_pct_gdp", "reserves_months_imports", "services_pct", "tax_revenue_pct_gdp", "trade_openness_pct_gdp"],
     "social": ["basic_sanitation_access_pct", "education_expenditure_pct_gdp", "fertility_rate", "gini_index", "health_expenditure_per_capita", "hdi", "labor_force_participation_pct", "life_expectancy", "literacy_rate", "population_mn", "primary_completion_rate_pct", "school_enrollment_secondary_pct", "under5_mortality_per_1000", "unemployment_pct", "urban_population_pct", "youth_unemployment_pct"],
     "technological": ["bank_account_ownership_pct", "fixed_broadband_per_100", "high_tech_exports_pct", "internet_users_pct", "mobile_subscriptions_per_100", "rd_expenditure_pct_gdp", "researchers_per_million"],
-    "environmental": ["cereal_yield_kg_per_ha", "co2_per_capita", "electric_power_losses_pct", "electricity_access_pct", "ghg_emissions_kt_co2eq", "pm25_air_pollution"],
+    "environmental": ["cereal_yield_kg_per_ha", "electric_power_losses_pct", "electricity_access_pct", "pm25_air_pollution"],
     "legal": ["control_of_corruption", "corruption_perception_index", "regulatory_quality", "rule_of_law_index", "transparency_corruption_score", "voice_accountability", "women_parliament_pct"],
 }
 INDICATOR_TO_PILLAR = {ind: p for p, inds in PESTEL_INDICATORS.items() for ind in inds}
 CORE_INDICATORS = {ind: ind for group in PESTEL_INDICATORS.values() for ind in group}
-INVERSE_INDICATORS = {"inflation", "cpi_index_raw", "debt_pct_gdp", "imports_pct_gdp", "unemployment_pct", "youth_unemployment_pct", "pm25_air_pollution", "military_expenditure_pct_gdp", "military_expenditure_pct_govt", "gini_index", "under5_mortality_per_1000", "fertility_rate", "electric_power_losses_pct", "co2_per_capita", "ghg_emissions_kt_co2eq"}
+INVERSE_INDICATORS = {"inflation", "cpi_index_raw", "debt_pct_gdp", "imports_pct_gdp", "unemployment_pct", "youth_unemployment_pct", "pm25_air_pollution", "military_expenditure_pct_gdp", "military_expenditure_pct_govt", "gini_index", "under5_mortality_per_1000", "fertility_rate", "electric_power_losses_pct"}
 
-INDICATOR_COLORSCALE = {"gdp_per_capita": "Viridis", "gdp_growth_pct": "RdYlGn", "inflation": "YlOrRd", "debt_pct_gdp": "YlOrRd", "agriculture_pct": "YlGn", "industry_pct": "PuBu", "services_pct": "Plasma", "life_expectancy": "RdYlGn", "hdi": "RdYlGn", "unemployment_pct": "YlOrRd", "internet_users_pct": "Cividis", "co2_per_capita": "Reds", "govt_effectiveness_index": "RdYlGn"}
+INDICATOR_COLORSCALE = {"gdp_per_capita": "Viridis", "gdp_growth_pct": "RdYlGn", "inflation": "YlOrRd", "debt_pct_gdp": "YlOrRd", "agriculture_pct": "YlGn", "industry_pct": "PuBu", "services_pct": "Plasma", "life_expectancy": "RdYlGn", "hdi": "RdYlGn", "unemployment_pct": "YlOrRd", "internet_users_pct": "Cividis", "govt_effectiveness_index": "RdYlGn"}
 
 def get_expressive_colorscale(indicator_key: str) -> str:
     return INDICATOR_COLORSCALE.get(indicator_key, "YlOrRd" if indicator_key in INVERSE_INDICATORS else "Viridis")
@@ -135,8 +135,6 @@ INDICATOR_INFO = {
     "rd_expenditure_pct_gdp": ("Research & development spending as a share of GDP.", "Higher = stronger innovation effort.", "Dépenses de recherche-développement rapportées au PIB.", "Plus élevé = effort d'innovation plus intense."),
     "researchers_per_million": ("Number of researchers in R&D per million people.", "Higher = greater scientific capacity.", "Nombre de chercheurs en R&D par million d'habitants.", "Plus élevé = capacité scientifique plus forte."),
     "patent_applications_total": ("Total patent applications filed worldwide.", "Higher = greater inventive activity.", "Total des demandes de brevets déposées dans le monde.", "Plus élevé = plus grande activité inventive."),
-    "co2_per_capita": ("CO₂ emissions per person (tonnes).", "Lower = smaller carbon footprint.", "Émissions de CO₂ par habitant (tonnes).", "Plus faible = empreinte carbone plus réduite."),
-    "ghg_emissions_kt_co2eq": ("Total greenhouse gas emissions in kilotonnes of CO₂ equivalent.", "Lower = lower climate impact.", "Émissions totales de gaz à effet de serre en kilotonnes d'équivalent CO₂.", "Plus faible = moindre impact climatique."),
     "pm25_air_pollution": ("Mean annual exposure to fine PM2.5 particles (µg/m³).", "WHO guideline ≈ 5 µg/m³; higher = worse air quality.", "Exposition annuelle moyenne aux particules fines PM2,5 (µg/m³).", "Seuil OMS ≈ 5 µg/m³ ; plus élevé = moins bonne qualité de l'air."),
     "electricity_access_pct": ("Share of the population with access to electricity.", "Higher = better energy access.", "Part de la population ayant accès à l'électricité.", "Plus élevé = meilleur accès à l'énergie."),
     "electric_power_losses_pct": ("Electricity lost in transmission & distribution (%).", "Lower = more efficient grid.", "Pertes électriques en transport et distribution (%).", "Plus faible = réseau plus efficace."),
@@ -260,6 +258,99 @@ def get_pestel_scores(df_target: pd.DataFrame, df_world: pd.DataFrame, year: int
         scores[pillar] = round(100.0 * np.mean(norms), 1) if norms else 0.0
     return scores
 
+# ═══════════════════════════════════════════════════════════════════════════
+# INVESTMENT SCORE FUNCTIONS
+# ═══════════════════════════════════════════════════════════════════════════
+INVESTMENT_INDICATORS = {
+    "gdp_growth_pct": 0.20,
+    "political_stability_index": 0.20,
+    "control_of_corruption": 0.15,
+    "inflation": 0.15,  # inverse
+    "debt_pct_gdp": 0.10,  # inverse
+    "trade_openness_pct_gdp": 0.10,
+    "electricity_access_pct": 0.05,
+    "internet_users_pct": 0.05,
+}
+
+INVESTMENT_INVERSE = {"inflation", "debt_pct_gdp"}
+
+def compute_investment_score(df_world: pd.DataFrame, year: int) -> pd.DataFrame:
+    """Compute composite investment attractiveness score (0-100) for all countries."""
+    df_year = df_world[df_world["year"] == year].copy()
+    scores = []
+    
+    for _, row in df_year.iterrows():
+        norm_values = []
+        for ind, weight in INVESTMENT_INDICATORS.items():
+            if ind not in row or pd.isna(row[ind]):
+                continue
+            col = df_year[ind].dropna()
+            if col.empty:
+                continue
+            vmin, vmax = col.min(), col.max()
+            if vmax <= vmin:
+                norm = 0.5
+            else:
+                norm = (row[ind] - vmin) / (vmax - vmin)
+            if ind in INVESTMENT_INVERSE:
+                norm = 1.0 - norm
+            norm_values.append(np.clip(norm, 0, 1) * weight)
+        
+        score = sum(norm_values) * 100 if norm_values else None
+        scores.append(score)
+    
+    df_year["investment_score"] = scores
+    return df_year[["iso3", "country", "region", "income_group", "investment_score"]].dropna(subset=["investment_score"])
+
+def detect_red_flags(df_world: pd.DataFrame, year: int, lang: str = "en") -> pd.DataFrame:
+    """Detect countries with risk signals based on standard thresholds."""
+    df_year = df_world[df_world["year"] == year].copy()
+    flags = []
+    
+    for _, row in df_year.iterrows():
+        country_flags = []
+        
+        if pd.notna(row.get("inflation")) and row["inflation"] > 10:
+            country_flags.append(f"🔴 {t('flag_high_inflation', lang)}")
+        if pd.notna(row.get("debt_pct_gdp")) and row["debt_pct_gdp"] > 80:
+            country_flags.append(f"🔴 {t('flag_high_debt', lang)}")
+        if pd.notna(row.get("unemployment_pct")) and row["unemployment_pct"] > 15:
+            country_flags.append(f"🔴 {t('flag_high_unemployment', lang)}")
+        if pd.notna(row.get("political_stability_index")) and row["political_stability_index"] < -1:
+            country_flags.append(f"🔴 {t('flag_political_instability', lang)}")
+        if pd.notna(row.get("corruption_perception_index")) and row["corruption_perception_index"] < 25:
+            country_flags.append(f"🔴 {t('flag_high_corruption', lang)}")
+        if pd.notna(row.get("inflation")) and 5 < row["inflation"] <= 10:
+            country_flags.append(f"🟡 {t('flag_moderate_inflation', lang)}")
+        if pd.notna(row.get("debt_pct_gdp")) and 50 < row["debt_pct_gdp"] <= 80:
+            country_flags.append(f"🟡 {t('flag_moderate_debt', lang)}")
+        
+        flags.append({
+            "country": row["country"],
+            "iso3": row["iso3"],
+            "region": row["region"],
+            "income_group": row["income_group"],
+            "red_flags": len([f for f in country_flags if "🔴" in f]),
+            "yellow_flags": len([f for f in country_flags if "🟡" in f]),
+            "total_flags": len(country_flags),
+            "flag_details": " | ".join(country_flags) if country_flags else f"✅ {t('flag_no_risk', lang)}",
+        })
+    
+    return pd.DataFrame(flags)
+
+def compute_cagr(df_world: pd.DataFrame, country: str, indicator: str, years: list) -> float:
+    """Compute Compound Annual Growth Rate for a country/indicator over given years."""
+    df_c = df_world[(df_world["country"] == country) & (df_world["year"].isin(years))].sort_values("year")
+    if len(df_c) < 2 or indicator not in df_c.columns:
+        return None
+    first, last = df_c[indicator].iloc[0], df_c[indicator].iloc[-1]
+    if pd.isna(first) or pd.isna(last) or first <= 0 or last <= 0:
+        return None
+    n_years = df_c["year"].iloc[-1] - df_c["year"].iloc[0]
+    if n_years <= 0:
+        return None
+    return (last / first) ** (1 / n_years) - 1
+
 # ── Load data ──────────────────────────────────────────────────────────────
 df_all = load_data()
 INDICATOR_KEYS = [ind for pillar in PESTEL_PILLAR_ORDER for ind in sorted(PESTEL_INDICATORS[pillar], key=_en_label) if ind in df_all.columns]
@@ -273,7 +364,7 @@ ALL_YEARS = sorted(df_all["year"].unique())
 with st.sidebar:
     lang = st.radio("🌐 Language / Langue", ["EN", "FR"], horizontal=True, index=0, key="lang_choice").lower()
     st.markdown(f"## {t('sidebar_title', lang)}")
-    default_years = [y for y in ALL_YEARS if y >= 2010]
+    default_years = ALL_YEARS
     sel_years = st.multiselect(t("years_label", lang), ALL_YEARS, default=default_years)
     if not sel_years:
         sel_years = ALL_YEARS
@@ -345,8 +436,11 @@ k5.metric(ind_label("life_expectancy", lang),
           help=life_tooltip)
 st.divider()
 
-# ── Tabs navigation ─────────────────────────────────────────────────────────
-tab_map, tab_trend, tab_country, tab_compare, tab_struct, tab_data = st.tabs([t("tab_map", lang), t("tab_trend", lang), t("tab_country", lang), t("tab_compare", lang), t("tab_struct", lang), t("tab_data", lang)])
+tab_map, tab_trend, tab_country, tab_compare, tab_struct, tab_data, tab_invest = st.tabs([
+    t("tab_map", lang), t("tab_trend", lang), t("tab_country", lang),
+    t("tab_compare", lang), t("tab_struct", lang), t("tab_data", lang),
+    t("tab_invest", lang),  # ← Le 7ème onglet
+])
 
 # ── TAB 1: WORLD MAP ────────────────────────────────────────────────────────
 with tab_map:
@@ -740,6 +834,224 @@ with tab_data:
     
     csv = df_display.to_csv(index=False).encode("utf-8")
     st.download_button(t("export_csv", lang, n=len(df_display), y=data_year), data=csv, file_name=f"world_economic_{data_year}.csv", mime="text/csv")
+
+# ── TAB 7: INVESTMENT SCORE ────────────────────────────────────────────────
+
+with tab_invest:
+    st.markdown(f"### 🎯 {t('invest_title', lang)}")
+
+    st.markdown(f'<div class="indicator-banner">ℹ️ {t("invest_banner", lang)}</div>', unsafe_allow_html=True)
+    
+    invest_year = st.selectbox(t("invest_ref_year", lang), sorted(sel_years, reverse=True), index=0, key="inv_yr")
+
+    df_scores = compute_investment_score(df_all, invest_year)
+    df_flags = detect_red_flags(df_all, invest_year, lang)
+    
+    # ── SECTION 1: Investment Scorecard ──
+    st.markdown(f"#### 🏆 {t('invest_scorecard', lang)}")
+    st.markdown(f'<div class="indicator-banner">ℹ️ {t("invest_scorecard_tip", lang)}</div>', unsafe_allow_html=True)
+    
+    sc1, sc2 = st.columns(2)
+    with sc1:
+        filter_region = st.multiselect(t("invest_filter_region", lang), ALL_REGIONS, default=[], key="inv_reg", format_func=lambda x: t(x, lang))
+    with sc2:
+        filter_income = st.multiselect(t("invest_filter_income", lang), INCOME_ORDER, default=[], key="inv_inc", format_func=lambda x: t(x, lang))
+    
+    df_filtered = df_scores.copy()
+    if filter_region:
+        df_filtered = df_filtered[df_filtered["region"].isin(filter_region)]
+    if filter_income:
+        df_filtered = df_filtered[df_filtered["income_group"].isin(filter_income)]
+
+    df_filtered["_cname"] = df_filtered["country"].map(lambda n: cname(n, lang))
+    
+    fig_score_map = go.Figure(go.Choropleth(
+        locations=df_filtered["iso3"],
+        z=df_filtered["investment_score"],
+        text=df_filtered["_cname"],
+        customdata=df_filtered[["investment_score", "region", "income_group"]].values,
+        colorscale="Viridis",
+        colorbar=dict(title=t("invest_score_label", lang), len=0.6, thickness=15),
+        marker_line_color="#78909c",
+        marker_line_width=0.6,
+        hovertemplate=(
+            "<b>%{text}</b><br>"
+            + f"{t('invest_score_label', lang)}: %{{z:.1f}}/100<br>"
+            + f"{t('region', lang)}: %{{customdata[1]}}<br>"
+            + f"{t('income_level', lang)}: %{{customdata[2]}}<br><extra></extra>"
+        ),
+    ))
+    fig_score_map.update_layout(
+        title=dict(text=f"{t('invest_scorecard', lang)} — {invest_year}", font=dict(size=15)),
+        geo=dict(**GEO_STYLE, projection_type="natural earth"),
+        margin=dict(t=50, b=0, l=0, r=0),
+        height=500,
+    )
+    st.plotly_chart(fig_score_map, width="stretch")
+
+    st.markdown(f"**🏅 {t('invest_top10', lang, y=invest_year)}**")
+    df_top = df_filtered.sort_values("investment_score", ascending=False).head(10).copy()
+    df_top["_cname"] = df_top["country"].map(lambda n: cname(n, lang))
+    df_top["income_group"] = df_top["income_group"].map(lambda x: t(x, lang))
+    df_top["region"] = df_top["region"].map(lambda x: t(x, lang))
+    df_top = df_top[["_cname", "investment_score", "region", "income_group"]].rename(columns={
+        "_cname": t("col_country", lang),
+        "investment_score": t("invest_score_label", lang),
+        "region": t("col_region", lang),
+        "income_group": t("income_level", lang),
+    })
+    st.dataframe(df_top.style.background_gradient(cmap="YlGn", subset=[t("invest_score_label", lang)]), width="stretch", hide_index=True)
+    
+    st.divider()
+    
+    # ─ SECTION 2: Risk/Reward Matrix ──
+    st.markdown(f"#### ️ {t('invest_risk_reward', lang)}")
+    st.markdown(f'<div class="indicator-banner">ℹ️ {t("invest_risk_reward_tip", lang)}</div>', unsafe_allow_html=True)
+
+    df_rr = df_all[df_all["year"].isin(sel_years)].copy()
+    df_rr["_cname"] = df_rr["country"].map(lambda n: cname(n, lang))
+    
+    recent_years = sorted(sel_years)[-5:]
+    df_rr_agg = df_rr.groupby("country").agg(
+        gdp_first=("gdp_per_capita", lambda x: x.iloc[0] if len(x) > 0 and pd.notna(x.iloc[0]) else None),
+        gdp_last=("gdp_per_capita", lambda x: x.iloc[-1] if len(x) > 0 and pd.notna(x.iloc[-1]) else None),
+        inflation_mean=("inflation", "mean"),
+        inflation_std=("inflation", "std"),
+        region=("region", "first"),
+        income_group=("income_group", "first"),
+        gdp_total=("gdp_total_bn", "last"),
+    ).reset_index()
+
+    df_rr_agg["_cname"] = df_rr_agg["country"].map(lambda n: cname(n, lang))
+    
+    df_rr_agg["cagr"] = np.where(
+        (df_rr_agg["gdp_first"] > 0) & (df_rr_agg["gdp_last"] > 0) & (df_rr_agg["gdp_first"].notna()) & (df_rr_agg["gdp_last"].notna()),
+        (df_rr_agg["gdp_last"] / df_rr_agg["gdp_first"]) ** (1 / max(len(recent_years) - 1, 1)) - 1,
+        np.nan,
+    )
+    df_rr_agg["risk"] = df_rr_agg["inflation_std"].fillna(0) + df_rr_agg["inflation_mean"].fillna(0) * 0.1
+    
+    df_rr_agg = df_rr_agg.dropna(subset=["cagr", "risk"])
+
+    median_cagr = df_rr_agg["cagr"].median()
+    median_risk = df_rr_agg["risk"].median()
+    
+    def get_quadrant(row):
+        if row["cagr"] >= median_cagr and row["risk"] <= median_risk:
+            return "⭐ Star"
+        elif row["cagr"] >= median_cagr and row["risk"] > median_risk:
+            return "❓ Question Mark"
+        elif row["cagr"] < median_cagr and row["risk"] <= median_risk:
+            return "💰 Cash Cow"
+        else:
+            return "️ Dog"
+    
+    df_rr_agg["quadrant"] = df_rr_agg.apply(get_quadrant, axis=1)
+    
+    quadrant_colors = {
+        "⭐ Star": "#059669",
+        "❓ Question Mark": "#d97706",
+        "💰 Cash Cow": "#0067C0",
+        "⚠️ Dog": "#dc2626",
+    }
+    
+    fig_rr = px.scatter(
+        df_rr_agg,
+        x="cagr",
+        y="risk",
+        color="quadrant",
+        color_discrete_map=quadrant_colors,
+        size="gdp_total",
+        size_max=45,
+        hover_name="_cname",
+        labels={
+            "cagr": t("invest_cagr", lang),
+            "risk": t("invest_risk", lang),
+            "quadrant": t("invest_quadrant", lang),
+        },
+        title=f"{t('invest_risk_reward', lang)} — {t('invest_5y', lang)}",
+    )
+    fig_rr.add_vline(x=median_cagr, line_dash="dash", line_color="#94a3b8", annotation_text=t("invest_median", lang))
+    fig_rr.add_hline(y=median_risk, line_dash="dash", line_color="#94a3b8")
+    fig_rr.update_layout(margin=dict(t=50, b=20, l=10, r=10), height=500, legend=dict(orientation="h", y=-0.2))
+    st.plotly_chart(fig_rr, width="stretch")
+    
+    st.divider()
+    
+    # ── SECTION 3: Red Flags Detector ─────────────────────────────────────────
+    st.markdown(f"#### 🚩 {t('invest_red_flags', lang)}")
+    st.markdown(f'<div class="indicator-banner">ℹ️ {t("invest_red_flags_tip", lang)}</div>', unsafe_allow_html=True)
+
+    # Préparation des données
+    df_flags["_cname"] = df_flags["country"].map(lambda n: cname(n, lang))
+    df_flags["income_group"] = df_flags["income_group"].map(lambda x: t(x, lang))
+    df_flags = df_flags.sort_values(["red_flags", "yellow_flags"], ascending=[False, False])
+
+    # Filtre par type de drapeau
+    flag_filter = st.radio(
+        t("invest_flag_filter", lang),
+        ["all", "red", "any"],
+        format_func=lambda x: t(f"invest_flag_{x}", lang),
+        horizontal=True,
+        key="inv_flag",
+    )
+
+    if flag_filter == "red":
+        df_flags_show = df_flags[df_flags["red_flags"] > 0]
+    elif flag_filter == "any":
+        df_flags_show = df_flags[df_flags["total_flags"] > 0]
+    else:
+        df_flags_show = df_flags
+
+    # Construction du tableau d'affichage
+    df_flags_display = df_flags_show[["_cname", "red_flags", "yellow_flags", "total_flags", "flag_details", "income_group"]].rename(columns={
+        "_cname": t("col_country", lang),
+        "red_flags": "🔴",
+        "yellow_flags": "🟡",
+        "total_flags": t("invest_total_flags", lang),
+        "flag_details": t("invest_flag_details", lang),
+        "income_group": t("income_level", lang),
+    })
+
+    # Affichage — tous les pays filtrés, scrollable
+    st.dataframe(df_flags_display, width="stretch", hide_index=True, height=500)
+
+    st.divider()
+    
+    # ── SECTION 4: Top Opportunities ──
+    st.markdown(f"#### 💎 {t('invest_opportunities', lang)}")
+    st.markdown(f'<div class="indicator-banner">ℹ️ {t("invest_opportunities_tip", lang)}</div>', unsafe_allow_html=True)
+
+    df_clean = df_scores.merge(df_flags[["country", "red_flags"]], on="country", how="left")
+    df_clean = df_clean[df_clean["red_flags"] == 0].sort_values("investment_score", ascending=False).head(10)
+    
+    if not df_clean.empty:
+        df_clean["_cname"] = df_clean["country"].map(lambda n: cname(n, lang))
+        df_clean["income_group"] = df_clean["income_group"].map(lambda x: t(x, lang))
+        
+        fig_opp = px.bar(
+            df_clean,
+            x="_cname",
+            y="investment_score",
+            color="income_group",
+            color_discrete_map=INCOME_COLORS,
+            labels={"_cname": t("col_country", lang), "investment_score": t("invest_score_label", lang)},
+            title=f"{t('invest_top_opportunities', lang, y=invest_year)}",
+        )
+        fig_opp.update_layout(margin=dict(t=50, b=20, l=10, r=10), height=400, legend=dict(orientation="h", y=-0.2))
+        st.plotly_chart(fig_opp, width="stretch")
+
+        st.markdown(f"**🔍 {t('invest_top3_detail', lang)}**")
+        top3_cols = st.columns(3)
+        for i, (_, row) in enumerate(df_clean.head(3).iterrows()):
+            with top3_cols[i]:
+                st.metric(
+                    f"#{i+1} {cname(row['country'], lang)}",
+                    f"{row['investment_score']:.1f}/100",
+                    help=f"{t('income_level', lang)}: {t(row['income_group'], lang)}",
+                )
+    else:
+        st.info(t("invest_no_clean", lang))
 
 # ── Footer ──────────────────────────────────────────────────────────────────
 st.divider()

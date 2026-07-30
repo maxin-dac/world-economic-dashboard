@@ -13,6 +13,7 @@ TRANSLATIONS = {
         "footer": "🌍 Global Economic Intelligence Dashboard",
         "loading_data": "Loading data…",
         "data_lag_note": "Latest available validated data (up to 2024)",
+        "income_group": "Income Group",
 
         # ── Sidebar ─────────────────────────────────────────────────────────
         "sidebar_title": "🌍 Global Economic Intelligence Dashboard",
@@ -45,6 +46,7 @@ TRANSLATIONS = {
         "tab_compare": "↔️ Compare Countries",
         "tab_struct": "🏗️ Economic Structure",
         "tab_data": "📋 Data",
+        "tab_invest": "💎 Investment Score",
 
         # ── Tab 1: Map ──────────────────────────────────────────────────────
         "map_indicator": "Indicator to map",
@@ -125,6 +127,37 @@ TRANSLATIONS = {
         "pestel_all": "All pillars",
         "col_country": "Country",
         "col_region": "Region",
+
+        # ── Tab 7: Investment Score ──────────────────────────────────────────
+        "invest_title": "Investment Attractiveness Analysis",
+        "invest_banner": "This module combines 8 key indicators (GDP growth, political stability, corruption control, inflation, debt, trade openness, electricity and internet access) into a composite attractiveness score from 0 to 100. It also detects risk signals and identifies the best investment opportunities.",
+        "invest_ref_year": "Reference year",
+        "invest_scorecard": "Investment Scorecard",
+        "invest_scorecard_tip": "Composite score (0-100) calculated from 8 weighted indicators. Higher = more attractive for investment. Filter by region or income group to refine the analysis.",
+        "invest_filter_region": "Filter by region",
+        "invest_filter_income": "Filter by income group",
+        "invest_score_label": "Attractiveness Score",
+        "invest_top10": "Top 10 most attractive countries in {y}",
+        "invest_risk_reward": "Risk / Return Matrix",
+        "invest_risk_reward_tip": "Each bubble represents a country. X-axis = 5-year GDP per capita CAGR (return). Y-axis = inflation volatility (risk). Bubble size = GDP. Four quadrants: Star (high return, low risk), Question Mark (high return, high risk), Cash Cow (low return, low risk), Dog (low return, high risk).",
+        "invest_cagr": "5Y GDP CAGR (%)",
+        "invest_risk": "Inflation risk index",
+        "invest_quadrant": "Quadrant",
+        "invest_5y": "last 5 years",
+        "invest_median": "median",
+        "invest_red_flags": "Red Flags Detector",
+        "invest_red_flags_tip": "Countries are flagged when they exceed standard risk thresholds: inflation > 10%, debt > 80% GDP, unemployment > 15%, political instability < -1 (WGI), corruption perception < 25 (CPI).",
+        "invest_flag_filter": "Show",
+        "invest_flag_all": "All countries",
+        "invest_flag_red": "Only red flags",
+        "invest_flag_any": "Any flag",
+        "invest_total_flags": "Total signals",
+        "invest_flag_details": "Details",
+        "invest_opportunities": "Top Investment Opportunities",
+        "invest_opportunities_tip": "Countries with the highest attractiveness score AND zero red flags. These are the safest bets for investment based on current data.",
+        "invest_top_opportunities": "Top 10 safe investment opportunities in {y}",
+        "invest_top3_detail": "Top 3 detail",
+        "invest_no_clean": "No country with zero red flags in the current selection.",
 
         # ── PESTEL pillars ──────────────────────────────────────────────────
         "pestel_political": "Political",
@@ -228,6 +261,16 @@ TRANSLATIONS = {
         "ev_2008": "Financial\nCrisis",
         "ev_2020": "COVID-19",
         "ev_2022": "Ukraine\nWar",
+
+        # ── Red Flags Detector ──────────────────────────────────────────────
+        "flag_high_inflation": "High inflation",
+        "flag_high_debt": "High debt",
+        "flag_high_unemployment": "High unemployment",
+        "flag_political_instability": "Political instability",
+        "flag_high_corruption": "High corruption",
+        "flag_moderate_inflation": "Moderate inflation",
+        "flag_moderate_debt": "Moderate debt",
+        "flag_no_risk": "No major risks",
     },
 
     "fr": {
@@ -238,6 +281,7 @@ TRANSLATIONS = {
         "footer": "🌍 Tableau de Bord d'Intelligence Économique Mondiale",
         "loading_data": "Chargement des données…",
         "data_lag_note": "Dernières données validées disponibles (jusqu'en 2024)",
+        "income_group": "Groupe de Revenu",
 
         # ── Sidebar ─────────────────────────────────────────────────────────
         "sidebar_title": "🌍 Tableau de Bord d'Intelligence Économique Mondiale",
@@ -270,6 +314,7 @@ TRANSLATIONS = {
         "tab_compare": "↔️ Comparaison",
         "tab_struct": "🏗️ Structure économique",
         "tab_data": "📋 Données",
+        "tab_invest": "💎 Score Investissement",
 
         # ── Tab 1: Map ──────────────────────────────────────────────────────
         "map_indicator": "Indicateur à cartographier",
@@ -350,6 +395,37 @@ TRANSLATIONS = {
         "pestel_all": "Tous les piliers",
         "col_country": "Pays",
         "col_region": "Région",
+
+        # ── Tab 7: Investment Score ──────────────────────────────────────────
+        "invest_title": "Analyse d'attractivité à l'investissement",
+        "invest_banner": "Ce module combine 8 indicateurs clés (croissance PIB, stabilité politique, contrôle de la corruption, inflation, dette, ouverture commerciale, accès électricité et internet) en un score composite d'attractivité de 0 à 100. Il détecte également les signaux de risque et identifie les meilleures opportunités d'investissement.",
+        "invest_ref_year": "Année de référence",
+        "invest_scorecard": "Scorecard d'investissement",
+        "invest_scorecard_tip": "Score composite (0-100) calculé à partir de 8 indicateurs pondérés. Plus élevé = plus attractif pour l'investissement. Filtrez par région ou groupe de revenu pour affiner l'analyse.",
+        "invest_filter_region": "Filtrer par région",
+        "invest_filter_income": "Filtrer par groupe de revenu",
+        "invest_score_label": "Score d'attractivité",
+        "invest_top10": "Top 10 des pays les plus attractifs en {y}",
+        "invest_risk_reward": "Matrice Risque / Rendement",
+        "invest_risk_reward_tip": "Chaque bulle représente un pays. Axe X = TCAC PIB/hab. sur 5 ans (rendement). Axe Y = volatilité de l'inflation (risque). Taille = PIB. Quatre quadrants : Star (fort rendement, faible risque), Question Mark (fort rendement, fort risque), Cash Cow (faible rendement, faible risque), Dog (faible rendement, fort risque).",
+        "invest_cagr": "TCAC PIB 5 ans (%)",
+        "invest_risk": "Indice de risque inflation",
+        "invest_quadrant": "Quadrant",
+        "invest_5y": "5 dernières années",
+        "invest_median": "médiane",
+        "invest_red_flags": "Détecteur de signaux d'alerte",
+        "invest_red_flags_tip": "Les pays sont signalés lorsqu'ils dépassent des seuils de risque standards : inflation > 10%, dette > 80% PIB, chômage > 15%, instabilité politique < -1 (WGI), perception corruption < 25 (IPC).",
+        "invest_flag_filter": "Afficher",
+        "invest_flag_all": "Tous les pays",
+        "invest_flag_red": "Drapeaux rouges uniquement",
+        "invest_flag_any": "Tout signal",
+        "invest_total_flags": "Total signaux",
+        "invest_flag_details": "Détails",
+        "invest_opportunities": "Meilleures opportunités d'investissement",
+        "invest_opportunities_tip": "Pays avec le score d'attractivité le plus élevé ET zéro drapeau rouge. Ce sont les paris les plus sûrs pour l'investissement selon les données actuelles.",
+        "invest_top_opportunities": "Top 10 opportunités d'investissement sûres en {y}",
+        "invest_top3_detail": "Détail du Top 3",
+        "invest_no_clean": "Aucun pays sans drapeau rouge dans la sélection actuelle.",
 
         # ── PESTEL pillars ──────────────────────────────────────────────────
         "pestel_political": "Politique",
@@ -687,6 +763,16 @@ TRANSLATIONS = {
         "Low income": "Faible revenu",
         "Lower middle income": "Revenu intermédiaire inférieur",
         "Upper middle income": "Revenu intermédiaire supérieur",
+
+        # ── Red Flags Detector ──────────────────────────────────────────────
+        "flag_high_inflation": "Inflation élevée",
+        "flag_high_debt": "Dette élevée",
+        "flag_high_unemployment": "Chômage élevé",
+        "flag_political_instability": "Instabilité politique",
+        "flag_high_corruption": "Corruption élevée",
+        "flag_moderate_inflation": "Inflation modérée",
+        "flag_moderate_debt": "Dette modérée",
+        "flag_no_risk": "Aucun risque majeur",
     }
 }
 
