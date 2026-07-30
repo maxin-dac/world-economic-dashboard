@@ -15,6 +15,9 @@ import plotly.graph_objects as go
 import plotly.io as pio
 from plotly.subplots import make_subplots
 import streamlit as st
+import translations
+import importlib
+importlib.reload(translations)
 from translations import t, TRANSLATIONS
 
 # ── Page config ─────────────────────────────────────────────────────────────
