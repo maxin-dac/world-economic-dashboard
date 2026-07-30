@@ -26,7 +26,7 @@ An interactive bilingual platform for exploring the macroeconomic and strategic 
 
 ## Overview
 
-![Dashboard overview](image-1.png)
+![alt text](image.png)
 
 ## Why this dashboard?
 
