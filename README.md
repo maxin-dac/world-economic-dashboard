@@ -19,14 +19,12 @@ An interactive bilingual platform for exploring the macroeconomic and strategic 
 </p>
 
 > 🇫🇷 **French version:** [README-fr.md](README-fr.md)
->
-> 🆕 **New** — a dedicated **Investment Intelligence** module: composite attractiveness score, risk/return matrix, red-flag detector, and a clean-opportunity shortlist. See the *Investment Score* feature below.
 
 ---
 
 ## Overview
 
-![alt text](image.png)
+![alt text](image-2.png)
 
 ## Why this dashboard?
 
