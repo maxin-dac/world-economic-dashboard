@@ -1,16 +1,6 @@
 # 🌍 Global Economic Intelligence Dashboard
 
-An interactive bilingual platform for exploring the macroeconomic and strategic environment of **217 countries**, from **2000 to 2024** — structured around the **PESTEL framework** and powered by **58 real World Bank indicators**.
-
-<p align="left">
-  <img src="https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white" alt="Python" />
-  <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=flat&logo=streamlit&logoColor=white" alt="Streamlit" />
-  <img src="https://img.shields.io/badge/Plotly-3F4F75?style=flat&logo=plotly&logoColor=white" alt="Plotly" />
-  <img src="https://img.shields.io/badge/Pandas-150458?style=flat&logo=pandas&logoColor=white" alt="Pandas" />
-  <img src="https://img.shields.io/badge/NumPy-013243?style=flat&logo=numpy&logoColor=white" alt="NumPy" />
-  <img src="https://img.shields.io/badge/World%20Bank%20API-0072BC?style=flat" alt="World Bank API" />
-  <img src="https://img.shields.io/badge/License-MIT-green?style=flat" alt="MIT License" />
-</p>
+An interactive bilingual platform for exploring the macroeconomic and strategic environment of **217 countries**, from **2000 to 2024** - structured around the **PESTEL framework** and powered by **58 real World Bank indicators**.
 
 ***Click on the button below to launch the application***
 <p align="left">
@@ -29,9 +19,9 @@ An interactive bilingual platform for exploring the macroeconomic and strategic 
 
 ## Why this dashboard?
 
-Most freely available macroeconomic tools force you to choose between breadth (many countries, few indicators) and depth (rich analyses, one country at a time). This dashboard does both.
+Open macroeconomic tools usually cover either many countries with few indicators, or a single country in depth - rarely both.
 
-It combines **58 World Bank indicators** covering all PESTEL dimensions, data sourced directly from the official World Bank API, and a suite of visualizations designed for strategic analysis — all within a bilingual interface that is equally effective for quick country lookups and rigorous comparative studies. Everything is laid out across **seven coordinated views**, from the world map to a dedicated investment-intelligence module.
+This one combines **58 World Bank indicators** covering all PESTEL dimensions, data sourced directly from the official World Bank API, and a suite of visualizations designed for strategic analysis - all within a bilingual interface that is equally effective for quick country lookups and rigorous comparative studies. Everything is laid out across **seven coordinated views**, from the world map to a dedicated investment-intelligence module.
 
 ## Features
 
