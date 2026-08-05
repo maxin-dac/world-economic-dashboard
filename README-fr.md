@@ -36,7 +36,7 @@
 - **Ce que ça fait** : explorer, comparer et analyser 217 pays à partir d’indicateurs macroéconomiques, sociaux, technologiques, environnementaux et de gouvernance.
 - **Compétences mobilisées** : data engineering, analyse exploratoire, statistiques, data visualisation, UX bilingue, dashboarding.
 - **Démo** : [world-bi-dashboard.streamlit.app](https://world-bi-dashboard.streamlit.app/)
-- **Stack** : Python · Streamlit · Plotly · Pandas · NumPy · Statsmodels · World Bank API
+- **Stack** : Python · Streamlit · Plotly · Pandas · NumPy · Statsmodels · Requests · pycountry · World Bank API
 
 ## Fonctionnalités principales
 
