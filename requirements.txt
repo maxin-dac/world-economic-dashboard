@@ -6,3 +6,4 @@ matplotlib
 statsmodels
 requests
 pytest
+fpdf2
