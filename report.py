@@ -276,4 +276,4 @@ def build_country_report(df_all, country, lang):
             os.remove(p)
         except OSError:
             pass
-    return out
+    return bytes(out)
