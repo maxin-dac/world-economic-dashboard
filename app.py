@@ -663,7 +663,20 @@ with tab_country:
                 fig_mini.update_layout(height=150, margin=dict(l=8, r=8, t=30, b=6))
                 st.plotly_chart(fig_mini, width="stretch")
 
-# ── TAB 4: COMPARE COUNTRIES ────────────────────────────────────────────────
+# ──     st.divider()
+    import report as country_report
+    if st.button(country_report.ui_label(lang, "gen_btn"), key="gen_report"):
+        with st.spinner(country_report.ui_label(lang, "generating")):
+            _report_html = country_report.build_country_report(df_all, sel_country, lang)
+        st.download_button(
+            country_report.ui_label(lang, "dl_btn"),
+            data=_report_html,
+            file_name=f"report_{sel_country}_{latest_year_c}.html",
+            mime="text/html",
+            key="dl_report",
+        )
+
+TAB 4: COMPARE COUNTRIES ────────────────────────────────────────────────
 with tab_compare:
     defaults = [c for c in ["Cameroon", "France", "China", "Nigeria", "Brazil", "Germany", "India", "United States"] if c in ALL_COUNTRIES]
     sel_ctry = st.multiselect(t("select_countries", lang), ALL_COUNTRIES, default=defaults, max_selections=12, format_func=lambda n: cname(n, lang))
