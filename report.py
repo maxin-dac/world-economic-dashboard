@@ -242,7 +242,7 @@ def _fig_pestel(df_all, row, L, paths):
         axw.text(i, v + (0.4 if v >= 0 else -0.8), f"{v:.1f}%", ha="center", fontsize=10, weight="bold")
     axw.set_ylabel("% of GDP")
     axw.set_title(L["waterfall"], fontsize=15, weight="bold", color="#0B2540")
-    sns.despine()
+    sns.despine(ax=axw)
     fig.tight_layout()
     return _png(fig, paths)
 
