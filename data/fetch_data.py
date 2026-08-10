@@ -195,10 +195,10 @@ def fetch_indicator(indicator_code: str, col_name: str,
         except Exception as e:
             if attempt < MAX_RETRIES:
                 wait = REQUEST_DELAY * attempt * 2
-                log.warning(f"  ⚠ {col_name} — attempt {attempt} failed ({e}); retry in {wait:.1f}s")
+                log.warning(f"  ⚠ {col_name} - attempt {attempt} failed ({e}); retry in {wait:.1f}s")
                 time.sleep(wait)
             else:
-                log.warning(f"  ✗ {col_name} — failed after {MAX_RETRIES} attempts: {e}")
+                log.warning(f"  ✗ {col_name} - failed after {MAX_RETRIES} attempts: {e}")
                 return None
 
     return None
@@ -285,11 +285,11 @@ def build_dataset(countries: pd.DataFrame) -> pd.DataFrame:
         log.info(f"  {source['label']}")
         raw = fetch_owid_first_available(source["urls"])
         if raw is None:
-            log.warning(f"  ⚠ Could not fetch '{col}' — skipping.")
+            log.warning(f"  ⚠ Could not fetch '{col}' - skipping.")
             continue
         norm = normalize_owid(raw)
         if norm is None or norm.empty:
-            log.warning(f"  ⚠ No usable rows for '{col}' — skipping.")
+            log.warning(f"  ⚠ No usable rows for '{col}' - skipping.")
             continue
         master = master.merge(norm.rename(columns={"value": col}), on=["iso3", "year"], how="left")
         log.info(f"  ✓ Merged '{col}': {master[col].notna().sum():,} values available.")
@@ -324,7 +324,7 @@ def build_dataset(countries: pd.DataFrame) -> pd.DataFrame:
 def main():
     total = len(INDICATORS) + len(OWID_SOURCES)
     log.info("=" * 65)
-    log.info("World Bank API v2 + OWID — PESTEL Matrix Data Collection")
+    log.info("World Bank API v2 + OWID - PESTEL Matrix Data Collection")
     log.info(f"Period: {START_YEAR}:{END_YEAR}  |  Target indicators: {total} "
              f"({len(INDICATORS)} World Bank + {len(OWID_SOURCES)} OWID)")
     log.info("=" * 65)

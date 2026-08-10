@@ -1,6 +1,6 @@
 # 🌍 Tableau de Bord d'Intelligence Économique Mondiale
 
-Plateforme interactive bilingue (FR/EN) — 217 pays · 2000–2024 · 58 indicateurs Banque Mondiale structurés selon le cadre **PESTEL**, complétés d'un module dédié **Intelligence Investissement**.
+Plateforme interactive bilingue (FR/EN) - 217 pays · 2000-2024 · 58 indicateurs Banque Mondiale structurés selon le cadre **PESTEL**, complétés d'un module dédié **Intelligence Investissement**.
 
 <p align="left">
 <img src="https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white" alt="Python" />
@@ -33,13 +33,13 @@ Plateforme interactive bilingue (FR/EN) — 217 pays · 2000–2024 · 58 indica
 
 **7 vues coordonnées** + 1 module d'investissement :
 
-- **Carte mondiale** — choroplèthe + bulles, rognage par percentile, cartes de médiane régionale
-- **Tendances & corrélations** — séries par région/revenu, lignes de chocs annotées (2008, 2020, 2022), scatter OLS
-- **Profil pays** — radar PESTEL, heatmap normalisée 10 ans, double axe PIB/inflation, aires sectorielles, cascade balance commerciale, donut sectoriel
-- **Comparaison pays** — jusqu'à 12 pays, séries + barres de classement + tableau synthétique
-- **Structure économique** — treemap sectoriel, violin plot log du PIB/hab., Top/Bottom 10
-- **Explorateur de données** — jeu filtrable, mise en forme conditionnelle null-safe, export CSV en un clic
-- **Score Investissement** — score composite 0-100 (8 indicateurs pondérés), matrice risque/rendement 4 quadrants, détecteur de signaux d'alerte, shortlist d'opportunités propres
+- **Carte mondiale** - choroplèthe + bulles, rognage par percentile, cartes de médiane régionale
+- **Tendances & corrélations** - séries par région/revenu, lignes de chocs annotées (2008, 2020, 2022), scatter OLS
+- **Profil pays** - radar PESTEL, heatmap normalisée 10 ans, double axe PIB/inflation, aires sectorielles, cascade balance commerciale, donut sectoriel
+- **Comparaison pays** - jusqu'à 12 pays, séries + barres de classement + tableau synthétique
+- **Structure économique** - treemap sectoriel, violin plot log du PIB/hab., Top/Bottom 10
+- **Explorateur de données** - jeu filtrable, mise en forme conditionnelle null-safe, export CSV en un clic
+- **Score Investissement** - score composite 0-100 (8 indicateurs pondérés), matrice risque/rendement 4 quadrants, détecteur de signaux d'alerte, shortlist d'opportunités propres
 
 ## Couverture PESTEL (58 indicateurs)
 
@@ -82,12 +82,12 @@ Données collectées via l'**API REST de la Banque Mondiale** et **Our World in 
 ## Qualité des données & limitations
 
 - 2024 est la dernière année entièrement validée (décalage de publication Banque Mondiale de 12-18 mois)
-- Cellules nulles affichées en "**—**" (tableaux) / "**N/A**" (cartes KPI) sur fond gris neutre
+- Cellules nulles affichées en "**-**" (tableaux) / "**N/A**" (cartes KPI) sur fond gris neutre
 - Changelog mensuel traçant couverture, taux de nulls et indicateurs les moins couverts
 
 ## Auteur
 
-**Maxime NDACLEU** — Data Analyst & Business Intelligence Analyst
+**Maxime NDACLEU** - Data Analyst & Business Intelligence Analyst
 
 <p>
 <a href="https://github.com/maxin-dac"><img src="https://img.shields.io/badge/GitHub-maxin--dac-181717?style=flat&logo=github&logoColor=white" alt="GitHub" /></a>

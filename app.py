@@ -91,7 +91,7 @@ def get_expressive_colorscale(indicator_key: str) -> str:
     return INDICATOR_COLORSCALE.get(indicator_key, "YlOrRd" if indicator_key in INVERSE_INDICATORS else "Viridis")
 
 # ═══════════════════════════════════════════════════════════════════════════
-# INDICATOR EXPLANATIONS (bilingual) — key -> (en_desc, en_tip, fr_desc, fr_tip)
+# INDICATOR EXPLANATIONS (bilingual) - key -> (en_desc, en_tip, fr_desc, fr_tip)
 # ═══════════════════════════════════════════════════════════════════════════
 INDICATOR_INFO = {
     "gdp_per_capita": ("Average economic output per person.", "Higher = wealthier population.", "Production économique moyenne par personne.", "Plus élevé = population plus riche."),
@@ -100,7 +100,7 @@ INDICATOR_INFO = {
     "gdp_growth_pct": ("Annual growth rate of the economy.", "Positive = expanding; negative = recession.", "Taux de croissance annuel de l'économie.", "Positif = expansion ; négatif = récession."),
     "gross_fixed_capital_formation_pct_gdp": ("Investment in fixed assets (machinery, infrastructure).", "Higher = more investment.", "Investissement en actifs fixes (machines, infrastructures).", "Plus élevé = plus d'investissement."),
     "trade_openness_pct_gdp": ("Total trade (exports + imports) as a share of GDP.", "Higher = more open economy.", "Commerce total (exports + imports) rapporté au PIB.", "Plus élevé = économie plus ouverte."),
-    "cpi_index_raw": ("Consumer Price Index, base 100 in 2010 — measures PRICE levels, NOT corruption.", "100 = 2010 price level; higher = more cumulative inflation since 2010.", "Indice des prix à la consommation, base 100 en 2010 — mesure les PRIX, PAS la corruption.", "100 = niveau des prix de 2010 ; plus élevé = plus d'inflation cumulée depuis 2010."),
+    "cpi_index_raw": ("Consumer Price Index, base 100 in 2010 - measures PRICE levels, NOT corruption.", "100 = 2010 price level; higher = more cumulative inflation since 2010.", "Indice des prix à la consommation, base 100 en 2010 - mesure les PRIX, PAS la corruption.", "100 = niveau des prix de 2010 ; plus élevé = plus d'inflation cumulée depuis 2010."),
     "inflation": ("Annual percentage change in consumer prices.", "Moderate (2-3%) is healthy; very high erodes purchasing power.", "Variation annuelle en % des prix à la consommation.", "Modérée (2-3 %) = saine ; très élevée = érode le pouvoir d'achat."),
     "debt_pct_gdp": ("Government debt as a share of GDP.", "Higher = heavier public debt burden.", "Dette publique rapportée au PIB.", "Plus élevé = fardeau de la dette plus lourd."),
     "tax_revenue_pct_gdp": ("Tax revenue collected by the state as a share of GDP.", "Higher = greater fiscal capacity.", "Recettes fiscales de l'État rapportées au PIB.", "Plus élevé = plus de capacité à financer les services publics."),
@@ -234,7 +234,7 @@ def ind_label(key: str, current_lang: str, with_pillar: bool = False) -> str:
     if label == key: label = key.replace("_", " ").title()
     if with_pillar:
         pillar = INDICATOR_TO_PILLAR.get(key)
-        if pillar: return f"{t(PESTEL_LABEL_KEYS[pillar], current_lang)} — {label}"
+        if pillar: return f"{t(PESTEL_LABEL_KEYS[pillar], current_lang)} - {label}"
     return label
 def previous_year(years: list, current: int) -> int:
     earlier = [y for y in years if y < current]
@@ -462,7 +462,7 @@ with tab_map:
             zmax = float(np.percentile(df_map[map_ind], 98))
             if zmax <= zmin: zmin, zmax = None, None
         fig_map = go.Figure(go.Choropleth(locations=df_map["iso3"], z=df_map[map_ind], text=df_map["_cname"], customdata=df_map[[map_ind, "region", "income_group", "_interpret"]].values, zmin=zmin, zmax=zmax, hovertemplate=("<b>%{text}</b><br>" + f"{ilabel}: %{{customdata[0]:,.2f}}<br>" + "<b>%{customdata[3]}</b><br>" + f"{t('region', lang)}: %{{customdata[1]}}<br>" + f"{t('income_level', lang)}: %{{customdata[2]}}<br><extra></extra>"), colorscale=cscale, colorbar=dict(title=ilabel, len=0.6, thickness=15, tickfont=dict(size=10)), marker_line_color="#78909c", marker_line_width=0.6))
-        fig_map.update_layout(title=dict(text=f"{ilabel} — {map_year}", font=dict(size=15)), geo=dict(**GEO_STYLE, projection_type="natural earth"), margin=dict(t=50, b=0, l=0, r=0), height=520)
+        fig_map.update_layout(title=dict(text=f"{ilabel} - {map_year}", font=dict(size=15)), geo=dict(**GEO_STYLE, projection_type="natural earth"), margin=dict(t=50, b=0, l=0, r=0), height=520)
     else:
         size_col = size_choice_key if size_choice_key else map_ind
         df_map["_size"] = df_map[size_col].fillna(0).clip(lower=0)
@@ -471,7 +471,7 @@ with tab_map:
             sub = df_map[df_map["income_group"] == ig]
             if sub.empty or sub["_size"].max() <= 0: continue
             fig_map.add_trace(go.Scattergeo(locations=sub["iso3"], marker=dict(size=sub["_size"], sizemode="area", sizeref=2. * sub["_size"].max() / (42 ** 2), sizemin=4, color=INCOME_COLORS[ig], opacity=0.85, line=dict(color="white", width=0.5)), text=sub["_cname"], customdata=sub[[map_ind, "region", size_col, "_interpret"]].values, hovertemplate=("<b>%{text}</b><br>" + f"{ilabel}: %{{customdata[0]:,.2f}}<br>" + "<b>%{customdata[3]}</b><br>" + f"{t('region', lang)}: %{{customdata[1]}}<br>" + f"{ind_label(size_col, lang)}: %{{customdata[2]:,.2f}}<br><extra></extra>"), name=t(ig, lang)))
-        fig_map.update_layout(title=dict(text=f"{ilabel} — {map_year}", font=dict(size=15)), geo=dict(**GEO_STYLE, projection_type="natural earth"), margin=dict(t=50, b=0, l=0, r=0), height=520, legend=dict(orientation="h", y=-0.1, font_size=11))
+        fig_map.update_layout(title=dict(text=f"{ilabel} - {map_year}", font=dict(size=15)), geo=dict(**GEO_STYLE, projection_type="natural earth"), margin=dict(t=50, b=0, l=0, r=0), height=520, legend=dict(orientation="h", y=-0.1, font_size=11))
     st.plotly_chart(fig_map, width="stretch")
 
     st.markdown(t("median_by_region", lang, ind=ilabel, y=map_year))
@@ -673,7 +673,7 @@ with tab_compare:
     else:
         df_cp = df[df["country"].isin(sel_ctry)].copy()
         df_cp["_cname"] = df_cp["country"].map(lambda n: cname(n, lang))
-        fig_cp = px.line(df_cp, x="year", y=comp_ind, color="_cname", color_discrete_sequence=px.colors.qualitative.Set2, markers=True, labels={"year": t("year_label", lang), comp_ind: ind_label(comp_ind, lang), "_cname": ""}, title=f"{ind_label(comp_ind, lang)} — {min(sel_years)}–{max(sel_years)}")
+        fig_cp = px.line(df_cp, x="year", y=comp_ind, color="_cname", color_discrete_sequence=px.colors.qualitative.Set2, markers=True, labels={"year": t("year_label", lang), comp_ind: ind_label(comp_ind, lang), "_cname": ""}, title=f"{ind_label(comp_ind, lang)} - {min(sel_years)}-{max(sel_years)}")
         fig_cp.update_layout(margin=dict(t=50, b=20, l=10, r=10), hovermode="x unified", legend=dict(orientation="h", y=-0.25), height=400)
         st.plotly_chart(fig_cp, width="stretch")
         
@@ -821,7 +821,7 @@ with tab_data:
     if income_col and income_col in df_display.columns: styled_df = styled_df.map(style_income_group, subset=[income_col])
     text_cols = [c for c in df_display.columns if c not in num_cols and c != income_col]
     if text_cols: styled_df = styled_df.map(style_text_cells, subset=text_cols)
-    if num_cols: styled_df = styled_df.format("{:,.2f}", subset=num_cols, na_rep="—")
+    if num_cols: styled_df = styled_df.format("{:,.2f}", subset=num_cols, na_rep="-")
     st.dataframe(styled_df, width="stretch", height=520)
     
     csv = df_display.to_csv(index=False).encode("utf-8")
@@ -874,7 +874,7 @@ with tab_invest:
         ),
     ))
     fig_score_map.update_layout(
-        title=dict(text=f"{t('invest_scorecard', lang)} — {invest_year}", font=dict(size=15)),
+        title=dict(text=f"{t('invest_scorecard', lang)} - {invest_year}", font=dict(size=15)),
         geo=dict(**GEO_STYLE, projection_type="natural earth"),
         margin=dict(t=50, b=0, l=0, r=0),
         height=500,
@@ -961,7 +961,7 @@ with tab_invest:
             "risk": t("invest_risk", lang),
             "quadrant": t("invest_quadrant", lang),
         },
-        title=f"{t('invest_risk_reward', lang)} — {t('invest_5y', lang)}",
+        title=f"{t('invest_risk_reward', lang)} - {t('invest_5y', lang)}",
     )
     fig_rr.add_vline(x=median_cagr, line_dash="dash", line_color="#94a3b8", annotation_text=t("invest_median", lang))
     fig_rr.add_hline(y=median_risk, line_dash="dash", line_color="#94a3b8")
@@ -1005,7 +1005,7 @@ with tab_invest:
         "income_group": t("income_level", lang),
     })
 
-    # Affichage — tous les pays filtrés, scrollable
+    # Affichage - tous les pays filtrés, scrollable
     st.dataframe(df_flags_display, width="stretch", hide_index=True, height=500)
 
     st.divider()

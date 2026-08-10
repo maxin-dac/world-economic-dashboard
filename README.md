@@ -1,6 +1,6 @@
 # 🌍 Global Economic Intelligence Dashboard
 
-Interactive bilingual platform (EN/FR) — 217 countries · 2000–2024 · 58 World Bank indicators structured around the **PESTEL** framework, plus a dedicated **Investment Intelligence** module.
+Interactive bilingual platform (EN/FR) - 217 countries · 2000-2024 · 58 World Bank indicators structured around the **PESTEL** framework, plus a dedicated **Investment Intelligence** module.
 
 <p align="left">
 <img src="https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white" alt="Python" />
@@ -33,13 +33,13 @@ Interactive bilingual platform (EN/FR) — 217 countries · 2000–2024 · 58 Wo
 
 **7 coordinated views** + 1 investment module:
 
-- **World Map** — choropleth + bubble maps, percentile clipping, regional median cards
-- **Trends & Correlations** — time series by region/income, annotated shock lines (2008, 2020, 2022), OLS scatter
-- **Country Profile** — PESTEL radar, 10-year normalized heatmap, dual-axis GDP/inflation, sectoral area chart, trade balance waterfall, sectoral donut
-- **Country Comparison** — up to 12 countries, time series + ranking bars + summary table
-- **Economic Structure** — sectoral treemap, log-scale violin plot of GDP/capita, Top/Bottom 10 rankings
-- **Data Explorer** — filterable dataset, null-safe conditional formatting, one-click CSV export
-- **Investment Score** — composite 0-100 attractiveness score (8 weighted indicators), risk/return 4-quadrant matrix, red-flag detector, clean-opportunity shortlist
+- **World Map** - choropleth + bubble maps, percentile clipping, regional median cards
+- **Trends & Correlations** - time series by region/income, annotated shock lines (2008, 2020, 2022), OLS scatter
+- **Country Profile** - PESTEL radar, 10-year normalized heatmap, dual-axis GDP/inflation, sectoral area chart, trade balance waterfall, sectoral donut
+- **Country Comparison** - up to 12 countries, time series + ranking bars + summary table
+- **Economic Structure** - sectoral treemap, log-scale violin plot of GDP/capita, Top/Bottom 10 rankings
+- **Data Explorer** - filterable dataset, null-safe conditional formatting, one-click CSV export
+- **Investment Score** - composite 0-100 attractiveness score (8 weighted indicators), risk/return 4-quadrant matrix, red-flag detector, clean-opportunity shortlist
 
 ## PESTEL Coverage (58 indicators)
 
@@ -82,12 +82,12 @@ Data pulled from the **World Bank REST API** and **Our World in Data**, **automa
 ## Data Quality & Limitations
 
 - 2024 is the latest fully validated year (12-18 month World Bank publication lag)
-- Null cells rendered as "**—**" (tables) / "**N/A**" (KPI cards) with neutral gray background
+- Null cells rendered as "**-**" (tables) / "**N/A**" (KPI cards) with neutral gray background
 - Monthly changelog tracks coverage, null rates, and lowest-coverage indicators
 
 ## Author
 
-**Maxime NDACLEU** — Data Analyst & Business Intelligence Analyst
+**Maxime NDACLEU** - Data Analyst & Business Intelligence Analyst
 
 <p>
 <a href="https://github.com/maxin-dac"><img src="https://img.shields.io/badge/GitHub-maxin--dac-181717?style=flat&logo=github&logoColor=white" alt="GitHub" /></a>

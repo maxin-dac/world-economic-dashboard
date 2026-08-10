@@ -8,8 +8,8 @@ TRANSLATIONS = {
     "en": {
         # ── App Meta ────────────────────────────────────────────────────────
         "app_title": "GLOBAL ECONOMIC INTELLIGENCE DASHBOARD",
-        "app_subtitle": "{n} countries · {ymin}–{ymax}",
-        "app_caption": "**{n} countries** selected · Period: {y0}–{y1} · Latest year: **{ly}**",
+        "app_subtitle": "{n} countries · {ymin}-{ymax}",
+        "app_caption": "**{n} countries** selected · Period: {y0}-{y1} · Latest year: **{ly}**",
         "footer": "🌍 Global Economic Intelligence Dashboard",
         "loading_data": "Loading data…",
         "data_lag_note": "Latest available validated data (up to 2024)",
@@ -17,7 +17,7 @@ TRANSLATIONS = {
 
         # ── Sidebar ─────────────────────────────────────────────────────────
         "sidebar_title": "🌍 Global Economic Intelligence Dashboard",
-        "sidebar_caption": "**{n} countries** · {ymin}–{ymax}",
+        "sidebar_caption": "**{n} countries** · {ymin}-{ymax}",
         "period": "Analysis period",
         "years_label": "Years",
         "no_year_selected": "No year selected. All years are shown by default.",
@@ -49,7 +49,7 @@ TRANSLATIONS = {
         "bubble": "Bubble map",
         "ref_year": "Reference year",
         "bubble_size_label": "Bubble size",
-        "median_by_region": "**Median « {ind} » by region — {y}**",
+        "median_by_region": "**Median « {ind} » by region - {y}**",
 
         # ── Tab 2: Trends ───────────────────────────────────────────────────
         "indicator": "Indicator",
@@ -57,16 +57,16 @@ TRANSLATIONS = {
         "income_level": "Income level",
         "region": "Region",
         "year_label": "Year",
-        "trend_title": "{ind} — Median by {grp} ({y0}–{y1})",
+        "trend_title": "{ind} - Median by {grp} ({y0}-{y1})",
         "scatter_title": "Relationship between two indicators",
         "x_axis": "X axis",
         "y_axis": "Y axis",
-        "scatter_chart_title": "{xi} vs {yi} — {y}",
+        "scatter_chart_title": "{xi} vs {yi} - {y}",
 
         # ── Tab 3: Country Profile ──────────────────────────────────────────
         "select_country": "Select a country",
         "no_data": "No data available for this country.",
-        "country_map_title": "Geographic location — {c}",
+        "country_map_title": "Geographic location - {c}",
         "vs_world": "vs world median",
         "sector_breakdown": "Sector breakdown ({y})",
         "trade_balance": "Trade balance (% GDP)",
@@ -95,7 +95,7 @@ TRANSLATIONS = {
         # ── Tab 4: Compare ──────────────────────────────────────────────────
         "select_countries": "Select up to 12 countries",
         "select_least_one": "Please select at least one country.",
-        "ranking_title": "Ranking — {ind} ({y})",
+        "ranking_title": "Ranking - {ind} ({y})",
         "summary_table": "Summary table ({y})",
         "rank": "Rank",
         "value": "Value",
@@ -104,19 +104,19 @@ TRANSLATIONS = {
         # ── Tab 5: Structure ────────────────────────────────────────────────
         "treemap_title": "Median sector structure by region ({y})",
         "violin_title": "GDP/capita distribution by income level ({y})",
-        "gdp_log": "GDP/capita (USD) — log scale",
+        "gdp_log": "GDP/capita (USD) - log scale",
         "ranking_indicator": "Ranking indicator",
-        "top10": "🏆 Top 10 — {ind} ({y})",
-        "bottom10": "⚠️ Bottom 10 — {ind} ({y})",
+        "top10": "🏆 Top 10 - {ind} ({y})",
+        "bottom10": "⚠️ Bottom 10 - {ind} ({y})",
         "animated_title": "Sector structure over time",
         "animated_region": "Region for animation",
-        "anim_chart_title": "Median sector structure — {r}",
+        "anim_chart_title": "Median sector structure - {r}",
 
         # ── Tab 6: Data ─────────────────────────────────────────────────────
         "search_country": "🔍 Search a country",
         "filter_region": "Filter by region",
-        "showing": "Showing **{n} countries** — year {y}",
-        "export_csv": "⬇️ Export ({n} countries · {y}) — CSV",
+        "showing": "Showing **{n} countries** - year {y}",
+        "export_csv": "⬇️ Export ({n} countries · {y}) - CSV",
         "pestel_pillar_label": "PESTEL Pillar",
         "pestel_all": "All pillars",
         "col_country": "Country",
@@ -270,8 +270,8 @@ TRANSLATIONS = {
     "fr": {
         # ── App Meta ────────────────────────────────────────────────────────
         "app_title": "TABLEAU DE BORD D'INTELLIGENCE ÉCONOMIQUE MONDIALE",
-        "app_subtitle": "{n} pays · {ymin}–{ymax}",
-        "app_caption": "**{n} pays** sélectionnés · Période : {y0}–{y1} · Dernière année : **{ly}**",
+        "app_subtitle": "{n} pays · {ymin}-{ymax}",
+        "app_caption": "**{n} pays** sélectionnés · Période : {y0}-{y1} · Dernière année : **{ly}**",
         "footer": "🌍 Tableau de Bord d'Intelligence Économique Mondiale",
         "loading_data": "Chargement des données…",
         "data_lag_note": "Dernières données validées disponibles (jusqu'en 2024)",
@@ -279,7 +279,7 @@ TRANSLATIONS = {
 
         # ── Sidebar ─────────────────────────────────────────────────────────
         "sidebar_title": "🌍 Tableau de Bord d'Intelligence Économique Mondiale",
-        "sidebar_caption": "**{n} pays** · {ymin}–{ymax}",
+        "sidebar_caption": "**{n} pays** · {ymin}-{ymax}",
         "period": "Période d'analyse",
         "years_label": "Années",
         "no_year_selected": "Aucune année sélectionnée. Toutes les années sont affichées par défaut.",
@@ -311,7 +311,7 @@ TRANSLATIONS = {
         "bubble": "Carte à bulles",
         "ref_year": "Année de référence",
         "bubble_size_label": "Taille des bulles",
-        "median_by_region": "**Médiane « {ind} » par région — {y}**",
+        "median_by_region": "**Médiane « {ind} » par région - {y}**",
 
         # ── Tab 2: Trends ───────────────────────────────────────────────────
         "indicator": "Indicateur",
@@ -319,16 +319,16 @@ TRANSLATIONS = {
         "income_level": "Niveau de revenu",
         "region": "Région",
         "year_label": "Année",
-        "trend_title": "{ind} — Médiane par {grp} ({y0}–{y1})",
+        "trend_title": "{ind} - Médiane par {grp} ({y0}-{y1})",
         "scatter_title": "Relation entre deux indicateurs",
         "x_axis": "Axe X",
         "y_axis": "Axe Y",
-        "scatter_chart_title": "{xi} vs {yi} — {y}",
+        "scatter_chart_title": "{xi} vs {yi} - {y}",
 
         # ── Tab 3: Country Profile ──────────────────────────────────────────
         "select_country": "Sélectionner un pays",
         "no_data": "Aucune donnée disponible pour ce pays.",
-        "country_map_title": "Localisation géographique — {c}",
+        "country_map_title": "Localisation géographique - {c}",
         "vs_world": "vs médiane mondiale",
         "sector_breakdown": "Structure sectorielle ({y})",
         "trade_balance": "Balance commerciale (% PIB)",
@@ -357,7 +357,7 @@ TRANSLATIONS = {
         # ── Tab 4: Compare ──────────────────────────────────────────────────
         "select_countries": "Sélectionner jusqu'à 12 pays",
         "select_least_one": "Veuillez sélectionner au moins un pays.",
-        "ranking_title": "Classement — {ind} ({y})",
+        "ranking_title": "Classement - {ind} ({y})",
         "summary_table": "Tableau de synthèse ({y})",
         "rank": "Rang",
         "value": "Valeur",
@@ -366,19 +366,19 @@ TRANSLATIONS = {
         # ── Tab 5: Structure ────────────────────────────────────────────────
         "treemap_title": "Structure sectorielle médiane par région ({y})",
         "violin_title": "Distribution du PIB/hab par niveau de revenu ({y})",
-        "gdp_log": "PIB/habitant (USD) — échelle log",
+        "gdp_log": "PIB/habitant (USD) - échelle log",
         "ranking_indicator": "Indicateur de classement",
-        "top10": "🏆 Top 10 — {ind} ({y})",
-        "bottom10": "⚠️ Bottom 10 — {ind} ({y})",
+        "top10": "🏆 Top 10 - {ind} ({y})",
+        "bottom10": "⚠️ Bottom 10 - {ind} ({y})",
         "animated_title": "Évolution de la structure sectorielle",
         "animated_region": "Région pour l'animation",
-        "anim_chart_title": "Structure sectorielle médiane — {r}",
+        "anim_chart_title": "Structure sectorielle médiane - {r}",
 
         # ── Tab 6: Data ─────────────────────────────────────────────────────
         "search_country": "🔍 Rechercher un pays",
         "filter_region": "Filtrer par région",
-        "showing": "Affichage de **{n} pays** — année {y}",
-        "export_csv": "⬇️ Exporter ({n} pays · {y}) — CSV",
+        "showing": "Affichage de **{n} pays** - année {y}",
+        "export_csv": "⬇️ Exporter ({n} pays · {y}) - CSV",
         "pestel_pillar_label": "Pilier PESTEL",
         "pestel_all": "Tous les piliers",
         "col_country": "Pays",
