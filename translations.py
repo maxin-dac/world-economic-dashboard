@@ -23,12 +23,6 @@ TRANSLATIONS = {
         "no_year_selected": "No year selected. All years are shown by default.",
         "regions": "Regions",
         "income_levels": "Income levels",
-        "refresh_btn": "🔄 Refresh from API",
-        "refreshing": "Fetching data from World Bank + OWID…",
-        "refresh_ok": "✅ Data updated successfully!",
-        "refresh_err": "API Error:\n{e}",
-        "refresh_conn": "Connection Error: {e}",
-        "refresh_hint": "Run `python data/fetch_data.py` locally to update data.",
         "source": "Sources: World Bank API · Our World in Data API",
 
         # ── KPIs ────────────────────────────────────────────────────────────
@@ -291,12 +285,6 @@ TRANSLATIONS = {
         "no_year_selected": "Aucune année sélectionnée. Toutes les années sont affichées par défaut.",
         "regions": "Régions",
         "income_levels": "Niveaux de revenu",
-        "refresh_btn": "🔄 Rafraîchir depuis l'API",
-        "refreshing": "Collecte des données Banque Mondiale + OWID…",
-        "refresh_ok": "✅ Données mises à jour avec succès !",
-        "refresh_err": "Erreur API :\n{e}",
-        "refresh_conn": "Erreur de connexion : {e}",
-        "refresh_hint": "Exécutez localement `python data/fetch_data.py` pour mettre à jour les données.",
         "source": "Sources : Banque Mondiale API · Our World in Data API",
 
         # ── KPIs ────────────────────────────────────────────────────────────

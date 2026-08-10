@@ -1,0 +1,43 @@
+name: Monthly Data Refresh
+
+on:
+  schedule:
+    - cron: '0 6 1-7 * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run tests
+        run: pytest tests/ -v --tb=short
+
+      - name: Fetch data from World Bank API
+        run: python data/fetch_data.py
+
+      - name: Generate changelog entry
+        run: python scripts/changelog_entry.py
+
+      - name: Commit & push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/world_economic.csv CHANGELOG.md
+          git diff --cached --quiet || git commit -m "data: monthly refresh $(date +%Y-%m-%d)"
+          git push

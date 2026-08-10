@@ -375,17 +375,6 @@ with st.sidebar:
     sel_regions = st.multiselect(t("regions", lang), ALL_REGIONS, default=ALL_REGIONS, format_func=lambda x: t(x, lang))
     sel_income = st.multiselect(t("income_levels", lang), INCOME_ORDER, default=INCOME_ORDER, format_func=lambda x: t(x, lang))
     st.divider()
-    if st.button(t("refresh_btn", lang), width="stretch"):
-        with st.spinner(t("refreshing", lang)):
-            try:
-                res = subprocess.run([sys.executable, os.path.join("data", "fetch_data.py")], capture_output=True, text=True, timeout=600)
-                if res.returncode == 0:
-                    st.cache_data.clear()
-                    st.success(t("refresh_ok", lang))
-                    st.rerun()
-                else: st.error(t("refresh_err", lang, e=res.stderr[:300]))
-            except Exception as e: st.error(t("refresh_conn", lang, e=str(e)))
-    st.divider()
     st.caption(t("source", lang))
 
 # ── Global filters ──────────────────────────────────────────────────────────
