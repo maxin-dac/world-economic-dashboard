@@ -1,0 +1,20 @@
+name: Lint & Type-check
+on:
+  push:
+    paths: ['**.py']
+  pull_request:
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install ruff mypy
+      - name: Ruff
+        run: ruff check .
+        continue-on-error: true
+      - name: Mypy
+        run: mypy app.py --ignore-missing-imports
+        continue-on-error: true

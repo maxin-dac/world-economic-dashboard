@@ -25,7 +25,7 @@ Interactive bilingual platform (EN/FR) - 217 countries · 2000-2024 · 58 World 
 </a>
 </p>
 
-![Overview](image-3.png)
+![Overview](assets/image-3.png)
 
 > **French version:** [README-fr.md](README-fr.md)
 

@@ -6,3 +6,6 @@ matplotlib
 statsmodels
 requests
 pytest
+openpyxl
+scikit-learn
+pyarrow

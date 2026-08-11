@@ -25,7 +25,7 @@ Plateforme interactive bilingue (FR/EN) - 217 pays · 2000-2024 · 58 indicateur
 </a>
 </p>
 
-![Aperçu](image-2.png)
+![Aperçu](assets/image-2.png)
 
 > **Version anglaise :** [README.md](README.md)
 

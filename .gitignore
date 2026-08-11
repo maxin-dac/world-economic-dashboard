@@ -63,3 +63,4 @@ dist/
   new MutationObserver(function(){ scan(); }).observe(root.body, {childList:true, subtree:true});
 })();
 </script>
+data/*.parquet

@@ -40,7 +40,9 @@ TRANSLATIONS = {
         "tab_compare": "↔️ Compare Countries",
         "tab_struct": "🏗️ Economic Structure",
         "tab_data": "📋 Data",
-        "tab_invest": "💎 Investment Score",
+        "tab_invest": "🎯 Investment Intelligence",
+        "tab_dq": "📡 Data Quality",
+        "tab_sim": "🧭 Similar Countries",
 
         # ── Tab 1: Map ──────────────────────────────────────────────────────
         "map_indicator": "Indicator to map",
@@ -58,6 +60,8 @@ TRANSLATIONS = {
         "region": "Region",
         "year_label": "Year",
         "trend_title": "{ind} - Median by {grp} ({y0}-{y1})",
+        "trend_evolution_title": "Median evolution by group",
+        "trend_scatter_title": "Correlations & scatter plots",
         "scatter_title": "Relationship between two indicators",
         "x_axis": "X axis",
         "y_axis": "Y axis",
@@ -75,6 +79,8 @@ TRANSLATIONS = {
         "income_group_label": "Income group",
         "region_label": "Region",
         "country_analytics_title": "In-Depth Country Analytics",
+        "country_overview_title": "Overview",
+        "country_similar_title": "Similar Countries (PCA)",
         "median": "Median",
         "world_median": "World median",
         "region_median": "Region median",
@@ -103,6 +109,8 @@ TRANSLATIONS = {
 
         # ── Tab 5: Structure ────────────────────────────────────────────────
         "treemap_title": "Median sector structure by region ({y})",
+        "struct_sectors_title": "Sector composition & GDP distribution",
+        "struct_ranking_title": "Rankings: top & bottom 10",
         "violin_title": "GDP/capita distribution by income level ({y})",
         "gdp_log": "GDP/capita (USD) - log scale",
         "ranking_indicator": "Ranking indicator",
@@ -124,7 +132,7 @@ TRANSLATIONS = {
 
         # ── Tab 7: Investment Score ──────────────────────────────────────────
         "invest_title": "Investment Attractiveness Analysis",
-        "invest_banner": "This module combines 8 key indicators (GDP growth, political stability, corruption control, inflation, debt, trade openness, electricity and internet access) into a composite attractiveness score from 0 to 100. It also detects risk signals and identifies the best investment opportunities.",
+        "invest_banner": "Five coordinated reads for market entry and allocation: a composite attractiveness score (0-100) built from 8 weighted indicators, a risk/return matrix, a red-flag detector, a clean-opportunity shortlist, and a resilience-to-shocks analysis.",
         "invest_ref_year": "Reference year",
         "invest_scorecard": "Investment Scorecard",
         "invest_scorecard_tip": "Composite score (0-100) calculated from 8 weighted indicators. Higher = more attractive for investment. Filter by region or income group to refine the analysis.",
@@ -265,6 +273,12 @@ TRANSLATIONS = {
         "flag_moderate_inflation": "Moderate inflation",
         "flag_moderate_debt": "Moderate debt",
         "flag_no_risk": "No major risks",
+
+        "tab_data_explorer_title": "Data Explorer",
+        "tab_data_quality_title": "Data Quality & Coverage",
+        "export_xlsx": "Download Excel ({n} countries - {y})",
+        "export_pdf": "Download PDF ({n} countries - {y})",
+        "country_similar_title": "Similar Countries",
     },
 
     "fr": {
@@ -302,7 +316,9 @@ TRANSLATIONS = {
         "tab_compare": "↔️ Comparaison",
         "tab_struct": "🏗️ Structure économique",
         "tab_data": "📋 Données",
-        "tab_invest": "💎 Score Investissement",
+        "tab_invest": "🎯 Intelligence Investissement",
+        "tab_dq": "📡 Qualite des donnees",
+        "tab_sim": "🧭 Pays similaires",
 
         # ── Tab 1: Map ──────────────────────────────────────────────────────
         "map_indicator": "Indicateur à cartographier",
@@ -320,6 +336,8 @@ TRANSLATIONS = {
         "region": "Région",
         "year_label": "Année",
         "trend_title": "{ind} - Médiane par {grp} ({y0}-{y1})",
+        "trend_evolution_title": "Évolution médiane par groupe",
+        "trend_scatter_title": "Corrélations & nuages de points",
         "scatter_title": "Relation entre deux indicateurs",
         "x_axis": "Axe X",
         "y_axis": "Axe Y",
@@ -337,6 +355,8 @@ TRANSLATIONS = {
         "income_group_label": "Niveau de revenu",
         "region_label": "Région",
         "country_analytics_title": "Analyses approfondies du pays",
+        "country_overview_title": "Vue d'ensemble",
+        "country_similar_title": "Pays similaires (PCA)",
         "median": "Médiane",
         "world_median": "Médiane mondiale",
         "region_median": "Médiane régionale",
@@ -365,6 +385,8 @@ TRANSLATIONS = {
 
         # ── Tab 5: Structure ────────────────────────────────────────────────
         "treemap_title": "Structure sectorielle médiane par région ({y})",
+        "struct_sectors_title": "Composition sectorielle & distribution du PIB",
+        "struct_ranking_title": "Classements : top & bottom 10",
         "violin_title": "Distribution du PIB/hab par niveau de revenu ({y})",
         "gdp_log": "PIB/habitant (USD) - échelle log",
         "ranking_indicator": "Indicateur de classement",
@@ -386,7 +408,7 @@ TRANSLATIONS = {
 
         # ── Tab 7: Investment Score ──────────────────────────────────────────
         "invest_title": "Analyse d'attractivité à l'investissement",
-        "invest_banner": "Ce module combine 8 indicateurs clés (croissance PIB, stabilité politique, contrôle de la corruption, inflation, dette, ouverture commerciale, accès électricité et internet) en un score composite d'attractivité de 0 à 100. Il détecte également les signaux de risque et identifie les meilleures opportunités d'investissement.",
+        "invest_banner": "Cinq lectures coordonnées pour l'entrée sur un marché et l'allocation : un score composite d'attractivité (0-100) sur 8 indicateurs pondérés, une matrice risque/rendement, un détecteur de signaux d'alerte, une shortlist d'opportunités « propres » et une analyse de résilience aux chocs.",
         "invest_ref_year": "Année de référence",
         "invest_scorecard": "Scorecard d'investissement",
         "invest_scorecard_tip": "Score composite (0-100) calculé à partir de 8 indicateurs pondérés. Plus élevé = plus attractif pour l'investissement. Filtrez par région ou groupe de revenu pour affiner l'analyse.",
@@ -761,6 +783,12 @@ TRANSLATIONS = {
         "flag_moderate_inflation": "Inflation modérée",
         "flag_moderate_debt": "Dette modérée",
         "flag_no_risk": "Aucun risque majeur",
+
+        "tab_data_explorer_title": "Explorateur de données",
+        "tab_data_quality_title": "Qualité & couverture des données",
+        "export_xlsx": "Télécharger Excel ({n} pays - {y})",
+        "export_pdf": "Télécharger PDF ({n} pays - {y})",
+        "country_similar_title": "Pays similaires",
     }
 }
 
