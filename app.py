@@ -332,7 +332,7 @@ with tab_country:
             fig_geo.add_trace(go.Choropleth(locations=other["iso3"], z=[0.5] * len(other), colorscale=[[0, "#cfd8dc"], [1, "#cfd8dc"]], showscale=False, marker_line_color="#90a4ae", marker_line_width=0.4, hoverinfo="skip"))
             sel_geo = df_geo[df_geo["country"] == sel_country]
             if not sel_geo.empty:
-                fig_geo.add_trace(go.Choropleth(locations=sel_geo["iso3"], z=[1], colorscale=[[0, hl_color], [1, hl_color]], showscale=False, marker_line_color="white", marker_line_width=2.5, text=[cname(sel_country, lang)], hovertemplate=(f"<b>{cname(sel_country, lang)}</b><br>" f"{t('income_group_label', lang)}: {t(income_grp, lang)}<extra></extra>")))
+                fig_geo.add_trace(go.Choropleth(locations=sel_geo["iso3"], z=[1], colorscale=[[0, hl_color], [1, hl_color]], showscale=False, marker_line_color="white", marker_line_width=2.5, text=[cname(sel_country, lang)], hovertemplate=(f"<b>{cname(sel_country, lang)}</b><br>"f"{t('income_group_label', lang)}: {t(income_grp, lang)}<extra></extra>")))
             fig_geo.update_layout(title=dict(text=t("country_map_title", lang, c=cname(sel_country, lang)), font=dict(size=13)), geo=geo_centered, margin=dict(t=45, b=0, l=0, r=0), height=320)
             st.plotly_chart(fig_geo, width="stretch")
         with donut_col:
