@@ -1,4 +1,4 @@
-﻿"""Data Quality module: coverage, freshness, anomalies, null trends.
+"""Data Quality module: coverage, freshness, anomalies, null trends.
 Self-contained labels, no emoji (encoding-safe)."""
 import pandas as pd
 import plotly.graph_objects as go
@@ -61,7 +61,11 @@ def render(df_all, lang):
     inds = _inds(df_all)
     latest = int(df_all["year"].max())
     cov = (df_all[inds].notna().mean() * 100).sort_values(ascending=False)
-    fresh = pd.Series({c: int(df_all[df_all[c].notna()]["year"].max()) for c in inds})
+    fresh = pd.Series({
+        c: int(df_all[df_all[c].notna()]["year"].max())
+        for c in inds
+        if df_all[c].notna().any()  # skip cols with all NaN → .max() would be NaN
+    })
     lag = latest - fresh
 
     dl = df_all[df_all["year"] == latest]

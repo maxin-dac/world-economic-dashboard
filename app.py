@@ -1,4 +1,4 @@
-﻿"""
+"""
 Global Economic Intelligence Dashboard
 Real World Bank + Our World in Data · 217 countries · 2000-2024
 Code is 100% in English. All user-facing text is bilingual (EN/FR).
@@ -15,9 +15,6 @@ import plotly.graph_objects as go
 import plotly.io as pio
 from plotly.subplots import make_subplots
 import streamlit as st
-import translations
-import importlib
-importlib.reload(translations)
 from translations import t, TRANSLATIONS
 
 
@@ -673,10 +670,13 @@ with tab_invest:
     df_rr = df_all[df_all["year"].isin(sel_years)].copy()
     df_rr["_cname"] = df_rr["country"].map(lambda n: cname(n, lang))
     
+    # Use the last 5 selected years consistently for both the data window and the CAGR exponent
     recent_years = sorted(sel_years)[-5:]
-    df_rr_agg = df_rr.groupby("country").agg(
-        gdp_first=("gdp_per_capita", lambda x: x.iloc[0] if len(x) > 0 and pd.notna(x.iloc[0]) else None),
-        gdp_last=("gdp_per_capita", lambda x: x.iloc[-1] if len(x) > 0 and pd.notna(x.iloc[-1]) else None),
+    n_years_cagr = max(len(recent_years) - 1, 1)
+    df_rr_recent = df_rr[df_rr["year"].isin(recent_years)].copy()
+    df_rr_agg = df_rr_recent.groupby("country").agg(
+        gdp_first=("gdp_per_capita", lambda x: x.dropna().iloc[0] if x.dropna().size > 0 else None),
+        gdp_last=("gdp_per_capita", lambda x: x.dropna().iloc[-1] if x.dropna().size > 0 else None),
         inflation_mean=("inflation", "mean"),
         inflation_std=("inflation", "std"),
         region=("region", "first"),
@@ -685,10 +685,11 @@ with tab_invest:
     ).reset_index()
 
     df_rr_agg["_cname"] = df_rr_agg["country"].map(lambda n: cname(n, lang))
-    
+
     df_rr_agg["cagr"] = np.where(
-        (df_rr_agg["gdp_first"] > 0) & (df_rr_agg["gdp_last"] > 0) & (df_rr_agg["gdp_first"].notna()) & (df_rr_agg["gdp_last"].notna()),
-        (df_rr_agg["gdp_last"] / df_rr_agg["gdp_first"]) ** (1 / max(len(recent_years) - 1, 1)) - 1,
+        (df_rr_agg["gdp_first"] > 0) & (df_rr_agg["gdp_last"] > 0)
+        & df_rr_agg["gdp_first"].notna() & df_rr_agg["gdp_last"].notna(),
+        (df_rr_agg["gdp_last"] / df_rr_agg["gdp_first"]) ** (1 / n_years_cagr) - 1,
         np.nan,
     )
     df_rr_agg["risk"] = df_rr_agg["inflation_std"].fillna(0) + df_rr_agg["inflation_mean"].fillna(0) * 0.1
@@ -807,10 +808,11 @@ with tab_invest:
         top3_cols = st.columns(3)
         for i, (_, row) in enumerate(df_clean.head(3).iterrows()):
             with top3_cols[i]:
+                # income_group was already translated at line 792 — use directly
                 st.metric(
                     f"#{i+1} {cname(row['country'], lang)}",
                     f"{row['investment_score']:.1f}/100",
-                    help=f"{t('income_level', lang)}: {t(row['income_group'], lang)}",
+                    help=f"{t('income_level', lang)}: {row['income_group']}",
                 )
     else:
         st.info(t("invest_no_clean", lang))

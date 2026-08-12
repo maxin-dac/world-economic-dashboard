@@ -1,4 +1,4 @@
-﻿"""Similar countries: PCA + k-means on standardized structural indicators.
+"""Similar countries: PCA + k-means on standardized structural indicators.
 Exploratory by design: shows structural peers, not causal twins.
 Designed to be embedded as a section in Country Profile."""
 import numpy as np
@@ -56,6 +56,20 @@ def render(df_all, lang, default_country=None):
         k = st.selectbox(_t(lang, "clusters"), [3, 4, 5, 6], index=1, key="sim_k")
 
     dfy = df_all[df_all["year"] == year].set_index("country")
+
+    # Guard: if target has no data for latest_year, fall back to most recent available year
+    if target not in dfy.index:
+        available_years = sorted(df_all[df_all["country"] == target]["year"].unique(), reverse=True)
+        fallback = next((y for y in available_years if y in df_all["year"].values), None)
+        if fallback is None:
+            st.warning(f"No data available for {target}.")
+            return
+        year = fallback
+        dfy = df_all[df_all["year"] == year].set_index("country")
+        if target not in dfy.index:
+            st.warning(f"No data available for {target}.")
+            return
+
     cols = [c for c in FEATURES if c in dfy.columns]
     X = dfy[cols].copy()
     if "gdp_per_capita" in X.columns:

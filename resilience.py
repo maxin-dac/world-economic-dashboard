@@ -1,4 +1,4 @@
-﻿"""Resilience module: shock magnitude & recovery speed (2008 / 2020).
+"""Resilience module: shock magnitude & recovery speed (2008 / 2020).
 Self-contained: own labels + own math, rendered via Streamlit.
 Real GDP/capita index compounded from annual real growth (price-base agnostic)."""
 import numpy as np
@@ -76,12 +76,12 @@ def _shock(idx, peak):
 
 def compute_resilience(df_all):
     rows = []
-    for country, _ in df_all.groupby("country")["gdp_growth_pct"]:
-        sub = df_all[df_all["country"] == country].set_index("year")["gdp_growth_pct"]
+    for country, group in df_all.groupby("country"):
+        sub = group.set_index("year")["gdp_growth_pct"]
         idx = _real_index(sub.to_dict())
         d09, r09 = _shock(idx, 2008)
         d20, r20 = _shock(idx, 2019)
-        meta = df_all[df_all["country"] == country].iloc[0]
+        meta = group.iloc[0]
         rows.append({"country": country, "iso3": meta.get("iso3"), "region": meta.get("region"),
                      "income_group": meta.get("income_group"),
                      "drop_2009": d09, "rec_2009": r09, "drop_2020": d20, "rec_2020": r20, "_idx": idx})
