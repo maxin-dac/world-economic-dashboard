@@ -1,4 +1,4 @@
-"""Similar countries: PCA + k-means on standardized structural indicators.
+﻿"""Similar countries: PCA + k-means on standardized structural indicators.
 Exploratory by design: shows structural peers, not causal twins.
 Designed to be embedded as a section in Country Profile."""
 import numpy as np
@@ -90,7 +90,7 @@ def render(df_all, lang, default_country=None):
                       yaxis_title=f"{_t(lang, 'pca2')} ({pca.explained_variance_ratio_[1]:.0%})",
                       height=460, margin=dict(t=30, b=20, l=10, r=10),
                       legend=dict(orientation="h", y=-.15))
-    st.plotly_chart(fig, width="stretch")
+    st.plotly_chart(fig, use_container_width=True)
 
     st.markdown(f"**{_t(lang, 'similar')}**")
     rows = []
@@ -103,4 +103,4 @@ def render(df_all, lang, default_country=None):
             _t(lang, "gdp_cap"): round(float(gdp_val), 0) if pd.notna(gdp_val) else "-",
             _t(lang, "life_exp"): round(float(life_val), 1) if pd.notna(life_val) else "-",
         })
-    st.dataframe(pd.DataFrame(rows), width="stretch", hide_index=True)
+    st.dataframe(pd.DataFrame(rows), hide_index=True)

@@ -1,4 +1,4 @@
-"""
+﻿"""
 Global Economic Intelligence Dashboard
 Real World Bank + Our World in Data · 217 countries · 2000-2024
 Code is 100% in English. All user-facing text is bilingual (EN/FR).
@@ -227,7 +227,7 @@ with tab_map:
             if sub.empty or sub["_size"].max() <= 0: continue
             fig_map.add_trace(go.Scattergeo(locations=sub["iso3"], marker=dict(size=sub["_size"], sizemode="area", sizeref=2. * sub["_size"].max() / (42 ** 2), sizemin=4, color=INCOME_COLORS[ig], opacity=0.85, line=dict(color="white", width=0.5)), text=sub["_cname"], customdata=sub[[map_ind, "region", size_col, "_interpret"]].values, hovertemplate=("<b>%{text}</b><br>" + f"{ilabel}: %{{customdata[0]:,.2f}}<br>" + "<b>%{customdata[3]}</b><br>" + f"{t('region', lang)}: %{{customdata[1]}}<br>" + f"{ind_label(size_col, lang)}: %{{customdata[2]:,.2f}}<br><extra></extra>"), name=t(ig, lang)))
         fig_map.update_layout(title=dict(text=f"{ilabel} - {map_year}", font=dict(size=15)), geo=dict(**GEO_STYLE, projection_type="natural earth"), margin=dict(t=50, b=0, l=0, r=0), height=520, legend=dict(orientation="h", y=-0.1, font_size=11))
-    st.plotly_chart(fig_map, width="stretch")
+    st.plotly_chart(fig_map, use_container_width=True)
 
     st.markdown(t("median_by_region", lang, ind=ilabel, y=map_year))
     if not df_map.empty and "region" in df_map.columns:
@@ -261,7 +261,7 @@ with tab_trend:
         if min(sel_years) <= event_year <= max(sel_years):
             fig_tr.add_vline(x=event_year, line_dash="dot", line_color="#94a3b8", line_width=1)
             fig_tr.add_annotation(x=event_year, y=1, yref="paper", text=t(label_key, lang).replace("\n", "<br>"), showarrow=False, yanchor="top", font=dict(size=10, color="#64748b"))
-    st.plotly_chart(fig_tr, width="stretch")
+    st.plotly_chart(fig_tr, use_container_width=True)
 
     section_head("02", "trend_scatter_title", lang)
     s1, s2, s3 = st.columns(3)
@@ -278,7 +278,7 @@ with tab_trend:
         df_sc["_cname"] = df_sc["country"].map(lambda n: cname(n, lang))
         fig_sc = px.scatter(df_sc, x=x_ind, y=y_ind, color="income_label", color_discrete_map={t(k, lang): v for k, v in INCOME_COLORS.items()}, category_orders={"income_label": [t(v, lang) for v in INCOME_ORDER]}, size=size_col, size_max=45, hover_name="_cname", trendline=use_trendline, labels={x_ind: ind_label(x_ind, lang), y_ind: ind_label(y_ind, lang), "income_label": t("income_level", lang)}, title=t("scatter_chart_title", lang, xi=ind_label(x_ind, lang), yi=ind_label(y_ind, lang), y=sc_yr))
         fig_sc.update_layout(margin=dict(t=50, b=20, l=10, r=10), legend=dict(orientation="h", y=-0.25), height=430)
-        st.plotly_chart(fig_sc, width="stretch")
+        st.plotly_chart(fig_sc, use_container_width=True)
     else: st.info(t("no_data", lang))
 
 # ── TAB 3: COUNTRY PROFILE ──────────────────────────────────────────────────
@@ -334,7 +334,7 @@ with tab_country:
             if not sel_geo.empty:
                 fig_geo.add_trace(go.Choropleth(locations=sel_geo["iso3"], z=[1], colorscale=[[0, hl_color], [1, hl_color]], showscale=False, marker_line_color="white", marker_line_width=2.5, text=[cname(sel_country, lang)], hovertemplate=(f"<b>{cname(sel_country, lang)}</b><br>"f"{t('income_group_label', lang)}: {t(income_grp, lang)}<extra></extra>")))
             fig_geo.update_layout(title=dict(text=t("country_map_title", lang, c=cname(sel_country, lang)), font=dict(size=13)), geo=geo_centered, margin=dict(t=45, b=0, l=0, r=0), height=320)
-            st.plotly_chart(fig_geo, width="stretch")
+            st.plotly_chart(fig_geo, use_container_width=True)
         with donut_col:
             agr = latest_c.get("agriculture_pct", None)
             ind_ = latest_c.get("industry_pct", None)
@@ -342,7 +342,7 @@ with tab_country:
             if all(pd.notna(v) for v in [agr, ind_, svc]):
                 fig_donut = go.Figure(go.Pie(labels=[t("Agriculture", lang), t("Industry", lang), t("Services", lang)], values=[agr, ind_, svc], hole=0.55, marker_colors=[SECTOR_COLORS["Agriculture"], SECTOR_COLORS["Industry"], SECTOR_COLORS["Services"]], textinfo="label+percent", hovertemplate="%{label}: %{value:.1f}%<extra></extra>"))
                 fig_donut.update_layout(title=dict(text=t("sector_breakdown", lang, y=int(latest_year_c)), font=dict(size=13)), margin=dict(t=45, b=10, l=10, r=10), legend=dict(orientation="h", y=-0.2, font_size=11), height=320)
-                st.plotly_chart(fig_donut, width="stretch")
+                st.plotly_chart(fig_donut, use_container_width=True)
         st.divider()
 
         section_head("02", "country_analytics_title", lang)
@@ -360,7 +360,7 @@ with tab_country:
             fig_radar.add_trace(go.Scatterpolar(r=[region_scores.get(p, 0) for p in PESTEL_PILLAR_ORDER], theta=categories, fill="toself", name=t("region_median", lang)))
             fig_radar.add_trace(go.Scatterpolar(r=[world_scores.get(p, 0) for p in PESTEL_PILLAR_ORDER], theta=categories, fill="toself", name=t("world_median", lang)))
             fig_radar.update_layout(polar=dict(radialaxis=dict(visible=True, range=[0, 100])), showlegend=True, title=dict(text=t("pestel_performance_radar", lang), font=dict(size=13)), margin=dict(l=40, r=40, t=60, b=40), height=380)
-            st.plotly_chart(fig_radar, width="stretch")
+            st.plotly_chart(fig_radar, use_container_width=True)
         with col2:
             exports_val = latest_c.get("exports_pct_gdp", None)
             imports_val = latest_c.get("imports_pct_gdp", None)
@@ -368,7 +368,7 @@ with tab_country:
             if all(pd.notna(v) for v in [exports_val, imports_val, balance_val]):
                 fig_wf = go.Figure(go.Waterfall(name="Trade Balance", orientation="v", measure=["relative", "relative", "total"], x=[t("exports", lang), t("imports", lang), t("current_account", lang)], y=[exports_val, -imports_val, balance_val], text=[f"+{exports_val:.1f}%", f"-{imports_val:.1f}%", f"{balance_val:.1f}%"], textposition="outside", connector={"line": {"color": "rgb(100,116,139)"}}))
                 fig_wf.update_layout(title=t("trade_balance_waterfall", lang), height=380, margin=dict(l=20, r=20, t=40, b=20), yaxis_title=t("pct_gdp", lang))
-                st.plotly_chart(fig_wf, width="stretch")
+                st.plotly_chart(fig_wf, use_container_width=True)
             else: st.info(t("trade_data_unavailable", lang))
 
         col3, col4 = st.columns(2)
@@ -379,7 +379,7 @@ with tab_country:
                 df_s_melt["sector"] = df_s_melt["sector_key"].map(lambda k: t(SECTOR_LABEL_KEYS[k], lang))
                 fig_area = px.area(df_s_melt, x="year", y="value", color="sector", groupnorm="percent", labels={"year": t("year_label", lang), "value": t("share_of_gdp", lang), "sector": t("sector", lang)}, title=t("sector_evolution_title", lang), color_discrete_map={t("Agriculture", lang): SECTOR_COLORS["Agriculture"], t("Industry", lang): SECTOR_COLORS["Industry"], t("Services", lang): SECTOR_COLORS["Services"]})
                 fig_area.update_layout(height=380, margin=dict(l=20, r=20, t=40, b=20), legend=dict(orientation="h", y=-0.2))
-                st.plotly_chart(fig_area, width="stretch")
+                st.plotly_chart(fig_area, use_container_width=True)
             else: st.info(t("sector_data_unavailable", lang))
         with col4:
             indicators_hm = ["gdp_per_capita", "inflation", "debt_pct_gdp", "unemployment_pct", "life_expectancy", "electricity_access_pct", "internet_users_pct", "pm25_air_pollution"]
@@ -390,7 +390,7 @@ with tab_country:
                 df_norm.columns = [ind_label(c, lang) for c in df_norm.columns]
                 fig_hm = px.imshow(df_norm.T, labels=dict(x=t("year_label", lang), y=t("indicator", lang), color=t("normalized_score", lang)), title=t("indicator_trends_title", lang), color_continuous_scale="RdBu_r", aspect="auto", zmin=0, zmax=1)
                 fig_hm.update_layout(height=380, margin=dict(l=60, r=20, t=50, b=20))
-                st.plotly_chart(fig_hm, width="stretch")
+                st.plotly_chart(fig_hm, use_container_width=True)
             else: st.info(t("heatmap_unavailable", lang))
 
         if "gdp_per_capita" in df_c.columns and "inflation" in df_c.columns:
@@ -400,7 +400,7 @@ with tab_country:
             fig_comb.update_layout(title=t("gdp_inflation_title", lang), legend=dict(orientation="h", y=-0.2), margin=dict(t=40, b=20, l=10, r=10), height=300)
             fig_comb.update_yaxes(title_text=ind_label("gdp_per_capita", lang), secondary_y=False, showgrid=False)
             fig_comb.update_yaxes(title_text=ind_label("inflation", lang), secondary_y=True, showgrid=False)
-            st.plotly_chart(fig_comb, width="stretch")
+            st.plotly_chart(fig_comb, use_container_width=True)
 
         MINI_SPECS = [("unemployment_pct", "gauge", [0, 30], "#dc2626"), ("gdp_growth_pct", "delta", None, None), ("primary_completion_rate_pct", "gauge", [0, 100], "#0067C0"), ("life_expectancy", "gauge", [40, 90], "#059669"), ("internet_users_pct", "gauge", [0, 100], "#7c3aed"), ("electricity_access_pct", "gauge", [0, 100], "#d97706")]
         MINI_LABELS = {"unemployment_pct": ("Unemployment", "Chômage"), "gdp_growth_pct": ("GDP growth", "Croissance PIB"), "primary_completion_rate_pct": ("Primary completion", "Achèvement primaire"), "life_expectancy": ("Life expectancy", "Espérance de vie"), "internet_users_pct": ("Internet users", "Internet"), "electricity_access_pct": ("Electricity access", "Accès élec.")}
@@ -417,7 +417,7 @@ with tab_country:
                     prev_val = prev_c.get(key, 0)
                     fig_mini = go.Figure(go.Indicator(mode="number+delta", value=val, title={"text": label, "font": {"size": 9}}, number={"font": {"size": 15}, "valueformat": ".1f"}, delta={"reference": prev_val if pd.notna(prev_val) else 0, "valueformat": ".1f", "font": {"size": 10}}))
                 fig_mini.update_layout(height=150, margin=dict(l=8, r=8, t=30, b=6))
-                st.plotly_chart(fig_mini, width="stretch")
+                st.plotly_chart(fig_mini, use_container_width=True)
         import similar
         similar.render(df_all, lang, default_country=sel_country)
 
@@ -434,7 +434,7 @@ with tab_compare:
         df_cp["_cname"] = df_cp["country"].map(lambda n: cname(n, lang))
         fig_cp = px.line(df_cp, x="year", y=comp_ind, color="_cname", color_discrete_sequence=px.colors.qualitative.Set2, markers=True, labels={"year": t("year_label", lang), comp_ind: ind_label(comp_ind, lang), "_cname": ""}, title=f"{ind_label(comp_ind, lang)} - {min(sel_years)}-{max(sel_years)}")
         fig_cp.update_layout(margin=dict(t=50, b=20, l=10, r=10), hovermode="x unified", legend=dict(orientation="h", y=-0.25), height=400)
-        st.plotly_chart(fig_cp, width="stretch")
+        st.plotly_chart(fig_cp, use_container_width=True)
         
         latest_year_cp = int(df_cp["year"].max())
         prev_year_cp = previous_year(sorted(df_cp["year"].unique()), latest_year_cp)
@@ -444,7 +444,7 @@ with tab_compare:
             df_rank = df_latest_cp.sort_values(comp_ind, ascending=ascending)
             fig_rank = px.bar(df_rank, x="_cname", y=comp_ind, color="_cname", color_discrete_sequence=px.colors.qualitative.Set2, labels={"_cname": t("col_country", lang), comp_ind: ind_label(comp_ind, lang)}, title=t("ranking_title", lang, ind=ind_label(comp_ind, lang), y=latest_year_cp))
             fig_rank.update_layout(showlegend=False, margin=dict(t=50, b=20, l=10, r=10), height=400)
-            st.plotly_chart(fig_rank, width="stretch")
+            st.plotly_chart(fig_rank, use_container_width=True)
             
             df_prev_cp = df_cp[df_cp["year"] == prev_year_cp][["country", comp_ind]]
             summary = df_latest_cp[["country", comp_ind]].merge(df_prev_cp, on="country", how="left", suffixes=("_cur", "_prev"))
@@ -453,7 +453,7 @@ with tab_compare:
             summary = summary[[t("col_country", lang), ind_label(comp_ind, lang), t("delta", lang)]]
             summary[t("col_country", lang)] = summary[t("col_country", lang)].map(lambda n: cname(n, lang))
             st.markdown(f"**{t('summary_table', lang, y=latest_year_cp)}**")
-            st.dataframe(summary, width="stretch", hide_index=True)
+            st.dataframe(summary, hide_index=True)
 
 # ── TAB 5: ECONOMIC STRUCTURE ───────────────────────────────────────────────
 with tab_struct:
@@ -469,7 +469,7 @@ with tab_struct:
             df_tree_m["region"] = df_tree_m["region"].map(lambda x: t(x, lang))
             fig_tree = px.treemap(df_tree_m, path=["region", "income_group", "sector"], values="pct", color="pct", color_continuous_scale="RdYlGn", title=t("treemap_title", lang, y=latest_year))
             fig_tree.update_layout(margin=dict(t=50, b=0, l=0, r=0), height=420)
-            st.plotly_chart(fig_tree, width="stretch")
+            st.plotly_chart(fig_tree, use_container_width=True)
     with c_right:
         if "gdp_per_capita" in df.columns:
             df_vio = df[df["year"] == latest_year].dropna(subset=["gdp_per_capita"]).copy()
@@ -478,7 +478,7 @@ with tab_struct:
             df_vio["_cname"] = df_vio["country"].map(lambda n: cname(n, lang))
             fig_vio = px.violin(df_vio, x="income_label", y="gdp_per_capita", color="income_label", color_discrete_map={t(k, lang): v for k, v in INCOME_COLORS.items()}, category_orders={"income_label": [t(v, lang) for v in INCOME_ORDER]}, box=True, points="all", hover_name="_cname", labels={"income_label": "", "gdp_per_capita": ind_label("gdp_per_capita", lang)}, title=t("violin_title", lang, y=latest_year))
             fig_vio.update_layout(showlegend=False, margin=dict(t=50, b=20, l=10, r=10), yaxis_type="log", yaxis_title=t("gdp_log", lang), height=420)
-            st.plotly_chart(fig_vio, width="stretch")
+            st.plotly_chart(fig_vio, use_container_width=True)
     section_head("02", "struct_ranking_title", lang)
     rank_ind = st.selectbox(t("ranking_indicator", lang), INDICATOR_KEYS, format_func=lambda x: ind_label(x, lang, with_pillar=True), key="rank_ind")
     show_indicator_info(rank_ind, lang)
@@ -492,11 +492,11 @@ with tab_struct:
         with r1:
             fig_top = px.bar(top10, x="_cname", y=rank_ind, color="_cname", color_discrete_sequence=px.colors.qualitative.Set2, labels={"_cname": "", rank_ind: ind_label(rank_ind, lang)}, title=t("top10", lang, ind=ind_label(rank_ind, lang), y=latest_year))
             fig_top.update_layout(showlegend=False, margin=dict(t=50, b=20, l=10, r=10), height=380)
-            st.plotly_chart(fig_top, width="stretch")
+            st.plotly_chart(fig_top, use_container_width=True)
         with r2:
             fig_bot = px.bar(bottom10, x="_cname", y=rank_ind, color="_cname", color_discrete_sequence=px.colors.qualitative.Pastel1, labels={"_cname": "", rank_ind: ind_label(rank_ind, lang)}, title=t("bottom10", lang, ind=ind_label(rank_ind, lang), y=latest_year))
             fig_bot.update_layout(showlegend=False, margin=dict(t=50, b=20, l=10, r=10), height=380)
-            st.plotly_chart(fig_bot, width="stretch")
+            st.plotly_chart(fig_bot, use_container_width=True)
 
 # ── TAB 6: DATA EXPLORER ────────────────────────────────────────────────────
 with tab_data:
@@ -582,7 +582,7 @@ with tab_data:
     text_cols = [c for c in df_display.columns if c not in num_cols and c != income_col]
     if text_cols: styled_df = styled_df.map(style_text_cells, subset=text_cols)
     if num_cols: styled_df = styled_df.format("{:,.2f}", subset=num_cols, na_rep="-")
-    st.dataframe(styled_df, width="stretch", height=520, hide_index=True)
+    st.dataframe(styled_df, height=520, hide_index=True)
     
     st.divider()
     import exports as data_exports
@@ -594,8 +594,7 @@ with tab_data:
         data=xlsx_bytes,
         file_name=f"world_economic_{data_year}.xlsx",
         mime="application/vnd.openxmlformats-"
-        "officedocument.spreadsheetml.sheet",
-        width="stretch")
+        "officedocument.spreadsheetml.sheet")
 
     dataquality.render(df, lang)
 
@@ -650,7 +649,7 @@ with tab_invest:
         margin=dict(t=50, b=0, l=0, r=0),
         height=500,
     )
-    st.plotly_chart(fig_score_map, width="stretch")
+    st.plotly_chart(fig_score_map, use_container_width=True)
 
     st.markdown(f"**🏅 {t('invest_top10', lang, y=invest_year)}**")
     df_top = df_filtered.sort_values("investment_score", ascending=False).head(10).copy()
@@ -663,7 +662,7 @@ with tab_invest:
         "region": t("col_region", lang),
         "income_group": t("income_level", lang),
     })
-    st.dataframe(df_top.style.background_gradient(cmap="YlGn", subset=[t("invest_score_label", lang)]), width="stretch", hide_index=True)
+    st.dataframe(df_top.style.background_gradient(cmap="YlGn", subset=[t("invest_score_label", lang)]), hide_index=True)
     
     st.divider()
     
@@ -737,7 +736,7 @@ with tab_invest:
     fig_rr.add_vline(x=median_cagr, line_dash="dash", line_color="#94a3b8", annotation_text=t("invest_median", lang))
     fig_rr.add_hline(y=median_risk, line_dash="dash", line_color="#94a3b8")
     fig_rr.update_layout(margin=dict(t=50, b=20, l=10, r=10), height=500, legend=dict(orientation="h", y=-0.2))
-    st.plotly_chart(fig_rr, width="stretch")
+    st.plotly_chart(fig_rr, use_container_width=True)
     
     st.divider()
     
@@ -777,7 +776,7 @@ with tab_invest:
     })
 
     # Affichage - tous les pays filtrés, scrollable
-    st.dataframe(df_flags_display, width="stretch", hide_index=True, height=500)
+    st.dataframe(df_flags_display, hide_index=True, height=500)
 
     st.divider()
     
@@ -802,7 +801,7 @@ with tab_invest:
             title=f"{t('invest_top_opportunities', lang, y=invest_year)}",
         )
         fig_opp.update_layout(margin=dict(t=50, b=20, l=10, r=10), height=400, legend=dict(orientation="h", y=-0.2))
-        st.plotly_chart(fig_opp, width="stretch")
+        st.plotly_chart(fig_opp, use_container_width=True)
 
         st.markdown(f"**🔍 {t('invest_top3_detail', lang)}**")
         top3_cols = st.columns(3)

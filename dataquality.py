@@ -1,4 +1,4 @@
-"""Data Quality module: coverage, freshness, anomalies, null trends.
+﻿"""Data Quality module: coverage, freshness, anomalies, null trends.
 Self-contained labels, no emoji (encoding-safe)."""
 import pandas as pd
 import plotly.graph_objects as go
@@ -80,13 +80,13 @@ def render(df_all, lang):
     fig.update_layout(xaxis_range=[0, 100], xaxis_title=t("coverage"), yaxis=dict(autorange="reversed"),
                       height=max(500, len(cov) * 16), margin=dict(t=20, b=20, l=10, r=10))
     fig.update_yaxes(tickfont=dict(size=9))
-    st.plotly_chart(fig, width="stretch")
+    st.plotly_chart(fig, use_container_width=True)
 
     st.markdown(f"**{t('null_title')}**")
     yearly = df_all[inds].isna().groupby(df_all["year"]).mean().mean(axis=1) * 100
     fig2 = go.Figure(go.Scatter(x=yearly.index, y=yearly.values, mode="lines+markers", line=dict(color="#0067C0", width=2.2)))
     fig2.update_layout(yaxis_title="%", height=320, margin=dict(t=30, b=20, l=10, r=10))
-    st.plotly_chart(fig2, width="stretch")
+    st.plotly_chart(fig2, use_container_width=True)
 
     st.markdown(f"**{t('fresh_title')}**")
     old = fresh[fresh < latest].sort_values()
@@ -95,7 +95,7 @@ def render(df_all, lang):
     else:
         fd = old.reset_index()
         fd.columns = [t("indicator"), t("latest")]
-        st.dataframe(fd, width="stretch", hide_index=True)
+        st.dataframe(fd, hide_index=True)
 
     st.markdown(f"**{t('anom_title')}**")
     if anom.empty:
@@ -104,4 +104,4 @@ def render(df_all, lang):
         ad = anom.sort_values("z", key=abs, ascending=False).head(30)
         ad = ad.rename(columns={"country": t("country"), "indicator": t("indicator"),
                                 "value": t("value"), "z": t("z")})
-        st.dataframe(ad, width="stretch", hide_index=True)
+        st.dataframe(ad, hide_index=True)
