@@ -5,17 +5,10 @@ import sys
 import pathlib
 
 sys.path.insert(0, str(pathlib.Path(__file__).parent.parent))
+from core.investment import INVESTMENT_INDICATORS
 from core.investment import (compute_investment_score,
     detect_red_flags, compute_cagr)
-from core.constants import (INVESTMENT_INDICATORS,
-    INVESTMENT_INVERSE)
-    compute_investment_score,
-    detect_red_flags,
-    INVESTMENT_INDICATORS,
-    INVESTMENT_INVERSE,
-)
-
-
+from core.investment import INVESTMENT_INVERSE
 @pytest.fixture
 def sample_df():
     return pd.DataFrame({
