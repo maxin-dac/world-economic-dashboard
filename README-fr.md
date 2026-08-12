@@ -23,7 +23,7 @@ Plateforme interactive bilingue (FR/EN) - 217 pays · 2000-2024 · 58 indicateur
 </a>
 </p>
 
-![Aperçu](static/globe.png)
+![Aperçu](screenshots/aperçu.jpeg)
 
 > **Version anglaise :** [README.md](README.md)
 
@@ -36,7 +36,7 @@ Plateforme interactive bilingue (FR/EN) - 217 pays · 2000-2024 · 58 indicateur
 - **Profil pays** - Radar PESTEL, heatmap normalisée 10 ans, double axe PIB/inflation, cascade balance commerciale.
 - **Comparaison & Similarité pays** - Benchmarking multi-pays (jusqu'à 12 pays) et moteur de recherche de pays similaires.
 - **Structure & Résilience économique** - Treemap sectoriel, violin plot log du PIB/hab., analyse de la résilience et des chocs.
-- **Explorateur de données & Audit Qualité** - Jeu de données filtrable avec audit des données manquantes, mise en forme conditionnelle null-safe, export CSV en un clic.
+- **Explorateur de données & Audit Qualité** - Jeu de données filtrable avec audit des données manquantes, mise en forme conditionnelle null-safe, export Excel (.xlsx) en un clic.
 - **Score Investissement** - Score composite 0-100 (8 indicateurs pondérés), matrice risque/rendement 4 quadrants, détecteur de signaux d'alerte, shortlist d'opportunités propres.
 
 ## Couverture PESTEL (58 indicateurs)
@@ -54,11 +54,13 @@ Plateforme interactive bilingue (FR/EN) - 217 pays · 2000-2024 · 58 indicateur
 
 ```
 world-economic-dashboard/
+├── .devcontainer/
+│   └── devcontainer.json             # Conteneur de dev VS Code
 ├── .github/workflows/
 │   ├── lint.yml                      # Pipeline CI de contrôle de qualité du code
 │   └── update-data.yml               # Pipeline CI/CD mensuel d'actualisation des données
 ├── .streamlit/config.toml            # Configuration du thème Streamlit
-├── assets/style.css                  # Style CSS sur-mesure (Glassmorphism)
+├── assets/style.css                  # Thème CSS bleu/navy sur-mesure (filigrane globe)
 ├── core/                             # Package Python modulaire principal
 │   ├── __init__.py
 │   ├── analytics.py                  # Calculs statistiques et transformations
@@ -69,15 +71,21 @@ world-economic-dashboard/
 │   └── labels.py                     # Résolution des libellés multilingues
 ├── data/
 │   ├── fetch_data.py                 # Script de collecte API Banque Mondiale
-│   └── world_economic.csv            # Dataset agrégé (217 pays x 2000-2024)
-├── docs/OPERATIONS.md                # Guide d'exploitation et maintenance
+│   ├── world_economic.csv            # Dataset agrégé (217 pays x 2000-2024)
+│   └── world_economic.parquet        # Cache Parquet (chargement rapide)
+├── screenshots/
+│   └── aperçu.jpeg                   # Aperçu du tableau de bord (FR)
+│   └── overview.jpeg                 # Aperçu du tableau de bord (EN)
+├── scripts/
+│   └── changelog_entry.py            # Aide à la génération du changelog
 ├── static/
-│   └── globe.png                     # Visuels du tableau de bord
+│   └── globe.png                     # Filigrane globe (fond de l'app)
 ├── tests/
 │   └── test_investment.py            # Suite de tests automatisés pytest
+├── CHANGELOG.md                      # Historique des versions
 ├── app.py                            # Point d'entrée de l'application Streamlit
 ├── dataquality.py                    # Module d'audit de qualité des données et couverture
-├── exports.py                        # Moteur d'exportation de rapports et données
+├── exports.py                        # Moteur d'export Excel (.xlsx)
 ├── resilience.py                     # Module d'analyse de résilience économique
 ├── similar.py                        # Moteur d'analyse de similarité entre pays
 ├── translations.py                   # Dictionnaire de traduction bilingue (FR/EN)

@@ -395,3 +395,72 @@ button[aria-label*="sidebar" i] {
   box-shadow: 0 0 0 3px
     rgba(0,103,192,.16) !important;
 }
+
+.stApp {
+  background:
+    linear-gradient(180deg,
+      rgba(0, 47, 255, 0.18),
+      rgba(120, 134, 255, 0.24)),
+    url("app/static/globe.png")
+    no-repeat fixed !important;
+  background-position: 0 0,
+    calc(50% + 120px) center
+    !important;
+  background-size: auto,
+    125% !important;
+}
+
+.stApp {
+  background:
+    linear-gradient(180deg,
+      rgba(255,252,240,.78),
+      rgba(255,250,228,.84)),
+    url("app/static/globe.png")
+    no-repeat fixed !important;
+  background-position: 0 0,
+    calc(50% + 120px) center
+    !important;
+  background-size: auto,
+    125% !important;
+}
+
+.stApp {
+  background:
+    linear-gradient(180deg,
+      rgba(253, 245, 216, 0.92),
+      rgba(255,251,238,.95)),
+    url("app/static/globe.png")
+    no-repeat fixed !important;
+  background-position: 0 0,
+    calc(50% + 120px) center
+    !important;
+  background-size: auto,
+    125% !important;
+}
+
+.stApp {
+  background:
+    linear-gradient(180deg,
+      rgba(244,249,254,.95),
+      rgba(227,238,250,.95)),
+    url("app/static/globe.png")
+    no-repeat fixed !important;
+  background-position: 0 0,
+    calc(50% + 120px) center
+    !important;
+  background-size: auto,
+    125% !important;
+}
+
+.stSelectbox [data-baseweb] > div,
+.stMultiSelect [data-baseweb] > div,
+.stTextInput [data-baseweb],
+.stNumberInput [data-baseweb],
+.stDateInput [data-baseweb],
+.stTimeInput [data-baseweb] {
+  background: #ffffff !important;
+  border: 1px solid #9db8d2 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 1px 3px
+    rgba(15,23,42,.08) !important;
+}

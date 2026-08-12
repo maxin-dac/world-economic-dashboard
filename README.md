@@ -23,7 +23,7 @@ Interactive bilingual platform (EN/FR) - 217 countries · 2000-2024 · 58 World 
 </a>
 </p>
 
-![Overview](static/globe.png)
+![Overview](screenshots/overview.jpeg)
 
 > **French version:** [README-fr.md](README-fr.md)
 
@@ -36,7 +36,7 @@ Interactive bilingual platform (EN/FR) - 217 countries · 2000-2024 · 58 World 
 - **Country Profile** - PESTEL radar, 10-year normalized heatmap, dual-axis GDP/inflation, trade balance waterfall.
 - **Country Comparison & Similarity** - Multi-country benchmarking (up to 12 countries) and peer similarity matching engine.
 - **Economic Structure & Resilience** - Sectoral treemap, log-scale violin plot of GDP/capita, resilience & shock analysis.
-- **Data Explorer & Quality Audit** - Filterable dataset with missingness audit, null-safe conditional formatting, one-click CSV export.
+- **Data Explorer & Quality Audit** - Filterable dataset with missingness audit, null-safe conditional formatting, one-click Excel (.xlsx) export.
 - **Investment Score** - Composite 0-100 attractiveness score (8 weighted indicators), risk/return 4-quadrant matrix, red-flag detector, clean-opportunity shortlist.
 
 ## PESTEL Coverage (58 indicators)
@@ -54,11 +54,13 @@ Interactive bilingual platform (EN/FR) - 217 countries · 2000-2024 · 58 World 
 
 ```
 world-economic-dashboard/
+├── .devcontainer/
+│   └── devcontainer.json             # VS Code dev container
 ├── .github/workflows/
 │   ├── lint.yml                      # CI code quality & syntax validation
 │   └── update-data.yml               # Monthly automated data refresh pipeline
 ├── .streamlit/config.toml            # Streamlit theme & UI settings
-├── assets/style.css                  # Custom styling & glassmorphism CSS
+├── assets/style.css                  # Custom blue/navy theme CSS (globe watermark)
 ├── core/                             # Core modular python package
 │   ├── __init__.py
 │   ├── analytics.py                  # Statistical analytics & data transformations
@@ -69,15 +71,21 @@ world-economic-dashboard/
 │   └── labels.py                     # Multilingual label resolvers
 ├── data/
 │   ├── fetch_data.py                 # World Bank API data ingestion pipeline
-│   └── world_economic.csv            # Aggregated dataset (217 countries x 2000-2024)
-├── docs/OPERATIONS.md                # Maintenance & operations documentation
+│   ├── world_economic.csv            # Aggregated dataset (217 countries x 2000-2024)
+│   └── world_economic.parquet        # Parquet cache for fast local loading
+|── screenshots/
+|   ├── aperçu.jpeg                   # Dashboard overview (FR)
+|   └── overview.jpeg                 # Dashboard overview (FR)
+├── scripts/
+│   └── changelog_entry.py            # Changelog generation helper
 ├── static/
-│   └── globe.png                     # Dashboard visual assets
+│   └── globe.png                     # Globe watermark (app background)
 ├── tests/
 │   └── test_investment.py            # Pytest automated test suite
+├── CHANGELOG.md                      # Release history
 ├── app.py                            # Streamlit entry point application
 ├── dataquality.py                    # Data quality auditing & coverage reporting
-├── exports.py                        # Custom report & data exporting engine
+├── exports.py                        # Excel (.xlsx) export engine
 ├── resilience.py                     # Economic resilience & vulnerability module
 ├── similar.py                        # Country similarity algorithm engine
 ├── translations.py                   # Multilingual (EN/FR) translation matrix
