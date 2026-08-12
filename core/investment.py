@@ -10,6 +10,5 @@ from core.analytics import (
 )
 
 __all__ = ["compute_investment_score", "detect_red_flags", "compute_cagr"]
-
-from core.constants import (INVERSE_INDICATORS as _GLOBAL_INVERSE)
-INVESTMENT_INVERSE = (set(_GLOBAL_INVERSE) & set(INVESTMENT_INDICATORS))
+from core.constants import INVERSE_INDICATORS as _GI
+INVESTMENT_INVERSE = set(_GI) & set(INVESTMENT_INDICATORS)
