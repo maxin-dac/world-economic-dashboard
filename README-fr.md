@@ -39,6 +39,7 @@ Plateforme interactive bilingue (FR/EN) - 217 pays · 2000-2024 · 58 indicateur
 - [Documentation](#documentation)
   - [Guide utilisateur](#guide-utilisateur---interpréter-les-scores-et-les-vues)
   - [Documentation technique et API](#documentation-technique-et-api)
+- [Problèmes connus & Dépannage](#problèmes-connus--dépannage)
 - [Auteur](#auteur)
 - [Licence](#licence)
 
@@ -232,6 +233,20 @@ Le script `data/fetch_data.py` collecte les données de l'API Banque Mondiale et
     get_pestel_scores(df_target, df_world, year) -> dict  # {pilier: score 0-100}
     t(key, lang, **kwargs) -> str                   # traduction formatée
 ```
+
+## Problèmes connus & dépannage
+
+### Le message *« Failed to fetch dynamically imported module »* lors du lancement de l'application
+
+Ce message peut apparaître immédiatement **après un redéploiement** (push ou reboot sur Streamlit Cloud). **Il ne s'agit pas d'un bug de l'application** : lors de chaque mise à jour, les fichiers JavaScript du frontend changent d'empreinte (hash). Un onglet resté ouvert - ou un cache navigateur périmé - référence encore les anciennes adresses et reçoit des erreurs, que chaque widget affiche dans son propre encadré rouge. Le serveur Python, lui, fonctionne normalement.
+
+**Conduite à tenir :**
+
+1. Actualiser la page web, ou utiliser le racourci clavier `Ctrl+Shift+R` (ou `Ctrl+F5`).
+2. Si le message persiste, ouvrir l'application en navigation privée ou vider le cache du site.
+3. Après un push, attendre 1 à 2 minutes la fin du déploiement avant de recharger la page.
+
+Un visiteur qui arrive sur l'application une fois le déploiement terminé ne rencontre jamais ce message : c'est un simple artefact de rechargement post-mise à jour.
 
 ## Auteur
 

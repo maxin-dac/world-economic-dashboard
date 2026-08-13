@@ -39,6 +39,7 @@ Interactive bilingual platform (EN/FR) - 217 countries · 2000-2024 · 58 World 
 - [Documentation](#documentation)
   - [User guide](#user-guide---interpreting-the-scores-and-views)
   - [Technical & API documentation](#technical--api-documentation)
+- [Known issues & troubleshooting](#known-issues--troubleshooting)
 - [Author](#author)
 - [License](#license)
 
@@ -57,7 +58,7 @@ Interactive bilingual platform (EN/FR) - 217 countries · 2000-2024 · 58 World 
 ## PESTEL Coverage (58 indicators)
 
 | Pillar | # | Examples |
-|---|---|---|
+| --- | --- | --- |
 | Political | 4 | Military expenditure, Government Effectiveness, Political Stability (WGI) |
 | Economic | 20 | GDP, GDP/capita, Growth, Inflation, Public Debt, Trade Openness, FDI, Current Account |
 | Social | 16 | Population, Life Expectancy, HDI, Gini, Unemployment, Literacy, Infant Mortality |
@@ -207,6 +208,7 @@ In the explorer, per-column gradients show whether a high value is favorable (bl
 #### Application architecture
 
 The application is organized into specialized modules:
+
 - `app.py` is the Streamlit entry point: it assembles the 7 tabs and manages the global filters.
 
 - `core/data.py` exposes `load_data()`, which loads the dataset (CSV + Parquet cache) and returns a `pd.DataFrame`.
@@ -232,6 +234,20 @@ The `data/fetch_data.py` script collects data from the World Bank API and Our Wo
     get_pestel_scores(df_target, df_world, year) -> dict  # {pillar: 0-100 score}
     t(key, lang, **kwargs) -> str                   # formatted translation
 ```
+
+## Known issues & troubleshooting
+
+### The *"Failed to fetch dynamically imported module"* when launching the app
+
+This message may appear immediately **after a redeployment** (push or reboot on Streamlit Cloud). **It is not an application bug**: on every update, the frontend JavaScript files change their fingerprint (hash). A tab left open - or a stale browser cache - still references the old addresses and receives errors, which each widget displays in its own red box. The Python server, meanwhile, runs normally.
+
+**What to do:**
+
+1. Refresh the page, or use the keyboard shortcut `Ctrl+Shift+R` (or `Ctrl+F5`).
+2. If the message persists, open the app in private browsing or clear the site data (DevTools → Application → Clear site data).
+3. After a push, wait 1–2 minutes for the deployment to finish before reloading the page.
+
+A visitor arriving once the deployment is complete never encounters this message: it is merely a post-update reload artifact.
 
 ## Author
 
