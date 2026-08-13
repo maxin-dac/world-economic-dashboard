@@ -40,3 +40,11 @@ jobs:
           git add data/world_economic.csv CHANGELOG.md
           git diff --cached --quiet || git commit -m "data: monthly refresh $(date +%Y-%m-%d)"
           git push
+      
+      - name: Generate Power BI Star Schema
+        run: python data/prep_powerbi.py
+      
+      - name: Commit Power BI datasets
+        run: |
+          git add data/powerbi/
+          git diff --staged --quiet || git commit -m "data: refresh Power BI star schema parquet files"
