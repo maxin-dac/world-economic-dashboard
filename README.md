@@ -27,6 +27,21 @@ Interactive bilingual platform (EN/FR) - 217 countries · 2000-2024 · 58 World 
 
 > **French version:** [README-fr.md](README-fr.md)
 
+## Table of Contents
+
+- [Features](#features)
+- [PESTEL Coverage](#pestel-coverage-58-indicators)
+- [Project Architecture](#project-architecture)
+- [Quick Start & Installation](#quick-start--installation)
+  - [Option 1: Live Demo](#option-1-live-demo)
+  - [Option 2: Local Setup](#option-2-local-setup)
+  - [Option 3: Docker Setup](#option-3-docker-setup)
+- [Documentation](#documentation)
+  - [User guide](#user-guide---interpreting-the-scores-and-views)
+  - [Technical & API documentation](#technical--api-documentation)
+- [Author](#author)
+- [License](#license)
+
 ## Features
 
 **7 coordinated views** + specialized analytical modules:

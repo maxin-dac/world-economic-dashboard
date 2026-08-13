@@ -27,6 +27,21 @@ Plateforme interactive bilingue (FR/EN) - 217 pays · 2000-2024 · 58 indicateur
 
 > **Version anglaise :** [README.md](README.md)
 
+## Table des matières
+
+- [Fonctionnalités](#fonctionnalités)
+- [Couverture PESTEL](#couverture-pestel-58-indicateurs)
+- [Architecture du Projet](#architecture-du-projet)
+- [Démarrage rapide & Installation](#démarrage-rapide--installation)
+  - [Option 1 : Live Demo](#option-1--live-demo)
+  - [Option 2 : Installation Locale](#option-2--installation-locale)
+  - [Option 3 : Déploiement avec Docker](#option-3--déploiement-avec-docker)
+- [Documentation](#documentation)
+  - [Guide utilisateur](#guide-utilisateur---interpréter-les-scores-et-les-vues)
+  - [Documentation technique et API](#documentation-technique-et-api)
+- [Auteur](#auteur)
+- [Licence](#licence)
+
 ## Fonctionnalités
 
 **7 vues coordonnées** + modules d'analyse spécialisés :
