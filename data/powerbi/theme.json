@@ -1,0 +1,56 @@
+{
+    "name": "GEID Navy Flat",
+    "dataColors": [
+        "#4FA3E3", "#9DC3E6", "#F2C14E", "#7FD1AE",
+        "#FF8A80", "#C9A7EB", "#5AB4FF", "#FFFFFF"
+    ],
+    "background": "#0A1F44",
+    "foreground": "#E6EEF7",
+    "tableAccent": "#4FA3E3",
+    "good": "#7FD1AE",
+    "bad": "#FF8A80",
+    "neutral": "#9DC3E6",
+    "textClasses": {
+        "label": { "color": "#B9CCE4", "fontSize": 10 },
+        "callout": { "color": "#FFFFFF", "fontSize": 26 },
+        "title": { "color": "#FFFFFF", "fontSize": 12 },
+        "header": { "color": "#E6EEF7", "fontSize": 11 }
+    },
+    "visualStyles": {
+        "*": {
+            "*": {
+                "background": [ { "show": true, "color": "#10294F", "transparency": 0 } ],
+                "border": [ { "show": true, "color": "#274B7A", "radius": 12 } ],
+                "title": [ { "show": true,
+                    "fontColor": { "solid": { "color": "#FFFFFF" } },
+                    "fontSize": 12, "fontFamily": "Segoe UI" } ],
+                "labels": [ { "color": { "solid": { "color": "#B9CCE4" } } } ],
+                "categoryAxis": [ { "labelColor": { "solid": { "color": "#B9CCE4" } } } ],
+                "valueAxis": [ { "labelColor": { "solid": { "color": "#B9CCE4" } } } ],
+                "legend": [ { "labelColor": { "solid": { "color": "#E6EEF7" } } } ]
+            }
+        },
+        "tableEx": {
+            "*": {
+                "columnHeaders": [ {
+                    "fontColor": { "solid": { "color": "#FFFFFF" } },
+                    "backColor": { "solid": { "color": "#1F4E79" } },
+                    "fontSize": 10 } ],
+                "values": [ {
+                    "fontColor": { "solid": { "color": "#E6EEF7" } },
+                    "backColor": { "solid": { "color": "#10294F" } },
+                    "fontSize": 10 } ],
+                "grid": [ {
+                    "gridVertical": false,
+                    "gridHorizontal": true,
+                    "gridHorizontalColor": { "solid": { "color": "#274B7A" } } } ]
+            }
+        },
+        "card": {
+            "*": {
+                "labels": [ { "color": { "solid": { "color": "#FFFFFF" } } } ],
+                "categoryLabels": [ { "color": { "solid": { "color": "#B9CCE4" } } } ]
+            }
+        }
+    }
+}
