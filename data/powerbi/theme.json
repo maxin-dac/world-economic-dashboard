@@ -1,40 +1,40 @@
 {
-    "name": "GEID Soft Navy",
+    "name": "GEID Premium Light",
     "dataColors": [
-        "#1F4E79", "#2E75B6", "#F2C14E", "#7FD1AE",
+        "#1F4E79", "#2E75B6", "#F2C14E", "#2E7D32",
         "#E4574C", "#7030A0", "#9DC3E6", "#5B7189"
     ],
-    "background": "#0F2C52",
-    "foreground": "#12305B",
-    "tableAccent": "#2E75B6",
+    "background": "#EEF2F7",
+    "foreground": "#16324F",
+    "tableAccent": "#1F4E79",
     "good": "#2E7D32",
     "bad": "#E4574C",
     "neutral": "#9DC3E6",
     "textClasses": {
         "label": { "color": "#5B7189", "fontSize": 10 },
-        "callout": { "color": "#12305B", "fontSize": 26 },
-        "title": { "color": "#12305B", "fontSize": 12 },
-        "header": { "color": "#12305B", "fontSize": 11 }
+        "callout": { "color": "#16324F", "fontSize": 26 },
+        "title": { "color": "#16324F", "fontSize": 12 },
+        "header": { "color": "#16324F", "fontSize": 11 }
     },
     "visualStyles": {
         "*": {
             "*": {
                 "background": [ { "show": true, "color": "#FFFFFF", "transparency": 0 } ],
-                "border": [ { "show": true, "color": "#D8E1EC", "radius": 14 } ],
+                "border": [ { "show": true, "color": "#DCE4EE", "radius": 14 } ],
                 "title": [ { "show": true,
-                    "fontColor": { "solid": { "color": "#12305B" } },
+                    "fontColor": { "solid": { "color": "#16324F" } },
                     "fontSize": 12, "fontFamily": "Segoe UI" } ],
                 "labels": [ { "color": { "solid": { "color": "#5B7189" } } } ],
                 "categoryAxis": [ { "labelColor": { "solid": { "color": "#5B7189" } } } ],
                 "valueAxis": [ { "labelColor": { "solid": { "color": "#5B7189" } } } ],
-                "legend": [ { "labelColor": { "solid": { "color": "#12305B" } } } ]
+                "legend": [ { "labelColor": { "solid": { "color": "#16324F" } } } ]
             }
         },
         "tableEx": {
             "*": {
                 "columnHeaders": [ {
-                    "fontColor": { "solid": { "color": "#12305B" } },
-                    "backColor": { "solid": { "color": "#EAF0F7" } },
+                    "fontColor": { "solid": { "color": "#FFFFFF" } },
+                    "backColor": { "solid": { "color": "#1F4E79" } },
                     "fontSize": 10 } ],
                 "values": [ {
                     "fontColor": { "solid": { "color": "#22364E" } },
@@ -48,7 +48,7 @@
         },
         "card": {
             "*": {
-                "labels": [ { "color": { "solid": { "color": "#12305B" } } } ],
+                "labels": [ { "color": { "solid": { "color": "#16324F" } } } ],
                 "categoryLabels": [ { "color": { "solid": { "color": "#5B7189" } } } ]
             }
         }

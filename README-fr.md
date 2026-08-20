@@ -199,7 +199,7 @@ Dans l'explorateur, les dégradés par colonne indiquent si une valeur élevée 
 #### Bonnes pratiques et limites
 
 - Une corrélation n'implique pas de causalité (les droites OLS sont descriptives).
-- Une médiane n'est pas une moyenne.
+- **Tendance centrale** : médianes par défaut (robustes aux valeurs extrêmes : micro-États, hyperinflations). La moyenne n'est jamais utilisée pour les agrégats affichés ; la dispersion est mesurée par écart-type.
 - 2024 est la dernière année validée (décalage de publication de 12 à 18 mois).
 - Enfin, **les scores sont relatifs** : 60/100 signifie « 60 % de l'écart min-max monde », et non une note absolue.
 

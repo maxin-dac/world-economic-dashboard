@@ -104,7 +104,7 @@ def render(df_all, lang, default_country=None):
                       yaxis_title=f"{_t(lang, 'pca2')} ({pca.explained_variance_ratio_[1]:.0%})",
                       height=460, margin=dict(t=30, b=20, l=10, r=10),
                       legend=dict(orientation="h", y=-.15))
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width="stretch")
 
     st.markdown(f"**{_t(lang, 'similar')}**")
     rows = []

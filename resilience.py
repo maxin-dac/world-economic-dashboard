@@ -145,7 +145,7 @@ def render(df_all, lang):
                       margin=dict(t=40, b=20, l=10, r=10), legend=dict(orientation="h", y=-.15))
     fig.add_vline(x=df["drop_2020"].median(), line_dash="dash", line_color="#94a3b8")
     fig.add_hline(y=df["rec_2020"].median(), line_dash="dash", line_color="#94a3b8")
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width="stretch")
 
     st.markdown(f"**{_t(lang, 'rank')}**")
     cols = ["_cname", "drop_2009", "rec_2009", "drop_2020", "rec_2020", "score"]
@@ -171,4 +171,4 @@ def render(df_all, lang):
         if peak in idx:
             fig2.add_vline(x=peak, line_width=1.5, line_color=col)
     fig2.update_layout(height=360, margin=dict(t=30, b=20, l=10, r=10), yaxis_title="Index (first year = 100)")
-    st.plotly_chart(fig2, use_container_width=True)
+    st.plotly_chart(fig2, width="stretch")

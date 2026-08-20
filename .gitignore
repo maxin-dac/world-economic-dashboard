@@ -9,3 +9,4 @@ venv/
 dist/
 .DS_Store
 data/*.parquet
+data/powerbi/*.pbix

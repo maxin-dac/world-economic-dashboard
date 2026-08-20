@@ -199,7 +199,7 @@ In the explorer, per-column gradients show whether a high value is favorable (bl
 #### Best practices and limitations
 
 - Correlation does not imply causation (OLS trendlines are descriptive).
-- A median is not a mean.
+- **Central tendency**: medians by default (robust to outliers such as micro-states and hyperinflations). Means are never used for displayed aggregates; dispersion is measured with standard deviations.
 - 2024 is the latest validated year (12–18 month publication lag).
 - Finally, **scores are relative**: 60/100 means "60% of the world min-max gap", not an absolute grade.
 

@@ -60,6 +60,21 @@ def build_dim_time(df: pd.DataFrame) -> pd.DataFrame:
     return dim
 
 
+
+def load_labels_fr() -> dict:
+    """Libellés FR des indicateurs (translations.py, extraction AST)."""
+    import ast
+    import pathlib
+    src = pathlib.Path(__file__).parent.parent / "translations.py"
+    tree = ast.parse(src.read_text(encoding="utf-8"))
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Assign):
+            for t in node.targets:
+                if isinstance(t, ast.Name) and t.id == "TRANSLATIONS":
+                    return ast.literal_eval(node.value).get("fr", {})
+    return {}
+
+
 def build_dim_indicator() -> pd.DataFrame:
     records = [
         {"indicator_id": code, "pillar": pillar,
@@ -68,7 +83,15 @@ def build_dim_indicator() -> pd.DataFrame:
         for code in codes
     ]
     dim = pd.DataFrame(records).sort_values(["pillar", "indicator_id"])
-    print(f"✓ Dim_Indicator: {len(dim)} indicateurs")
+    labels = load_labels_fr()
+    pillar_fr = {"political": "Politique", "economic": "Économique",
+                 "social": "Social", "technological": "Technologique",
+                 "environmental": "Environnemental", "legal": "Légal"}
+    naked = dim["indicator_id"].str.replace("_", " ")
+    dim["label_fr"] = (dim["pillar"].str.lower().map(pillar_fr)
+                       .fillna(dim["pillar"])
+                       + " - " + naked.map(labels).fillna(naked))
+    print(f"✓ Dim_Indicator: {len(dim)} indicateurs (libelles FR)")
     return dim.reset_index(drop=True)
 
 
