@@ -28,7 +28,3 @@ secrets.json
 
 # --- Datas ---
 data/*.parquet
-# Choix assumé : parquets + pbix Power BI TRACKÉS (reproductibilité).
-# Pour un repo léger, décommenter :
-# *.parquet
-# data/powerbi/*.pbix
