@@ -298,7 +298,7 @@ with tab_country:
 
         st.markdown(f"### 🏳️ {cname(sel_country, lang)}")
         section_head("01", "country_overview_title", lang)
-        ov1, ov2, ov3, ov4, ov5 = st.columns(5)
+        ov1, ov2, ov3, ov4, ov5, ov6, ov7 = st.columns(7)
         
         ov1.metric(t("income_group_label", lang), t(income_grp, lang), help=f"{t('income_group_label', lang)}: {t(income_grp, lang)}")
         ov2.metric(t("region_label", lang), t(region_val, lang), help=f"{t('region_label', lang)}: {t(region_val, lang)}")
@@ -313,9 +313,13 @@ with tab_country:
         inf_delta = safe_delta(inf_val, prev_c.get("inflation", None))
         ov4.metric(ind_label("inflation", lang), f"{inf_val:.1f}%" if pd.notna(inf_val) else "N/A", f"{inf_delta:+.1f} pp" if inf_delta is not None else "", delta_color="inverse", help=f"{ind_label('inflation', lang)}: {inf_val:.1f}%" if pd.notna(inf_val) else "N/A")
         
-        debt_val = latest_c.get("debt_pct_gdp", None)
-        debt_delta = safe_delta(debt_val, prev_c.get("debt_pct_gdp", None))
-        ov5.metric(ind_label("debt_pct_gdp", lang), f"{debt_val:.1f}%" if pd.notna(debt_val) else "N/A", f"{debt_delta:+.1f} pp" if debt_delta is not None else "", delta_color="inverse", help=f"{ind_label('debt_pct_gdp', lang)}: {debt_val:.1f}%" if pd.notna(debt_val) else "N/A")
+        growth_val = latest_c.get("gdp_growth_pct", None)
+        growth_delta = safe_delta(growth_val, prev_c.get("gdp_growth_pct", None))
+        ov5.metric(ind_label("gdp_growth_pct", lang), f"{growth_val:.1f}%" if pd.notna(growth_val) else "N/A", f"{growth_delta:+.1f} pp" if growth_delta is not None else "")
+        pop_val = latest_c.get("population_mn", None)
+        ov6.metric(ind_label("population_mn", lang), f"{pop_val:,.1f}" if pd.notna(pop_val) else "N/A")
+        gdp_tot = latest_c.get("gdp_total_bn", None)
+        ov7.metric(ind_label("gdp_total_bn", lang), f"{gdp_tot:,.1f}" if pd.notna(gdp_tot) else "N/A")
         
         st.divider()
 
