@@ -12,6 +12,8 @@ Plateforme interactive bilingue (FR/EN) - 217 pays · 2000-2024 · 58 indicateur
 <img src="https://img.shields.io/badge/Matplotlib-11557C?style=flat&logo=matplotlib&logoColor=white" alt="Matplotlib" />
 <img src="https://img.shields.io/badge/Statsmodels-4B3F72?style=flat" alt="Statsmodels" />
 <img src="https://img.shields.io/badge/pytest-0A9EDC?style=flat&logo=pytest&logoColor=white" alt="pytest" />
+<img src="https://img.shields.io/badge/Power_BI-F2C811?style=flat&logo=powerbi&logoColor=white" alt="Power BI" />
+<img src="https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor=white" alt="Git" />
 <img src="https://img.shields.io/badge/GitHub_Actions-2088FF?style=flat&logo=githubactions&logoColor=white" alt="GitHub Actions" />
 <img src="https://img.shields.io/badge/API_Banque_Mondiale-0072BC?style=flat" alt="API Banque Mondiale" />
 <img src="https://img.shields.io/badge/Licence_MIT-green?style=flat" alt="Licence MIT" />
@@ -30,6 +32,7 @@ Plateforme interactive bilingue (FR/EN) - 217 pays · 2000-2024 · 58 indicateur
 ## Table des matières
 
 - [Fonctionnalités](#fonctionnalités)
+- [Le jumeau Power BI](#le-jumeau-power-bi)
 - [Couverture PESTEL](#couverture-pestel-58-indicateurs)
 - [Architecture du Projet](#architecture-du-projet)
 - [Démarrage rapide & Installation](#démarrage-rapide--installation)
@@ -54,6 +57,21 @@ Plateforme interactive bilingue (FR/EN) - 217 pays · 2000-2024 · 58 indicateur
 - **Structure & Résilience économique** - Treemap sectoriel, violin plot log du PIB/hab., analyse de la résilience et des chocs.
 - **Explorateur de données & Audit Qualité** - Jeu de données filtrable avec audit des données manquantes, mise en forme conditionnelle null-safe, export Excel (.xlsx) en un clic.
 - **Score Investissement** - Score composite 0-100 (8 indicateurs pondérés), matrice risque/rendement 4 quadrants, détecteur de signaux d'alerte, shortlist d'opportunités propres.
+
+## Le jumeau Power BI
+
+Un miroir Power BI complet du dashboard est maintenu en parallèle (en français uniquement).
+
+![PowerBI-overview](screenshots/PowerBI-overview.png)
+
+| Élément | Chemin |
+|---|---|
+| Rapport | `data/powerbi/world-economic-dashboard.pbix` |
+| Modèle (parquet) | généré par `scripts/prep_powerbi.py` |
+| TopoJSON monde (choroplèthe) | `data/powerbi/world.topo.json` |
+
+**Pages** : Carte mondiale (choroplèthe quintiles) · Tendances · Profil pays (drillthrough) · Comparatifs · Structure économique.
+*L'Intelligence Investissement reste volontairement dans l'app Streamlit (similarité PCA, drapeaux rouges, scorecard).*
 
 ## Couverture PESTEL (58 indicateurs)
 
