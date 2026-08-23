@@ -1,12 +1,34 @@
+# --- Python ---
 __pycache__/
 *.pyc
 *.pyo
-.env
-.venv/
-venv/
-.streamlit/secrets.toml
 *.egg-info/
 dist/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# --- Virtual environments ---
+.venv/
+venv/
+ENV/
+
+# --- Secrets ---
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+*.p12
+secrets.json
+.streamlit/secrets.toml
+
+# --- OS ---
 .DS_Store
+
+# --- Datas ---
 data/*.parquet
-data/powerbi/*.pbix
+# Choix assumé : parquets + pbix Power BI TRACKÉS (reproductibilité).
+# Pour un repo léger, décommenter :
+# *.parquet
+# data/powerbi/*.pbix
