@@ -31,3 +31,13 @@ updates:
     labels: ["dependencies", "docker"]
     commit-message:
       prefix: "docker"
+
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    ignore:
+      - dependency-name: "python"
+        update-types:
+          - "version-update:semver-major"
+          - "version-update:semver-minor"
