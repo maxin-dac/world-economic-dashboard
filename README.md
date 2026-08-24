@@ -88,47 +88,42 @@ A complete Power BI mirror of this dashboard is maintained in parallel (french o
 
 ```
 world-economic-dashboard/
-├── .devcontainer/
-│   └── devcontainer.json             # VS Code dev container
-├── .github/workflows/
-│   ├── lint.yml                      # CI code quality & syntax validation
-│   └── update-data.yml               # Monthly automated data refresh pipeline
-├── .streamlit/config.toml            # Streamlit theme & UI settings
-├── assets/style.css                  # Custom blue/navy theme CSS (globe watermark)
-├── core/                             # Core modular python package
-│   ├── __init__.py
-│   ├── analytics.py                  # Statistical analytics & data transformations
-│   ├── constants.py                  # PESTEL definitions, colors & indicator schemas
-│   ├── data.py                       # Cached data loading & optimization
-│   ├── indicators.py                 # Indicator calculation engines
-│   ├── investment.py                 # Investment scoring & quadrant algorithms
-│   └── labels.py                     # Multilingual label resolvers
+├── .github/
+│ ├── workflows/                # CI/CD pipelines (lint, security scan, data refresh)
+│ └── dependabot.yml            # Automated dependency updates (pip, GitHub Actions, Docker)
+├── .streamlit/
+│ └── config.toml               # Streamlit theme & UI settings
+├── assets/
+│ ├── style.css                 # Custom blue/navy theme CSS
+│ └── globe.png                 # Globe watermark (app background)
+├── core/                       # Core modular Python package
+│ ├── analytics.py              # Cached statistical helpers
+│ ├── constants.py              # PESTEL schemas, palettes, inverse indicators
+│ ├── data.py                   # Cached data loading (CSV + Parquet)
+│ ├── indicators.py             # Indicator metadata & interpretation
+│ ├── investment.py             # Investment scoring & quadrant algorithms
+│ └── labels.py                 # Multilingual label resolvers
 ├── data/
-│   ├── fetch_data.py                 # World Bank API data ingestion pipeline
-│   ├── world_economic.csv            # Aggregated dataset (217 countries x 2000-2024)
-│   └── world_economic.parquet        # Parquet cache for fast local loading
-|── screenshots/
-|   ├── aperçu.jpeg                   # Dashboard overview (FR)
-|   └── overview.jpeg                 # Dashboard overview (FR)
-├── scripts/
-│   └── changelog_entry.py            # Changelog generation helper
-├── static/
-│   └── globe.png                     # Globe watermark (app background)
+│ ├── fetch_data.py             # World Bank + OWID data ingestion pipeline
+│ ├── world_economic.csv        # Aggregated dataset (217 countries × 2000-2024)
+│ └── world_economic.parquet    # Parquet cache for fast local loading
 ├── tests/
-│   └── test_investment.py            # Pytest automated test suite
-├── CHANGELOG.md                      # Release history
-├── app.py                            # Streamlit entry point application
-├── dataquality.py                    # Data quality auditing & coverage reporting
-├── exports.py                        # Excel (.xlsx) export engine
-├── resilience.py                     # Economic resilience & vulnerability module
-├── similar.py                        # Country similarity algorithm engine
-├── translations.py                   # Multilingual (EN/FR) translation matrix
-├── Dockerfile                        # Production Docker container configuration
-├── .dockerignore                     # Docker build optimization rules
-├── requirements.txt                  # Python dependencies
-├── LICENSE                           # MIT License
-├── README.md                         # English Documentation
-└── README-fr.md                      # French Documentation
+│ └── test_investment.py        # Pytest automated test suite
+├── docs/
+│ └── screenshots/              # Dashboard overview captures (EN + FR)
+├── app.py                      # Streamlit entry point (7 tabs)
+├── dataquality.py              # Data quality auditing & coverage reporting
+├── exports.py                  # Excel (.xlsx) export engine
+├── resilience.py               # Economic resilience & vulnerability module
+├── similar.py                  # Country similarity algorithm (PCA-based)
+├── translations.py             # Multilingual (EN/FR) translation matrix
+├── Dockerfile                  # Production Docker container
+├── .dockerignore               # Docker build optimization
+├── requirements.txt            # Python dependencies
+├── SECURITY.md                 # Security policy & vulnerability reporting
+├── LICENSE                     # MIT License
+├── README.md                   # English documentation
+└── README-fr.md                # French documentation
 ```
 
 ## Quick Start & Installation

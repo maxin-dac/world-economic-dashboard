@@ -88,47 +88,42 @@ Un miroir Power BI complet du dashboard est maintenu en parallèle (en français
 
 ```
 world-economic-dashboard/
-├── .devcontainer/
-│   └── devcontainer.json             # Conteneur de dev VS Code
-├── .github/workflows/
-│   ├── lint.yml                      # Pipeline CI de contrôle de qualité du code
-│   └── update-data.yml               # Pipeline CI/CD mensuel d'actualisation des données
-├── .streamlit/config.toml            # Configuration du thème Streamlit
-├── assets/style.css                  # Thème CSS bleu/navy sur-mesure (filigrane globe)
-├── core/                             # Package Python modulaire principal
-│   ├── __init__.py
-│   ├── analytics.py                  # Calculs statistiques et transformations
-│   ├── constants.py                  # Définitions PESTEL, couleurs & schémas
-│   ├── data.py                       # Chargement des données et optimisation mémoire
-│   ├── indicators.py                 # Moteur de calcul des indicateurs
-│   ├── investment.py                 # Algorithmes de scoring d'investissement et quadrants
-│   └── labels.py                     # Résolution des libellés multilingues
+├── .github/
+│ ├── workflows/              # Pipelines CI/CD (lint, scan sécurité, refresh données)
+│ └── dependabot.yml          # Mises à jour auto des dépendances (pip, GitHub Actions, Docker)
+├── .streamlit/
+│ └── config.toml             # Thème & paramètres UI Streamlit
+├── assets/
+│ ├── style.css               # Thème CSS bleu/navy sur-mesure
+│ └── globe.png               # Filigrane globe (fond de l'app)
+├── core/                     # Package Python modulaire principal
+│ ├── analytics.py            # Helpers statistiques mis en cache
+│ ├── constants.py            # Schémas PESTEL, palettes, indicateurs inversés
+│ ├── data.py                 # Chargement des données (CSV + Parquet)
+│ ├── indicators.py           # Métadonnées & interprétation des indicateurs
+│ ├── investment.py           # Algorithmes de scoring d'investissement et quadrants
+│ └── labels.py               # Résolution des libellés multilingues
 ├── data/
-│   ├── fetch_data.py                 # Script de collecte API Banque Mondiale
-│   ├── world_economic.csv            # Dataset agrégé (217 pays x 2000-2024)
-│   └── world_economic.parquet        # Cache Parquet (chargement rapide)
-├── screenshots/
-│   └── aperçu.jpeg                   # Aperçu du tableau de bord (FR)
-│   └── overview.jpeg                 # Aperçu du tableau de bord (EN)
-├── scripts/
-│   └── changelog_entry.py            # Aide à la génération du changelog
-├── static/
-│   └── globe.png                     # Filigrane globe (fond de l'app)
+│ ├── fetch_data.py           # Pipeline de collecte API Banque Mondiale + OWID
+│ ├── world_economic.csv      # Dataset agrégé (217 pays × 2000-2024)
+│ └── world_economic.parquet  # Cache Parquet (chargement rapide)
 ├── tests/
-│   └── test_investment.py            # Suite de tests automatisés pytest
-├── CHANGELOG.md                      # Historique des versions
-├── app.py                            # Point d'entrée de l'application Streamlit
-├── dataquality.py                    # Module d'audit de qualité des données et couverture
-├── exports.py                        # Moteur d'export Excel (.xlsx)
-├── resilience.py                     # Module d'analyse de résilience économique
-├── similar.py                        # Moteur d'analyse de similarité entre pays
-├── translations.py                   # Dictionnaire de traduction bilingue (FR/EN)
-├── Dockerfile                        # Configuration de conteneurisation Docker
-├── .dockerignore                     # Rôles d'exclusion pour le build Docker
-├── requirements.txt                  # Dépendances Python
-├── LICENSE                           # Licence MIT
-├── README.md                         # Documentation en anglais
-└── README-fr.md                      # French Documentation
+│ └── test_investment.py      # Suite de tests automatisés pytest
+├── docs/
+│ └── screenshots/            # Captures d'aperçu du dashboard (FR + EN)
+├── app.py                    # Point d'entrée Streamlit (7 onglets)
+├── dataquality.py            # Module d'audit de qualité et de couverture
+├── exports.py                # Moteur d'export Excel (.xlsx)
+├── resilience.py             # Module d'analyse de résilience économique
+├── similar.py                # Algorithme de similarité pays (PCA)
+├── translations.py           # Dictionnaire de traduction bilingue (FR/EN)
+├── Dockerfile                # Conteneur Docker de production
+├── .dockerignore             # Optimisation du build Docker
+├── requirements.txt          # Dépendances Python
+├── SECURITY.md               # Politique de sécurité & signalement de vulnérabilités
+├── LICENSE                   # Licence MIT
+├── README.md                 # Documentation en anglais
+└── README-fr.md              # Documentation en français
 ```
 
 ## Démarrage rapide & Installation
