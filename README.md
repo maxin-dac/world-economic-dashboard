@@ -25,7 +25,7 @@ Interactive bilingual platform (EN/FR) - 217 countries · 2000-2024 · 58 World 
 </a>
 </p>
 
-![Overview](screenshots/overview.jpeg)
+![Overview](docs/screenshots/overview.jpeg)
 
 > **French version:** [README-fr.md](README-fr.md)
 
@@ -62,7 +62,7 @@ Interactive bilingual platform (EN/FR) - 217 countries · 2000-2024 · 58 World 
 
 A complete Power BI mirror of this dashboard is maintained in parallel (french only).
 
-![PowerBI-overview](screenshots/PowerBI-overview.png)
+![PowerBI-overview](docs/screenshots/PowerBI-overview.png)
 
 | Item | Path |
 |---|---|

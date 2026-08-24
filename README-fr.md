@@ -25,7 +25,7 @@ Plateforme interactive bilingue (FR/EN) - 217 pays · 2000-2024 · 58 indicateur
 </a>
 </p>
 
-![Aperçu](screenshots/aperçu.jpeg)
+![Aperçu](docs/screenshots/aperçu.jpeg)
 
 > **Version anglaise :** [README.md](README.md)
 
@@ -62,7 +62,7 @@ Plateforme interactive bilingue (FR/EN) - 217 pays · 2000-2024 · 58 indicateur
 
 Un miroir Power BI complet du dashboard est maintenu en parallèle (en français uniquement).
 
-![PowerBI-overview](screenshots/PowerBI-overview.png)
+![PowerBI-overview](docs/screenshots/PowerBI-overview.png)
 
 | Élément | Chemin |
 |---|---|
