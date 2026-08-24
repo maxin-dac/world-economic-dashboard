@@ -126,6 +126,15 @@ with st.sidebar:
     st.divider()
     st.caption(t("source", lang))
 
+    st.markdown(
+        f'''<div style="margin-top:10px; font-size:0.72rem; color:#8fa3bf; line-height:1.7;">
+        © {pd.Timestamp.now().year} <b>Maxime NDACLEU</b> · Data Analyst & BI Analyst<br>
+        Tous droits réservés / All rights reserved<br>
+        <a href="https://github.com/maxin-dac" target="_blank"><img src="https://img.shields.io/badge/GitHub-maxin--dac-181717?style=flat&logo=github&logoColor=white" alt="GitHub" style="height:18px;"></a>&nbsp;
+        <a href="https://www.linkedin.com/in/maximendacleu" target="_blank"><img src="https://img.shields.io/badge/LinkedIn-maximendacleu-0A66C2?style=flat&logo=linkedin&logoColor=white" alt="LinkedIn" style="height:18px;"></a>
+        </div>''',
+        unsafe_allow_html=True,
+    )
 # ── Global filters ──────────────────────────────────────────────────────────
 mask = (df_all["year"].isin(sel_years) & df_all["region"].isin(sel_regions) & df_all["income_group"].isin(sel_income))
 df = df_all[mask].copy()
