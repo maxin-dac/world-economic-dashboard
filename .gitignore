@@ -1,30 +1,38 @@
-# --- Python ---
-__pycache__/
+```
+# Compiled and build artifacts
 *.pyc
-*.pyo
-*.egg-info/
-dist/
-.pytest_cache/
-.coverage
-htmlcov/
+__pycache__/
 
-# --- Virtual environments ---
+# Dependencies
 .venv/
 venv/
-ENV/
+node_modules/
 
-# --- Secrets ---
+# Logs and temp files
+*.log
+*.tmp
+*.swp
+
+# Environment
 .env
 .env.local
-.env.*.local
-*.pem
-*.key
-*.p12
-secrets.json
-.streamlit/secrets.toml
+*.env.*
 
-# --- OS ---
+# Editors
+.vscode/
+.idea/
+
+# OS generated files
 .DS_Store
+Thumbs.db
 
-# --- Datas ---
-data/*.parquet
+# Coverage reports
+coverage/
+htmlcov/
+.coverage
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+```

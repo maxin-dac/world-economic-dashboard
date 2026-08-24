@@ -2,6 +2,7 @@
 Global Economic Intelligence Dashboard
 Real World Bank + Our World in Data · 217 countries · 2000-2024
 Code is 100% in English. All user-facing text is bilingual (EN/FR).
+Modern UI/UX with dark theme, SVG icons, and Plotly integration.
 """
 import os
 import sys
@@ -24,6 +25,114 @@ from core.constants import (INCOME_ORDER, INCOME_COLORS, REGION_COLORS, SECTOR_C
     INDICATOR_TO_PILLAR, CORE_INDICATORS, INVERSE_INDICATORS, get_expressive_colorscale)
 from core.indicators import indicator_info, interpret_value, show_indicator_info
 from core.investment import compute_investment_score, detect_red_flags, compute_cagr
+
+# ═══════════════════════════════════════════════════════════════════════════
+# SVG ICONS (Lucide/Feather style - inline for performance)
+# ═══════════════════════════════════════════════════════════════════════════
+
+SVG_ICONS = {
+    "globe": '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>',
+    "trending_up": '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>',
+    "building": '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M8 10h.01"/><path d="M16 10h.01"/><path d="M8 14h.01"/><path d="M16 14h.01"/></svg>',
+    "compare": '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>',
+    "layers": '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>',
+    "award": '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>',
+    "database": '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>',
+    "info": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>',
+    "alert": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>',
+    "search": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m21 21-4.3-4.3"/></svg>',
+    "filter": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>',
+    "calendar": '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>',
+    "map": '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" x2="9" y1="3" y2="18"/><line x1="15" x2="15" y1="6" y2="21"/></svg>',
+    "flag": '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" x2="4" y1="22" y2="15"/></svg>',
+}
+
+def svg_icon(name: str, size: int = 18) -> str:
+    """Return SVG icon with custom size"""
+    icon = SVG_ICONS.get(name, SVG_ICONS["info"])
+    return f'<span style="display:inline-flex;align-items:center;vertical-align:middle;margin-right:6px;">{icon}</span>'
+
+# ═══════════════════════════════════════════════════════════════════════════
+# PLOTLY THEME - Dark mode compatible
+# ═══════════════════════════════════════════════════════════════════════════
+
+PLOTLY_THEME = {
+    'layout': {
+        'font': {
+            'family': "'Inter', 'Segoe UI', sans-serif",
+            'size': 12,
+            'color': "#CBD5E1"
+        },
+        'title': {
+            'font': {
+                'family': "'Inter', 'Segoe UI', sans-serif",
+                'size': 14,
+                'color': "#F8FAFC"
+            },
+            'x': 0.5,
+            'xanchor': 'center'
+        },
+        'paper_bgcolor': 'rgba(0,0,0,0)',
+        'plot_bgcolor': 'rgba(0,0,0,0)',
+        'hovermode': 'x unified',
+        'hoverlabel': {
+            'bgcolor': '#1E293B',
+            'font_size': 11,
+            'font_family': "'Inter', 'Segoe UI', sans-serif",
+            'font_color': "#F8FAFC",
+            'bordercolor': '#334155'
+        },
+        'legend': {
+            'font': {
+                'size': 11,
+                'color': "#CBD5E1"
+            },
+            'bgcolor': 'rgba(0,0,0,0)',
+            'bordercolor': 'rgba(0,0,0,0)'
+        },
+        'margin': {'t': 50, 'b': 20, 'l': 10, 'r': 10},
+        'height': 420
+    },
+    'config': {
+        'displayModeBar': False,
+        'responsive': True,
+        'scrollZoom': False
+    }
+}
+
+def apply_plotly_theme(fig: go.Figure) -> go.Figure:
+    """Apply custom Plotly theme to a figure"""
+    fig.update_layout(
+        font=dict(family="'Inter', 'Segoe UI', sans-serif", size=12, color="#CBD5E1"),
+        title_font=dict(family="'Inter', 'Segoe UI', sans-serif", size=14, color="#F8FAFC"),
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)',
+        hoverlabel=dict(
+            bgcolor='#1E293B',
+            font_size=11,
+            font_family="'Inter', 'Segoe UI', sans-serif",
+            font_color="#F8FAFC",
+            bordercolor='#334155'
+        ),
+        legend=dict(
+            font=dict(size=11, color="#CBD5E1"),
+            bgcolor='rgba(0,0,0,0)',
+            bordercolor='rgba(0,0,0,0)'
+        ),
+        xaxis=dict(
+            gridcolor='rgba(51, 65, 85, 0.5)',
+            linecolor='rgba(51, 65, 85, 0.8)',
+            zerolinecolor='rgba(51, 65, 85, 0.8)',
+            tickfont=dict(color="#94A3B8")
+        ),
+        yaxis=dict(
+            gridcolor='rgba(51, 65, 85, 0.5)',
+            linecolor='rgba(51, 65, 85, 0.8)',
+            zerolinecolor='rgba(51, 65, 85, 0.8)',
+            tickfont=dict(color="#94A3B8")
+        )
+    )
+    return fig
 
 # ── Page config ─────────────────────────────────────────────────────────────
 st.set_page_config(
@@ -114,15 +223,15 @@ ALL_YEARS = sorted(df_all["year"].unique())
 
 # ── Sidebar ─────────────────────────────────────────────────────────────────
 with st.sidebar:
-    lang = st.radio("🌐 Language / Langue", ["EN", "FR"], horizontal=True, index=0, key="lang_choice").lower()
+    lang = st.radio(f"{svg_icon('globe')} Language / Langue", ["EN", "FR"], horizontal=True, index=0, key="lang_choice").lower()
     st.markdown(f"## {t('sidebar_title', lang)}")
     default_years = ALL_YEARS
-    sel_years = st.multiselect(t("years_label", lang), ALL_YEARS, default=default_years)
+    sel_years = st.multiselect(f"{svg_icon('calendar')} {t('years_label', lang)}", ALL_YEARS, default=default_years)
     if not sel_years:
         sel_years = ALL_YEARS
         st.warning(t("no_year_selected", lang))
-    sel_regions = st.multiselect(t("regions", lang), ALL_REGIONS, default=ALL_REGIONS, format_func=lambda x: t(x, lang))
-    sel_income = st.multiselect(t("income_levels", lang), INCOME_ORDER, default=INCOME_ORDER, format_func=lambda x: t(x, lang))
+    sel_regions = st.multiselect(f"{svg_icon('map')} {t('regions', lang)}", ALL_REGIONS, default=ALL_REGIONS, format_func=lambda x: t(x, lang))
+    sel_income = st.multiselect(f"{svg_icon('filter')} {t('income_levels', lang)}", INCOME_ORDER, default=INCOME_ORDER, format_func=lambda x: t(x, lang))
     st.divider()
     st.caption(t("source", lang))
 
@@ -190,17 +299,21 @@ def section_head(num, key, lang):
     st.markdown(f'<div class="section-head"><span class="sh-num">{num}</span><span class="sh-title">{t(key, lang)}</span></div>', unsafe_allow_html=True)
 
 tab_map, tab_trend, tab_country, tab_compare, tab_struct, tab_invest, tab_data = st.tabs([
-    t("tab_map", lang), t("tab_trend", lang), t("tab_country", lang),
-    t("tab_compare", lang), t("tab_struct", lang), t("tab_invest", lang),
-    t("tab_data", lang),
+    f"{svg_icon('map')} {t('tab_map', lang)}", 
+    f"{svg_icon('trending_up')} {t('tab_trend', lang)}", 
+    f"{svg_icon('building')} {t('tab_country', lang)}",
+    f"{svg_icon('compare')} {t('tab_compare', lang)}", 
+    f"{svg_icon('layers')} {t('tab_struct', lang)}", 
+    f"{svg_icon('award')} {t('tab_invest', lang)}",
+    f"{svg_icon('database')} {t('tab_data', lang)}",
 ])
 
 # ── TAB 1: WORLD MAP ────────────────────────────────────────────────────────
 with tab_map:
     c1, c2, c3 = st.columns([2, 1, 1])
-    with c1: map_ind = st.selectbox(t("map_indicator", lang), INDICATOR_KEYS, format_func=lambda x: ind_label(x, lang, with_pillar=True), key="map_ind")
+    with c1: map_ind = st.selectbox(f"{svg_icon('map')} {t('map_indicator', lang)}", INDICATOR_KEYS, format_func=lambda x: ind_label(x, lang, with_pillar=True), key="map_ind")
     with c2: map_type = st.radio(t("map_type", lang), ["choropleth", "bubble"], format_func=lambda x: t(x, lang), horizontal=True)
-    with c3: map_year = st.selectbox(t("ref_year", lang), sorted(sel_years, reverse=True), index=0, key="map_yr")
+    with c3: map_year = st.selectbox(f"{svg_icon('calendar')} {t('ref_year', lang)}", sorted(sel_years, reverse=True), index=0, key="map_yr")
     show_indicator_info(map_ind, lang)
     
     size_choice_key = None
