@@ -8,7 +8,7 @@ font = "sans serif"
 
 [server]
 enableStaticServing = true
-headless = true
+headless = false
 
 [runner]
 fastReruns = true
