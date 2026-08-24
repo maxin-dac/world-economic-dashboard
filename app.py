@@ -223,15 +223,15 @@ ALL_YEARS = sorted(df_all["year"].unique())
 
 # ── Sidebar ─────────────────────────────────────────────────────────────────
 with st.sidebar:
-    lang = st.radio(f"{svg_icon('globe')} Language / Langue", ["EN", "FR"], horizontal=True, index=0, key="lang_choice").lower()
+    lang = st.radio("🌍 Language / Langue", ["EN", "FR"], horizontal=True, index=0, key="lang_choice").lower()
     st.markdown(f"## {t('sidebar_title', lang)}")
     default_years = ALL_YEARS
-    sel_years = st.multiselect(f"{svg_icon('calendar')} {t('years_label', lang)}", ALL_YEARS, default=default_years)
+    sel_years = st.multiselect(f"📅 {t('years_label', lang)}", ALL_YEARS, default=default_years)
     if not sel_years:
         sel_years = ALL_YEARS
         st.warning(t("no_year_selected", lang))
-    sel_regions = st.multiselect(f"{svg_icon('map')} {t('regions', lang)}", ALL_REGIONS, default=ALL_REGIONS, format_func=lambda x: t(x, lang))
-    sel_income = st.multiselect(f"{svg_icon('filter')} {t('income_levels', lang)}", INCOME_ORDER, default=INCOME_ORDER, format_func=lambda x: t(x, lang))
+    sel_regions = st.multiselect(f"🗺️ {t('regions', lang)}", ALL_REGIONS, default=ALL_REGIONS, format_func=lambda x: t(x, lang))
+    sel_income = st.multiselect(f"🔍 {t('income_levels', lang)}", INCOME_ORDER, default=INCOME_ORDER, format_func=lambda x: t(x, lang))
     st.divider()
     st.caption(t("source", lang))
 
@@ -299,21 +299,21 @@ def section_head(num, key, lang):
     st.markdown(f'<div class="section-head"><span class="sh-num">{num}</span><span class="sh-title">{t(key, lang)}</span></div>', unsafe_allow_html=True)
 
 tab_map, tab_trend, tab_country, tab_compare, tab_struct, tab_invest, tab_data = st.tabs([
-    f"{svg_icon('map')} {t('tab_map', lang)}", 
-    f"{svg_icon('trending_up')} {t('tab_trend', lang)}", 
-    f"{svg_icon('building')} {t('tab_country', lang)}",
-    f"{svg_icon('compare')} {t('tab_compare', lang)}", 
-    f"{svg_icon('layers')} {t('tab_struct', lang)}", 
-    f"{svg_icon('award')} {t('tab_invest', lang)}",
-    f"{svg_icon('database')} {t('tab_data', lang)}",
+    f"🗺️ {t('tab_map', lang)}", 
+    f"📈 {t('tab_trend', lang)}", 
+    f"🏛️ {t('tab_country', lang)}",
+    f"📊 {t('tab_compare', lang)}", 
+    f"📑 {t('tab_struct', lang)}", 
+    f"🏆 {t('tab_invest', lang)}",
+    f"🗄️ {t('tab_data', lang)}",
 ])
 
 # ── TAB 1: WORLD MAP ────────────────────────────────────────────────────────
 with tab_map:
     c1, c2, c3 = st.columns([2, 1, 1])
-    with c1: map_ind = st.selectbox(f"{svg_icon('map')} {t('map_indicator', lang)}", INDICATOR_KEYS, format_func=lambda x: ind_label(x, lang, with_pillar=True), key="map_ind")
+    with c1: map_ind = st.selectbox(f"🗺️ {t('map_indicator', lang)}", INDICATOR_KEYS, format_func=lambda x: ind_label(x, lang, with_pillar=True), key="map_ind")
     with c2: map_type = st.radio(t("map_type", lang), ["choropleth", "bubble"], format_func=lambda x: t(x, lang), horizontal=True)
-    with c3: map_year = st.selectbox(f"{svg_icon('calendar')} {t('ref_year', lang)}", sorted(sel_years, reverse=True), index=0, key="map_yr")
+    with c3: map_year = st.selectbox(f"📅 {t('ref_year', lang)}", sorted(sel_years, reverse=True), index=0, key="map_yr")
     show_indicator_info(map_ind, lang)
     
     size_choice_key = None
