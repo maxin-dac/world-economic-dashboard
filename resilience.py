@@ -6,6 +6,8 @@ import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 from translations import t
+from core.theme import style_plotly
+from core.theme import render_table
 
 L = {
     "en": {
@@ -118,7 +120,7 @@ def _make_style(d, score_col):
     return d.style.apply(row_css, axis=1)
 
 
-def render(df_all, lang):
+def render(df_all, lang, theme_mode="dark"):
     st.divider()
     st.markdown(f'<div class="section-head"><span class="sh-num">05</span><span class="sh-title">{_t(lang, "title")}</span></div>', unsafe_allow_html=True)
     st.markdown(f'<div class="indicator-banner">{_t(lang, "tip")}</div>', unsafe_allow_html=True)
@@ -145,7 +147,7 @@ def render(df_all, lang):
                       margin=dict(t=40, b=20, l=10, r=10), legend=dict(orientation="h", y=-.15))
     fig.add_vline(x=df["drop_2020"].median(), line_dash="dash", line_color="#94a3b8")
     fig.add_hline(y=df["rec_2020"].median(), line_dash="dash", line_color="#94a3b8")
-    st.plotly_chart(fig, width="stretch", theme="streamlit")
+    st.plotly_chart(style_plotly(fig, theme_mode), width="stretch", theme="streamlit")
 
     st.markdown(f"**{_t(lang, 'rank')}**")
     cols = ["_cname", "drop_2009", "rec_2009", "drop_2020", "rec_2020", "score"]
@@ -156,10 +158,10 @@ def render(df_all, lang):
     c1, c2 = st.columns(2)
     with c1:
         st.markdown(f"**{_t(lang, 'top')}**")
-        st.dataframe(_make_style(disp.head(10), _t(lang, "score")), hide_index=True)
+        render_table(_make_style(disp.head(10), _t(lang, "score")), theme_mode, hide_index=True)
     with c2:
         st.markdown(f"**{_t(lang, 'bottom')}**")
-        st.dataframe(_make_style(disp.tail(10), _t(lang, "score")), hide_index=True)
+        render_table(_make_style(disp.tail(10), _t(lang, "score")), theme_mode, hide_index=True)
 
     st.markdown(f"**{_t(lang, 'traj')}**")
     sel = st.selectbox(_t(lang, "select"), sorted(df["country"].unique()), key="resil_ctry", format_func=lambda n: t(n, lang))
@@ -171,4 +173,4 @@ def render(df_all, lang):
         if peak in idx:
             fig2.add_vline(x=peak, line_width=1.5, line_color=col)
     fig2.update_layout(height=360, margin=dict(t=30, b=20, l=10, r=10), yaxis_title="Index (first year = 100)")
-    st.plotly_chart(fig2, width="stretch", theme="streamlit")
+    st.plotly_chart(style_plotly(fig2, theme_mode), width="stretch", theme="streamlit")

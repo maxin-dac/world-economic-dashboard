@@ -9,6 +9,8 @@ from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 from translations import t as tr
+from core.theme import style_plotly
+from core.theme import render_table
 
 L = {
     "en": {
@@ -40,7 +42,7 @@ def _t(lang, k):
     return L[lang][k]
 
 
-def render(df_all, lang, default_country=None):
+def render(df_all, lang, default_country=None, theme_mode="dark"):
     st.divider()
     st.markdown(f'<div class="section-head"><span class="sh-num">03</span><span class="sh-title">{_t(lang, "title")}</span></div>', unsafe_allow_html=True)
     st.markdown(f'<div class="indicator-banner">{_t(lang, "tip")}</div>', unsafe_allow_html=True)
@@ -104,7 +106,7 @@ def render(df_all, lang, default_country=None):
                       yaxis_title=f"{_t(lang, 'pca2')} ({pca.explained_variance_ratio_[1]:.0%})",
                       height=460, margin=dict(t=30, b=20, l=10, r=10),
                       legend=dict(orientation="h", y=-.15))
-    st.plotly_chart(fig, width="stretch", theme="streamlit")
+    st.plotly_chart(style_plotly(fig, theme_mode), width="stretch", theme="streamlit")
 
     st.markdown(f"**{_t(lang, 'similar')}**")
     rows = []
@@ -117,4 +119,4 @@ def render(df_all, lang, default_country=None):
             _t(lang, "gdp_cap"): round(float(gdp_val), 0) if pd.notna(gdp_val) else "-",
             _t(lang, "life_exp"): round(float(life_val), 1) if pd.notna(life_val) else "-",
         })
-    st.dataframe(pd.DataFrame(rows), hide_index=True)
+    render_table(pd.DataFrame(rows), theme_mode, hide_index=True)

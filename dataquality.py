@@ -4,6 +4,8 @@ import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 from translations import t as tr
+from core.theme import style_plotly
+from core.theme import render_table
 
 META = {"iso3", "country", "region", "income_group", "capital", "latitude",
         "longitude", "year", "gdp_total_bn", "population_mn"}
@@ -52,7 +54,7 @@ def _robust_z(s):
     return (s - med) / (1.4826 * mad)
 
 
-def render(df_all, lang):
+def render(df_all, lang, theme_mode="dark"):
     t = lambda k: L[lang][k]
     st.divider()
     st.markdown(f'<div class="section-head"><span class="sh-num">02</span><span class="sh-title">{t("title")}</span></div>', unsafe_allow_html=True)
@@ -84,13 +86,13 @@ def render(df_all, lang):
     fig.update_layout(xaxis_range=[0, 100], xaxis_title=t("coverage"), yaxis=dict(autorange="reversed"),
                       height=max(500, len(cov) * 16), margin=dict(t=20, b=20, l=10, r=10))
     fig.update_yaxes(tickfont=dict(size=9))
-    st.plotly_chart(fig, width="stretch", theme="streamlit")
+    st.plotly_chart(style_plotly(fig, theme_mode), width="stretch", theme="streamlit")
 
     st.markdown(f"**{t('null_title')}**")
     yearly = df_all[inds].isna().groupby(df_all["year"]).mean().mean(axis=1) * 100
     fig2 = go.Figure(go.Scatter(x=yearly.index, y=yearly.values, mode="lines+markers", line=dict(color="#0067C0", width=2.2)))
     fig2.update_layout(yaxis_title="%", height=320, margin=dict(t=30, b=20, l=10, r=10))
-    st.plotly_chart(fig2, width="stretch", theme="streamlit")
+    st.plotly_chart(style_plotly(fig2, theme_mode), width="stretch", theme="streamlit")
 
     st.markdown(f"**{t('fresh_title')}**")
     old = fresh[fresh < latest].sort_values()
@@ -99,7 +101,7 @@ def render(df_all, lang):
     else:
         fd = old.reset_index()
         fd.columns = [t("indicator"), t("latest")]
-        st.dataframe(fd, hide_index=True)
+        render_table(fd, theme_mode, hide_index=True)
 
     st.markdown(f"**{t('anom_title')}**")
     if anom.empty:
@@ -108,4 +110,4 @@ def render(df_all, lang):
         ad = anom.sort_values("z", key=abs, ascending=False).head(30)
         ad = ad.rename(columns={"country": t("country"), "indicator": t("indicator"),
                                 "value": t("value"), "z": t("z")})
-        st.dataframe(ad, hide_index=True)
+        render_table(ad, theme_mode, hide_index=True)

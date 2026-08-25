@@ -88,10 +88,13 @@ label, a, small,
 }
 
 .stApp {
-  background: linear-gradient(135deg, 
-    var(--bg-primary) 0%, 
-    var(--bg-secondary) 50%, 
-    #1a1f35 100%);
+  background-color: var(--bg-primary);
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(59, 130, 246, 0.08), transparent 30%),
+    radial-gradient(circle at 88% 82%, rgba(245, 158, 11, 0.06), transparent 28%),
+    linear-gradient(115deg, transparent 0%, var(--bg-secondary) 48%, transparent 100%),
+    repeating-linear-gradient(0deg, transparent 0, transparent 39px, rgba(148, 163, 184, 0.045) 40px),
+    repeating-linear-gradient(90deg, transparent 0, transparent 39px, rgba(148, 163, 184, 0.045) 40px);
   background-attachment: fixed;
   min-height: 100vh;
 }
@@ -104,9 +107,8 @@ label, a, small,
   right: 0;
   bottom: 0;
   background: 
-    radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 40% 40%, rgba(245, 158, 11, 0.05) 0%, transparent 40%);
+    radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.045) 0%, transparent 45%),
+    radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.04) 0%, transparent 45%);
   pointer-events: none;
   z-index: 0;
 }
@@ -361,7 +363,9 @@ h4 {
 [data-testid="stPlotlyChart"] {
   background: transparent !important;
   border-radius: var(--radius-lg) !important;
+  border: 1px solid var(--border-color) !important;
   padding: 0 !important;
+  box-shadow: var(--shadow-sm) !important;
 }
 
 .js-plotly-plot .modebar {
@@ -378,17 +382,21 @@ h4 {
 
 [data-testid="stTable"] {
   max-height: 560px;
-  overflow: auto;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: auto;
   background: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
 }
 
 [data-testid="stTable"] table {
-  width: 100%;
+  width: max-content;
+  min-width: 100%;
   border-collapse: collapse;
-  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif !important;
-  font-size: 13px !important;
+  font-family: "Segoe UI", sans-serif !important;
+  font-size: 12px !important;
+  line-height: 1.25 !important;
 }
 
 [data-testid="stTable"] th {
@@ -396,8 +404,8 @@ h4 {
   font-size: 11px !important;
   text-transform: uppercase !important;
   letter-spacing: 0.05em;
-  height: 42px !important;
-  padding: 0 12px !important;
+  height: 38px !important;
+  padding: 8px 10px !important;
   white-space: nowrap !important;
   background: var(--bg-tertiary) !important;
   color: var(--text-muted) !important;
@@ -405,18 +413,44 @@ h4 {
 }
 
 [data-testid="stTable"] td {
-  font-size: 13px !important;
-  height: 40px !important;
-  padding: 0 12px !important;
+  font-size: 12px !important;
+  height: 36px !important;
+  padding: 7px 10px !important;
   white-space: nowrap !important;
   overflow: hidden !important;
   text-overflow: ellipsis !important;
-  color: var(--text-secondary) !important;
-  border-bottom: 1px solid var(--border-color) !important;
+  color: var(--text-secondary);
+  background-color: var(--bg-card);
+  border-bottom: 1px solid var(--border-color);
 }
 
 [data-testid="stTable"] tr:hover td {
-  background: var(--bg-tertiary) !important;
+  background: var(--bg-tertiary);
+}
+
+/* Dataframe surfaces follow the selected application palette. */
+[data-testid="stDataFrame"] {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--radius-lg) !important;
+  overflow: hidden !important;
+}
+[data-testid="stDataFrame"] [data-testid="stDataFrameResizable"] {
+  background: var(--bg-card) !important;
+}
+[data-testid="stDataFrame"] [role="columnheader"],
+[data-testid="stDataFrame"] [role="gridcell"] {
+  color: var(--text-secondary) !important;
+  background-color: var(--bg-card) !important;
+  border-color: var(--border-color) !important;
+}
+[data-testid="stDataFrame"] [role="columnheader"] {
+  color: var(--text-primary) !important;
+  background-color: var(--bg-tertiary) !important;
+  font-weight: 700 !important;
+}
+[data-testid="stDataFrame"] [role="gridcell"]:hover {
+  background-color: var(--bg-tertiary) !important;
 }
 
 .stSelectbox [data-baseweb] > div,
@@ -435,6 +469,56 @@ h4 {
 .stMultiSelect [data-baseweb] > div:hover,
 .stTextInput [data-baseweb]:hover {
   border-color: var(--border-light) !important;
+}
+
+/* Selectors and segmented controls must use the active app theme. */
+body [data-baseweb="select"],
+body [data-baseweb="select"] > div,
+body [data-baseweb="input"],
+body [data-baseweb="base-input"],
+body [data-baseweb="popover"],
+body [data-baseweb="menu"],
+body [data-baseweb="menu"] > div,
+body [role="listbox"],
+body [role="option"] {
+  background-color: var(--bg-tertiary) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-color) !important;
+}
+body [data-baseweb="select"] input,
+body [data-baseweb="select"] [data-testid="stMarkdownContainer"],
+body [data-baseweb="input"] input,
+body [role="option"] * {
+  color: var(--text-primary) !important;
+}
+body [data-baseweb="select"] input::placeholder,
+body [data-baseweb="input"] input::placeholder {
+  color: var(--text-muted) !important;
+}
+body [data-baseweb="popover"] [aria-selected="true"],
+body [data-baseweb="menu"] [aria-selected="true"],
+body [role="option"][aria-selected="true"] {
+  background-color: var(--bg-card) !important;
+}
+
+body [data-baseweb="menu"] [role="option"]:hover,
+body [role="option"]:hover {
+  background-color: var(--bg-card) !important;
+}
+
+body [data-testid="stRadio"] label,
+body [data-testid="stRadio"] label p,
+body [data-testid="stWidgetLabel"] label,
+body [data-testid="stWidgetLabel"] p {
+  color: var(--text-primary) !important;
+}
+
+.sidebar-credit,
+.sidebar-credit b {
+  color: var(--text-secondary) !important;
+}
+.sidebar-credit b {
+  color: var(--text-primary) !important;
 }
 
 [data-testid="stHorizontalLine"] {
