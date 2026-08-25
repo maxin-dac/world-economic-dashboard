@@ -4,11 +4,10 @@ primaryColor = "#3B82F6"
 backgroundColor = "#0F172A"
 secondaryBackgroundColor = "#1E293B"
 textColor = "#F8FAFC"
-font = "Segoe UI, sans-serif"
 
 [server]
-enableStaticServing = false
 headless = true
+enableStaticServing = false
 
 [runner]
 fastReruns = true
