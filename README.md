@@ -5,6 +5,7 @@ Interactive bilingual platform (EN/FR) - 217 countries · 2000-2024 · 58 World 
 <p align="left">
 <img src="https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white" alt="Python" />
 <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=flat&logo=streamlit&logoColor=white" alt="Streamlit" />
+<img src="https://img.shields.io/badge/Render-46E3B7?style=flat&logo=render&logoColor=white" alt="Render" />
 <img src="https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white" alt="Docker" />
 <img src="https://img.shields.io/badge/Plotly-3F4F75?style=flat&logo=plotly&logoColor=white" alt="Plotly" />
 <img src="https://img.shields.io/badge/Pandas-150458?style=flat&logo=pandas&logoColor=white" alt="Pandas" />
@@ -23,6 +24,12 @@ Interactive bilingual platform (EN/FR) - 217 countries · 2000-2024 · 58 World 
 <a href="https://world-bi-dashboard.streamlit.app/">
 <img src="https://img.shields.io/badge/Live_Demo-Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Live Demo" />
 </a>
+</p>
+
+<p align="left">
+  <a href="https://world-economic-dashboard.onrender.com/">
+    <img src="https://img.shields.io/badge/Live Demo-Render-FF4B4B?style=for-the-badge&logo=render&logoColor=white" alt="Live Demo">
+  </a>
 </p>
 
 ![Overview](docs/screenshots/overview.jpeg)
@@ -130,7 +137,8 @@ world-economic-dashboard/
 
 ### Option 1: Live Demo
 
-**Click [here](https://world-bi-dashboard.streamlit.app/) to use the dashboard, hosted on Streamlit Cloud**.
+- Click **[here](https://world-bi-dashboard.streamlit.app/)** to use the dashboard, hosted on **Streamlit Cloud**.
+- For redundancy needs, the app is also hosted on **Render**. Click **[here](https://world-economic-dashboard.onrender.com/)**.
 
 ### Option 2: Local Setup
 
