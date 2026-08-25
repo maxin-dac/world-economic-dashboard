@@ -862,3 +862,31 @@ body [data-testid="stSidebar"] [data-testid="stWidgetLabel"] p:hover {
 }
 .social-btn:hover { box-shadow: var(--shadow-glow); transform: translateY(-1px); }
 .social-btn span { margin-right: 0 !important; }
+
+/* ── Sidebar: barre de défilement restaurée ────────────────────────── */
+[data-testid="stSidebar"],
+[data-testid="stSidebarContent"],
+[data-testid="stSidebar"] > div {
+  overflow-y: auto !important;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-light) transparent;
+}
+[data-testid="stSidebar"]::-webkit-scrollbar,
+[data-testid="stSidebarContent"]::-webkit-scrollbar,
+[data-testid="stSidebar"] > div::-webkit-scrollbar {
+  width: 8px;
+  display: block;
+}
+[data-testid="stSidebar"]::-webkit-scrollbar-track,
+[data-testid="stSidebarContent"]::-webkit-scrollbar-track {
+  background: transparent;
+}
+[data-testid="stSidebar"]::-webkit-scrollbar-thumb,
+[data-testid="stSidebarContent"]::-webkit-scrollbar-thumb {
+  background: var(--border-light);
+  border-radius: 4px;
+}
+[data-testid="stSidebar"]::-webkit-scrollbar-thumb:hover,
+[data-testid="stSidebarContent"]::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-blue);
+}
