@@ -1,3 +1,4 @@
+import os
 """Data loading with parquet cache."""
 from pathlib import Path
 import pandas as pd
