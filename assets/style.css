@@ -986,3 +986,25 @@ section[data-testid="stSidebar"] { overflow-y: auto !important; }
 
 /* sidebar-scroll-immunise */
 section[data-testid="stSidebar"], [data-testid="stSidebarContent"] { overflow-y: auto !important; }
+
+/* Tabs : double generation de DOM Streamlit */
+[data-baseweb="tab-list"],
+[data-testid="stTabs"] [role="tablist"] { gap: 12px !important; border-bottom: none !important; padding: 14px 0 !important; }
+[data-baseweb="tab"],
+[data-testid="stTabs"] [role="tab"] { background: var(--bg-secondary) !important; border: 1px solid var(--border-color) !important; border-radius: 14px !important; padding: 10px 18px !important; }
+[data-baseweb="tab"] p, [data-baseweb="tab"] span,
+[data-testid="stTabs"] [role="tab"] p, [data-testid="stTabs"] [role="tab"] span { color: var(--text-secondary) !important; font-weight: 700 !important; text-transform: uppercase; font-size: 0.8rem !important; }
+[data-baseweb="tab"][aria-selected="true"],
+[data-testid="stTabs"] [role="tab"][aria-selected="true"] { background: linear-gradient(135deg, var(--primary-blue), var(--primary-violet)) !important; border-color: transparent !important; box-shadow: var(--shadow-glow) !important; }
+[data-baseweb="tab"][aria-selected="true"] p, [data-baseweb="tab"][aria-selected="true"] span,
+[data-testid="stTabs"] [role="tab"][aria-selected="true"] p, [data-testid="stTabs"] [role="tab"][aria-selected="true"] span { color: #ffffff !important; }
+
+/* Champs : selecteurs immunises + fallback structurel */
+.stSelectbox [data-baseweb] > div, .stSelectbox > div > div,
+.stMultiSelect [data-baseweb] > div, .stMultiSelect > div > div,
+.stTextInput [data-baseweb], .stTextInput > div,
+.stNumberInput [data-baseweb], .stNumberInput > div {
+  background: #24344D !important;
+  border: 1px solid rgba(248, 250, 252, 0.32) !important;
+  border-radius: 10px !important;
+}
