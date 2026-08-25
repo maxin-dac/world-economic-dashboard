@@ -1008,3 +1008,16 @@ section[data-testid="stSidebar"], [data-testid="stSidebarContent"] { overflow-y:
   border: 1px solid rgba(248, 250, 252, 0.32) !important;
   border-radius: 10px !important;
 }
+
+/* fix: barre bleue sous l'onglet actif (residu d'underline) */
+body [data-baseweb="tab"][aria-selected="true"],
+body [data-testid="stTabs"] [role="tab"][aria-selected="true"],
+[data-baseweb="tab"][aria-selected="true"],
+[data-testid="stTabs"] [role="tab"][aria-selected="true"] {
+  border-bottom: 0 !important;
+  border-bottom-color: transparent !important;
+}
+[data-baseweb="tab-list"],
+[data-testid="stTabs"] [role="tablist"] {
+  border-bottom: 0 !important;
+}
