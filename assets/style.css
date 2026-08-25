@@ -965,3 +965,24 @@ section[data-testid="stSidebar"] { overflow-y: auto !important; }
 .stMultiSelect [data-baseweb] p {
   color: #F8FAFC !important;
 }
+
+/* champs-contrast-immunise */
+.stSelectbox [data-baseweb] > div,
+.stMultiSelect [data-baseweb] > div,
+.stTextInput [data-baseweb],
+.stNumberInput [data-baseweb],
+.stDateInput [data-baseweb],
+.stTimeInput [data-baseweb] {
+  background: #1E293B !important;
+  border: 1px solid rgba(248, 250, 252, 0.30) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+}
+.stSelectbox [data-baseweb] > div:hover,
+.stMultiSelect [data-baseweb] > div:hover { border-color: rgba(248, 250, 252, 0.45) !important; }
+.stSelectbox [data-baseweb] p,
+.stMultiSelect [data-baseweb] p,
+.stTextInput [data-baseweb] input { color: #F8FAFC !important; }
+
+/* sidebar-scroll-immunise */
+section[data-testid="stSidebar"], [data-testid="stSidebarContent"] { overflow-y: auto !important; }
