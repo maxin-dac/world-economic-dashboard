@@ -8,7 +8,7 @@ font = "Segoe UI, sans-serif"
 
 [server]
 enableStaticServing = false
-headless = false
+headless = true
 
 [runner]
 fastReruns = true
