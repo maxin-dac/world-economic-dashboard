@@ -4,7 +4,7 @@ INCOME_COLORS = {"High income": "#1a9850", "Upper middle income": "#fee08b", "Lo
 REGION_COLORS = {"East Asia & Pacific": "#1D9E75", "Europe & Central Asia": "#3778C2", "Latin America & Caribbean": "#E67E22", "Middle East & North Africa": "#9B59B6", "North America": "#17A589", "South Asia": "#F39C12", "Sub-Saharan Africa": "#E24B4A"}
 SECTOR_COLORS = {"Agriculture": "#1D9E75", "Industry": "#3778C2", "Services": "#E67E22"}
 SECTOR_LABEL_KEYS = {"agriculture_pct": "Agriculture", "industry_pct": "Industry", "services_pct": "Services"}
-GEO_STYLE = dict(showframe=False, showcoastlines=True, coastlinecolor="#b0bec5", showland=True, landcolor="#f0f0f0", showocean=True, oceancolor="#e0f2fe", showlakes=True, lakecolor="#e0f2fe", showcountries=True, countrycolor="#b0bec5", countrywidth=0.6)
+GEO_STYLE = dict(showframe=False, showcoastlines=True, coastlinecolor="#64748b", coastlinewidth=0.6, showland=True, landcolor="rgba(0,0,0,0)", showocean=True, oceancolor="rgba(0,0,0,0)", showlakes=True, lakecolor="rgba(0,0,0,0)", showcountries=True, countrycolor="#64748b", countrywidth=0.45)
 
 PESTEL_PILLAR_ORDER = ["political", "economic", "social", "technological", "environmental", "legal"]
 PESTEL_LABEL_KEYS = {"political": "pestel_political", "economic": "pestel_economic", "social": "pestel_social", "technological": "pestel_technological", "environmental": "pestel_environmental", "legal": "pestel_legal"}

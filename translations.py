@@ -34,15 +34,15 @@ TRANSLATIONS = {
         "in_selection": "In current selection",
 
         # ── Tabs ────────────────────────────────────────────────────────────
-        "tab_map": "🗺️ World Map",
-        "tab_trend": "📈 Trends",
-        "tab_country": "🔎 Country Profile",
-        "tab_compare": "↔️ Compare Countries",
-        "tab_struct": "🏗️ Economic Structure",
-        "tab_data": "📋 Data",
-        "tab_invest": "🎯 Investment Intelligence",
-        "tab_dq": "📡 Data Quality",
-        "tab_sim": "🧭 Similar Countries",
+        "tab_map": "World Map",
+        "tab_trend": "Trends",
+        "tab_country": "Country Profile",
+        "tab_compare": "Compare Countries",
+        "tab_struct": "Economic Structure",
+        "tab_data": "Data",
+        "tab_invest": "Investment Intelligence",
+        "tab_dq": "Data Quality",
+        "tab_sim": "Similar Countries",
 
         # ── Tab 1: Map ──────────────────────────────────────────────────────
         "map_indicator": "Indicator to map",
@@ -310,15 +310,15 @@ TRANSLATIONS = {
         "in_selection": "Dans la sélection actuelle",
 
         # ── Tabs ────────────────────────────────────────────────────────────
-        "tab_map": "🗺️ Carte mondiale",
-        "tab_trend": "📈 Tendances",
-        "tab_country": "🔎 Profil pays",
-        "tab_compare": "↔️ Comparaison",
-        "tab_struct": "🏗️ Structure économique",
-        "tab_data": "📋 Données",
-        "tab_invest": "🎯 Intelligence Investissement",
-        "tab_dq": "📡 Qualite des donnees",
-        "tab_sim": "🧭 Pays similaires",
+        "tab_map": "Carte mondiale",
+        "tab_trend": "Tendances",
+        "tab_country": "Profil pays",
+        "tab_compare": "Comparaison",
+        "tab_struct": "Structure économique",
+        "tab_data": "Données",
+        "tab_invest": "Intelligence Investissement",
+        "tab_dq": "Qualite des donnees",
+        "tab_sim": "Pays similaires",
 
         # ── Tab 1: Map ──────────────────────────────────────────────────────
         "map_indicator": "Indicateur à cartographier",

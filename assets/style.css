@@ -1,3 +1,36 @@
+/* Keep navigation styling stable against duplicate legacy rules below. */
+body [data-baseweb="tab-list"] { background: transparent !important; border: 0 !important; border-bottom: 1px solid var(--border-color) !important; border-radius: 0 !important; gap: 18px !important; padding: 10px 0 0 !important; }
+body [data-baseweb="tab"] { background: var(--bg-tertiary) !important; border: 1px solid var(--border-color) !important; border-radius: 8px !important; padding: 10px 16px !important; }
+body [data-baseweb="tab"] p,
+body [data-baseweb="tab"] span { color: var(--text-primary) !important; font-weight: 800 !important; font-size: 0.82rem !important; letter-spacing: 0.05em !important; text-transform: uppercase !important; }
+body [data-baseweb="tab"]:hover { background: var(--bg-card) !important; border-color: var(--primary-blue) !important; }
+body [data-baseweb="tab"][aria-selected="true"] { background: linear-gradient(135deg, var(--primary-blue), var(--primary-violet)) !important; border-color: transparent !important; box-shadow: var(--shadow-glow) !important; }
+body [data-baseweb="tab"][aria-selected="true"] p,
+body [data-baseweb="tab"][aria-selected="true"] span { color: #ffffff !important; font-weight: 800 !important; }
+
+/* Streamlit versions that render tabs with role=tab instead of BaseWeb. */
+body [data-testid="stTabs"] [role="tab"] {
+  background: var(--bg-tertiary) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 8px !important;
+  color: var(--text-primary) !important;
+  font-weight: 800 !important;
+  padding: 10px 16px !important;
+}
+body [data-testid="stTabs"] [role="tab"] p,
+body [data-testid="stTabs"] [role="tab"] span {
+  color: inherit !important;
+  font-weight: 800 !important;
+}
+body [data-testid="stTabs"] [role="tab"]:hover,
+body [data-testid="stTabs"] [role="tab"][aria-selected="true"] {
+  border-color: var(--primary-blue) !important;
+}
+body [data-testid="stTabs"] [role="tab"][aria-selected="true"] {
+  background: linear-gradient(135deg, var(--primary-blue), var(--primary-violet)) !important;
+  color: #ffffff !important;
+  box-shadow: var(--shadow-glow) !important;
+}
 :root {
   
   --primary-blue: #3B82F6;
@@ -78,9 +111,16 @@ label, a, small,
   z-index: 0;
 }
 
-#MainMenu, footer, header, .stAppDeployButton {
+#MainMenu, footer, .stAppDeployButton {
   visibility: hidden !important;
   display: none !important;
+}
+
+/* Keep the navigation rail available throughout the session. */
+[data-testid="stSidebarCollapseButton"],
+[data-testid="collapsedControl"] {
+  display: none !important;
+  visibility: hidden !important;
 }
 
 [data-testid="stSidebar"] {
@@ -479,6 +519,42 @@ h4 {
 }
 [data-baseweb="tab"][aria-selected="true"] p { color: #ffffff !important; }
 
+/* Final tab treatment: match the sidebar title hierarchy. */
+[data-baseweb="tab-list"] {
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  border-radius: 0 !important;
+  gap: 18px !important;
+  padding: 10px 0 0 !important;
+}
+[data-baseweb="tab"] {
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 3px solid transparent !important;
+  border-radius: 0 !important;
+  padding: 12px 4px 14px !important;
+}
+[data-baseweb="tab"] p {
+  color: var(--text-primary) !important;
+  font-weight: 700 !important;
+  font-size: 0.82rem !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+}
+[data-baseweb="tab"]:hover {
+  background: transparent !important;
+  border-bottom-color: var(--primary-blue) !important;
+}
+[data-baseweb="tab"][aria-selected="true"] {
+  background: transparent !important;
+  border-bottom-color: var(--primary-blue) !important;
+  box-shadow: none !important;
+}
+[data-baseweb="tab"][aria-selected="true"] p {
+  color: var(--primary-blue) !important;
+}
+
 [data-testid="stSidebar"] [data-testid="stWidgetLabel"] label,
 [data-testid="stSidebar"] [data-testid="stWidgetLabel"] p {
   display: inline-block !important;
@@ -525,6 +601,111 @@ h4 {
 }
 .social-btn:hover { box-shadow: var(--shadow-glow); transform: translateY(-1px); }
 .social-btn span { margin-right: 0 !important; }
+
+/* Sidebar filter labels: compact framed sections. */
+body [data-testid="stSidebar"] [data-testid="stWidgetLabel"] label,
+body [data-testid="stSidebar"] [data-testid="stWidgetLabel"] p {
+  display: block !important;
+  width: 100% !important;
+  background: var(--bg-tertiary) !important;
+  border: 1px solid var(--border-color) !important;
+  border-left: 3px solid var(--primary-blue) !important;
+  border-radius: 7px !important;
+  color: var(--text-primary) !important;
+  padding: 7px 10px !important;
+  margin: 0 0 8px !important;
+  font-size: 0.7rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+body [data-testid="stSidebar"] [data-testid="stWidgetLabel"] label:hover,
+body [data-testid="stSidebar"] [data-testid="stWidgetLabel"] p:hover {
+  border-color: var(--primary-blue) !important;
+  box-shadow: var(--shadow-glow) !important;
+}
+
+/* Keep this override after the legacy repeated blocks. */
+[data-baseweb="tab-list"] { background: transparent !important; border: 0 !important; border-bottom: 1px solid var(--border-color) !important; border-radius: 0 !important; gap: 18px !important; padding: 10px 0 0 !important; }
+[data-baseweb="tab"] { background: transparent !important; border: 0 !important; border-bottom: 3px solid transparent !important; border-radius: 0 !important; padding: 12px 4px 14px !important; }
+[data-baseweb="tab"] p { color: var(--text-primary) !important; font-weight: 700 !important; font-size: 0.82rem !important; letter-spacing: 0.05em !important; text-transform: uppercase !important; }
+[data-baseweb="tab"]:hover { background: transparent !important; border-bottom-color: var(--primary-blue) !important; }
+[data-baseweb="tab"][aria-selected="true"] { background: transparent !important; border-bottom-color: var(--primary-blue) !important; box-shadow: none !important; }
+[data-baseweb="tab"][aria-selected="true"] p { color: var(--primary-blue) !important; }
+
+/* Definitive navigation styles must remain last to override legacy blocks. */
+[data-baseweb="tab-list"] {
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  border-radius: 0 !important;
+  gap: 18px !important;
+  padding: 10px 0 0 !important;
+}
+[data-baseweb="tab"] {
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 3px solid transparent !important;
+  border-radius: 0 !important;
+  padding: 12px 4px 14px !important;
+}
+[data-baseweb="tab"] p {
+  color: var(--text-primary) !important;
+  font-weight: 700 !important;
+  font-size: 0.82rem !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+}
+[data-baseweb="tab"]:hover {
+  background: transparent !important;
+  border-bottom-color: var(--primary-blue) !important;
+}
+[data-baseweb="tab"][aria-selected="true"] {
+  background: transparent !important;
+  border-bottom-color: var(--primary-blue) !important;
+  box-shadow: none !important;
+}
+[data-baseweb="tab"][aria-selected="true"] p {
+  color: var(--primary-blue) !important;
+}
+
+/* Final navigation treatment. */
+[data-baseweb="tab-list"] {
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  border-radius: 0 !important;
+  gap: 18px !important;
+  padding: 10px 0 0 !important;
+}
+[data-baseweb="tab"] {
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 3px solid transparent !important;
+  border-radius: 0 !important;
+  padding: 12px 4px 14px !important;
+}
+[data-baseweb="tab"] p {
+  color: var(--text-primary) !important;
+  font-weight: 700 !important;
+  font-size: 0.82rem !important;
+  letter-spacing: 0.05em !important;
+  text-transform: uppercase !important;
+}
+[data-baseweb="tab"]:hover {
+  background: transparent !important;
+  border-bottom-color: var(--primary-blue) !important;
+}
+[data-baseweb="tab"][aria-selected="true"] {
+  background: transparent !important;
+  border-bottom-color: var(--primary-blue) !important;
+  box-shadow: none !important;
+}
+[data-baseweb="tab"][aria-selected="true"] p {
+  color: var(--primary-blue) !important;
+}
 
 [data-baseweb="tab-list"] {
   gap: 12px !important;
