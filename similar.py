@@ -37,10 +37,8 @@ FEATURES = ["gdp_per_capita", "gdp_growth_pct", "inflation", "debt_pct_gdp",
             "life_expectancy", "hdi", "internet_users_pct", "electricity_access_pct",
             "urban_population_pct", "unemployment_pct"]
 
-
 def _t(lang, k):
     return L[lang][k]
-
 
 def render(df_all, lang, default_country=None, theme_mode="dark"):
     st.divider()
@@ -59,7 +57,6 @@ def render(df_all, lang, default_country=None, theme_mode="dark"):
 
     dfy = df_all[df_all["year"] == year].set_index("country")
 
-    # Guard: if target has no data for latest_year, fall back to most recent available year
     if target not in dfy.index:
         available_years = sorted(df_all[df_all["country"] == target]["year"].unique(), reverse=True)
         fallback = next((y for y in available_years if y in df_all["year"].values), None)

@@ -23,8 +23,6 @@ import requests
 import pandas as pd
 import numpy as np
 
-
-# ── Logging configuration ───────────────────────────────────────────────────
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s  %(levelname)-7s  %(message)s",
@@ -32,29 +30,24 @@ logging.basicConfig(
 )
 log = logging.getLogger(__name__)
 
-
-# ── Constants ───────────────────────────────────────────────────────────────
 BASE_URL = "https://api.worldbank.org/v2"
 START_YEAR = 2000
 END_YEAR = 2024
 
-MAX_RETRIES = 3          # attempts per World Bank indicator
-REQUEST_DELAY = 0.6      # seconds between requests (avoids rate-limiting)
+MAX_RETRIES = 3
+REQUEST_DELAY = 0.6
 MAX_FAILED_INDICATORS = 5
 
 OWID_TIMEOUT = 120
 OWID_HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; EconomicDashboard/1.0)"}
 
-
-# ── World Bank indicators (56) ──────────────────────────────────────────────
 INDICATORS = {
-    # P - Political
+
     "MS.MIL.XPND.GD.ZS":    "military_expenditure_pct_gdp",
     "MS.MIL.XPND.ZS":       "military_expenditure_pct_govt",
     "GOV_WGI_GE.EST":       "govt_effectiveness_index",
     "GOV_WGI_PV.EST":       "political_stability_index",
 
-    # E - Economic
     "NY.GDP.PCAP.CD":       "gdp_per_capita",
     "NY.GDP.PCAP.PP.CD":    "gdp_per_capita_ppp",
     "NY.GDP.MKTP.CD":       "gdp_total_usd",
@@ -76,7 +69,6 @@ INDICATORS = {
     "NV.IND.TOTL.ZS":       "industry_pct",
     "NV.SRV.TOTL.ZS":       "services_pct",
 
-    # S - Social
     "SP.POP.TOTL":          "population",
     "SL.UEM.TOTL.ZS":       "unemployment_pct",
     "SL.UEM.1524.ZS":       "youth_unemployment_pct",
@@ -93,7 +85,6 @@ INDICATORS = {
     "SH.XPD.CHEX.PC.CD":    "health_expenditure_per_capita",
     "SE.XPD.TOTL.GD.ZS":    "education_expenditure_pct_gdp",
 
-    # T - Technological
     "GB.XPD.RSDV.GD.ZS":    "rd_expenditure_pct_gdp",
     "SP.POP.SCIE.RD.P6":    "researchers_per_million",
     "TX.VAL.TECH.MF.ZS":    "high_tech_exports_pct",
@@ -102,13 +93,11 @@ INDICATORS = {
     "IT.NET.BBND.P2":       "fixed_broadband_per_100",
     "FX.OWN.TOTL.ZS":       "bank_account_ownership_pct",
 
-    # E - Environmental
     "EN.ATM.PM25.MC.M3":    "pm25_air_pollution",
     "EG.ELC.ACCS.ZS":       "electricity_access_pct",
     "EG.ELC.LOSS.ZS":       "electric_power_losses_pct",
     "AG.YLD.CREL.KG":       "cereal_yield_kg_per_ha",
 
-    # L - Legal & Governance (WGI indicators require the GOV_WGI_ prefix)
     "GOV_WGI_CC.EST":       "control_of_corruption",
     "GOV_WGI_RL.EST":       "rule_of_law_index",
     "GOV_WGI_RQ.EST":       "regulatory_quality",
@@ -117,8 +106,6 @@ INDICATORS = {
     "SG.GEN.PARL.ZS":       "women_parliament_pct",
 }
 
-
-# ── OWID supplementary indicators (2) ───────────────────────────────────────
 OWID_SOURCES = [
     {
         "column": "hdi",
@@ -132,8 +119,6 @@ OWID_SOURCES = [
     },
 ]
 
-
-# ── World Bank: country metadata ────────────────────────────────────────────
 def fetch_country_metadata() -> pd.DataFrame:
     """Fetch metadata for all real countries (filtering out regional aggregates)."""
     url = f"{BASE_URL}/country?format=json&per_page=300"
@@ -161,8 +146,6 @@ def fetch_country_metadata() -> pd.DataFrame:
         log.error(f"Error fetching country metadata: {e}")
         return pd.DataFrame()
 
-
-# ── World Bank: single indicator with retry + backoff ───────────────────────
 def fetch_indicator(indicator_code: str, col_name: str,
                     start_year: int = START_YEAR, end_year: int = END_YEAR):
     """Fetch a time series with automatic retry and exponential backoff."""
@@ -204,8 +187,6 @@ def fetch_indicator(indicator_code: str, col_name: str,
 
     return None
 
-
-# ── OWID: fetch + normalize ─────────────────────────────────────────────────
 def fetch_owid_first_available(urls):
     """Try each URL in order and return the first successful CSV as a DataFrame."""
     for url in urls:
@@ -218,7 +199,6 @@ def fetch_owid_first_available(urls):
         except Exception as e:
             log.warning(f"  ✗ Failed: {url} ({e})")
     return None
-
 
 def normalize_owid(df):
     """Normalize an OWID grapher CSV to (iso3, year, value)."""
@@ -251,15 +231,12 @@ def normalize_owid(df):
     out["value"] = pd.to_numeric(out["value"], errors="coerce")
     out = out.dropna(subset=["year", "value", "iso3"])
     out["year"] = out["year"].astype(int)
-    out = out[out["iso3"].str.match(r"^[A-Z]{3}$")]  # drop aggregates
+    out = out[out["iso3"].str.match(r"^[A-Z]{3}$")]
     return out[["iso3", "year", "value"]]
 
-
-# ── Build the unified dataset ───────────────────────────────────────────────
 def build_dataset(countries: pd.DataFrame) -> pd.DataFrame:
     """Fetch all indicators (World Bank + OWID) and merge into one wide DataFrame."""
 
-    # 1. World Bank indicators
     log.info(f"\nFetching {len(INDICATORS)} World Bank indicators...")
     frames = {}
     failed = []
@@ -279,7 +256,6 @@ def build_dataset(countries: pd.DataFrame) -> pd.DataFrame:
     for df_ in df_list[1:]:
         master = master.merge(df_, on=["iso3", "year"], how="outer")
 
-    # 2. OWID supplementary indicators
     log.info(f"\nFetching {len(OWID_SOURCES)} OWID supplementary indicators...")
     for source in OWID_SOURCES:
         col = source["column"]
@@ -295,11 +271,9 @@ def build_dataset(countries: pd.DataFrame) -> pd.DataFrame:
         master = master.merge(norm.rename(columns={"value": col}), on=["iso3", "year"], how="left")
         log.info(f"  ✓ Merged '{col}': {master[col].notna().sum():,} values available.")
 
-    # 3. Merge country metadata
     master = master.merge(countries, on="iso3", how="left")
     master = master[master["country"].notna() & (master["country"] != "")]
 
-    # 4. Unit conversions for readability
     if "gdp_total_usd" in master.columns:
         master["gdp_total_bn"] = (master["gdp_total_usd"] / 1e9).round(3)
         master = master.drop(columns=["gdp_total_usd"])
@@ -307,7 +281,6 @@ def build_dataset(countries: pd.DataFrame) -> pd.DataFrame:
         master["population_mn"] = (master["population"] / 1e6).round(3)
         master = master.drop(columns=["population"])
 
-    # 5. Normalize sector breakdown to exactly 100%
     sects = ["agriculture_pct", "industry_pct", "services_pct"]
     if all(s in master.columns for s in sects):
         row_sum = master[sects].sum(axis=1, skipna=False)
@@ -324,8 +297,6 @@ def build_dataset(countries: pd.DataFrame) -> pd.DataFrame:
 
     return master.sort_values(["country", "year"]).reset_index(drop=True)
 
-
-# ── Main ────────────────────────────────────────────────────────────────────
 def main():
     total = len(INDICATORS) + len(OWID_SOURCES)
     log.info("=" * 65)
@@ -353,7 +324,6 @@ def main():
     log.info(f" SUCCESS: Dataset saved to `{out_path}`")
     log.info(f" Final shape: {master.shape[0]:,} rows × {master.shape[1]} columns")
     log.info("=" * 65)
-
 
 if __name__ == "__main__":
     main()

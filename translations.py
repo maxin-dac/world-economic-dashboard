@@ -6,7 +6,7 @@ Every user-facing string in app.py must go through the t() function.
 
 TRANSLATIONS = {
     "en": {
-        # ── App Meta ────────────────────────────────────────────────────────
+
         "app_title": "GLOBAL ECONOMIC INTELLIGENCE DASHBOARD",
         "app_subtitle": "{n} countries · {ymin}-{ymax}",
         "app_caption": "**{n} countries** selected · Period: {y0}-{y1} · Latest year: **{ly}**",
@@ -15,7 +15,6 @@ TRANSLATIONS = {
         "data_lag_note": "Latest available validated data (up to 2024)",
         "income_group": "Income Group",
 
-        # ── Sidebar ─────────────────────────────────────────────────────────
         "sidebar_title": "🌍 Global Economic Intelligence Dashboard",
         "sidebar_caption": "**{n} countries** · {ymin}-{ymax}",
         "period": "Analysis period",
@@ -28,7 +27,6 @@ TRANSLATIONS = {
         "income_levels": "Income levels",
         "source": "Sources: World Bank API · Our World in Data API",
 
-        # ── KPIs ────────────────────────────────────────────────────────────
         "kpi_gdp": "Median GDP/capita",
         "kpi_inf": "Median Inflation",
         "kpi_debt": "Median Public Debt",
@@ -36,7 +34,6 @@ TRANSLATIONS = {
         "kpi_lo": "Low-income Countries",
         "in_selection": "In current selection",
 
-        # ── Tabs ────────────────────────────────────────────────────────────
         "tab_map": "World Map",
         "tab_trend": "Trends",
         "tab_country": "Country Profile",
@@ -47,7 +44,6 @@ TRANSLATIONS = {
         "tab_dq": "Data Quality",
         "tab_sim": "Similar Countries",
 
-        # ── Tab 1: Map ──────────────────────────────────────────────────────
         "map_indicator": "Indicator to map",
         "map_type": "Map style",
         "choropleth": "Choropleth",
@@ -56,7 +52,6 @@ TRANSLATIONS = {
         "bubble_size_label": "Bubble size",
         "median_by_region": "**Median « {ind} » by region - {y}**",
 
-        # ── Tab 2: Trends ───────────────────────────────────────────────────
         "indicator": "Indicator",
         "group_by": "Group by",
         "income_level": "Income level",
@@ -70,7 +65,6 @@ TRANSLATIONS = {
         "y_axis": "Y axis",
         "scatter_chart_title": "{xi} vs {yi} - {y}",
 
-        # ── Tab 3: Country Profile ──────────────────────────────────────────
         "select_country": "Select a country",
         "no_data": "No data available for this country.",
         "country_map_title": "Geographic location - {c}",
@@ -101,7 +95,6 @@ TRANSLATIONS = {
         "heatmap_unavailable": "Not enough data for the heatmap.",
         "gdp_inflation_title": "GDP per capita & inflation",
 
-        # ── Tab 4: Compare ──────────────────────────────────────────────────
         "select_countries": "Select up to 12 countries",
         "select_least_one": "Please select at least one country.",
         "ranking_title": "Ranking - {ind} ({y})",
@@ -110,7 +103,6 @@ TRANSLATIONS = {
         "value": "Value",
         "delta": "Change",
 
-        # ── Tab 5: Structure ────────────────────────────────────────────────
         "treemap_title": "Median sector structure by region ({y})",
         "struct_sectors_title": "Sector composition & GDP distribution",
         "struct_ranking_title": "Rankings: top & bottom 10",
@@ -123,7 +115,6 @@ TRANSLATIONS = {
         "animated_region": "Region for animation",
         "anim_chart_title": "Median sector structure - {r}",
 
-        # ── Tab 6: Data ─────────────────────────────────────────────────────
         "search_country": "🔍 Search a country",
         "filter_region": "Filter by region",
         "showing": "Showing **{n} countries** - year {y}",
@@ -133,7 +124,6 @@ TRANSLATIONS = {
         "col_country": "Country",
         "col_region": "Region",
 
-        # ── Tab 7: Investment Score ──────────────────────────────────────────
         "invest_title": "Investment Attractiveness Analysis",
         "invest_banner": "Five coordinated reads for market entry and allocation: a composite attractiveness score (0-100) built from 8 weighted indicators, a risk/return matrix, a red-flag detector, a clean-opportunity shortlist, and a resilience-to-shocks analysis.",
         "invest_ref_year": "Reference year",
@@ -164,7 +154,6 @@ TRANSLATIONS = {
         "invest_top3_detail": "Top 3 detail",
         "invest_no_clean": "No country with zero red flags in the current selection.",
 
-        # ── PESTEL pillars ──────────────────────────────────────────────────
         "pestel_political": "Political",
         "pestel_economic": "Economic",
         "pestel_social": "Social",
@@ -172,13 +161,11 @@ TRANSLATIONS = {
         "pestel_environmental": "Environmental",
         "pestel_legal": "Legal & Governance",
 
-        # ── Indicators: Political ───────────────────────────────────────────
         "military_expenditure_pct_gdp": "Military expenditure (% GDP)",
         "military_expenditure_pct_govt": "Military expenditure (% govt budget)",
         "govt_effectiveness_index": "Government Effectiveness (WGI)",
         "political_stability_index": "Political Stability (WGI)",
 
-        # ── Indicators: Economic ────────────────────────────────────────────
         "gdp_per_capita": "GDP per capita (USD)",
         "gdp_per_capita_ppp": "GDP per capita (PPP)",
         "gdp_total_bn": "Total GDP (Bn USD)",
@@ -200,7 +187,6 @@ TRANSLATIONS = {
         "industry_pct": "Industry (% GDP)",
         "services_pct": "Services (% GDP)",
 
-        # ── Indicators: Social ──────────────────────────────────────────────
         "population_mn": "Population (millions)",
         "unemployment_pct": "Unemployment Rate (%)",
         "youth_unemployment_pct": "Youth Unemployment (%)",
@@ -218,7 +204,6 @@ TRANSLATIONS = {
         "education_expenditure_pct_gdp": "Education expenditure (% GDP)",
         "hdi": "Human Development Index (HDI)",
 
-        # ── Indicators: Technological ───────────────────────────────────────
         "rd_expenditure_pct_gdp": "R&D expenditure (% GDP)",
         "researchers_per_million": "Researchers (per million)",
         "high_tech_exports_pct": "High-tech exports (%)",
@@ -227,13 +212,11 @@ TRANSLATIONS = {
         "fixed_broadband_per_100": "Fixed broadband (per 100)",
         "bank_account_ownership_pct": "Bank account ownership (%)",
 
-        # ── Indicators: Environmental ───────────────────────────────────────
         "pm25_air_pollution": "PM2.5 air pollution (µg/m³)",
         "electricity_access_pct": "Access to Electricity (%)",
         "electric_power_losses_pct": "Electric power losses (%)",
         "cereal_yield_kg_per_ha": "Cereal yield (kg/ha)",
 
-        # ── Indicators: Legal & Governance ──────────────────────────────────
         "control_of_corruption": "Control of Corruption (WGI)",
         "rule_of_law_index": "Rule of Law (WGI)",
         "regulatory_quality": "Regulatory Quality (WGI)",
@@ -242,18 +225,15 @@ TRANSLATIONS = {
         "women_parliament_pct": "Women in parliament (%)",
         "corruption_perception_index": "Corruption Perceptions Index (0-100)",
 
-        # ── Income Groups ───────────────────────────────────────────────────
         "High income": "High income",
         "Upper middle income": "Upper middle income",
         "Lower middle income": "Lower middle income",
         "Low income": "Low income",
 
-        # ── Sectors ─────────────────────────────────────────────────────────
         "Agriculture": "Agriculture",
         "Industry": "Industry",
         "Services": "Services",
 
-        # ── Regions ─────────────────────────────────────────────────────────
         "East Asia & Pacific": "East Asia & Pacific",
         "Europe & Central Asia": "Europe & Central Asia",
         "Latin America & Caribbean": "Latin America & Caribbean",
@@ -262,12 +242,10 @@ TRANSLATIONS = {
         "South Asia": "South Asia",
         "Sub-Saharan Africa": "Sub-Saharan Africa",
 
-        # ── Timeline Events ─────────────────────────────────────────────────
         "ev_2008": "Financial\nCrisis",
         "ev_2020": "COVID-19",
         "ev_2022": "Ukraine\nWar",
 
-        # ── Red Flags Detector ──────────────────────────────────────────────
         "flag_high_inflation": "High inflation",
         "flag_high_debt": "High debt",
         "flag_high_unemployment": "High unemployment",
@@ -285,7 +263,7 @@ TRANSLATIONS = {
     },
 
     "fr": {
-        # ── App Meta ────────────────────────────────────────────────────────
+
         "app_title": "TABLEAU DE BORD D'INTELLIGENCE ÉCONOMIQUE MONDIALE",
         "app_subtitle": "{n} pays · {ymin}-{ymax}",
         "app_caption": "**{n} pays** sélectionnés · Période : {y0}-{y1} · Dernière année : **{ly}**",
@@ -294,7 +272,6 @@ TRANSLATIONS = {
         "data_lag_note": "Dernières données validées disponibles (jusqu'en 2024)",
         "income_group": "Groupe de Revenu",
 
-        # ── Sidebar ─────────────────────────────────────────────────────────
         "sidebar_title": "🌍 Tableau de Bord d'Intelligence Économique Mondiale",
         "sidebar_caption": "**{n} pays** · {ymin}-{ymax}",
         "period": "Période d'analyse",
@@ -307,7 +284,6 @@ TRANSLATIONS = {
         "income_levels": "Niveaux de revenu",
         "source": "Sources : Banque Mondiale API · Our World in Data API",
 
-        # ── KPIs ────────────────────────────────────────────────────────────
         "kpi_gdp": "PIB/habitant médian",
         "kpi_inf": "Inflation médiane",
         "kpi_debt": "Dette publique médiane",
@@ -315,7 +291,6 @@ TRANSLATIONS = {
         "kpi_lo": "Pays à faible revenu",
         "in_selection": "Dans la sélection actuelle",
 
-        # ── Tabs ────────────────────────────────────────────────────────────
         "tab_map": "Carte mondiale",
         "tab_trend": "Tendances",
         "tab_country": "Profil pays",
@@ -326,7 +301,6 @@ TRANSLATIONS = {
         "tab_dq": "Qualite des donnees",
         "tab_sim": "Pays similaires",
 
-        # ── Tab 1: Map ──────────────────────────────────────────────────────
         "map_indicator": "Indicateur à cartographier",
         "map_type": "Style de carte",
         "choropleth": "Choroplèthe",
@@ -335,7 +309,6 @@ TRANSLATIONS = {
         "bubble_size_label": "Taille des bulles",
         "median_by_region": "**Médiane « {ind} » par région - {y}**",
 
-        # ── Tab 2: Trends ───────────────────────────────────────────────────
         "indicator": "Indicateur",
         "group_by": "Grouper par",
         "income_level": "Niveau de revenu",
@@ -349,7 +322,6 @@ TRANSLATIONS = {
         "y_axis": "Axe Y",
         "scatter_chart_title": "{xi} vs {yi} - {y}",
 
-        # ── Tab 3: Country Profile ──────────────────────────────────────────
         "select_country": "Sélectionner un pays",
         "no_data": "Aucune donnée disponible pour ce pays.",
         "country_map_title": "Localisation géographique - {c}",
@@ -380,7 +352,6 @@ TRANSLATIONS = {
         "heatmap_unavailable": "Données insuffisantes pour la carte de chaleur.",
         "gdp_inflation_title": "PIB par habitant et inflation",
 
-        # ── Tab 4: Compare ──────────────────────────────────────────────────
         "select_countries": "Sélectionner jusqu'à 12 pays",
         "select_least_one": "Veuillez sélectionner au moins un pays.",
         "ranking_title": "Classement - {ind} ({y})",
@@ -389,7 +360,6 @@ TRANSLATIONS = {
         "value": "Valeur",
         "delta": "Variation",
 
-        # ── Tab 5: Structure ────────────────────────────────────────────────
         "treemap_title": "Structure sectorielle médiane par région ({y})",
         "struct_sectors_title": "Composition sectorielle & distribution du PIB",
         "struct_ranking_title": "Classements : top & bottom 10",
@@ -402,7 +372,6 @@ TRANSLATIONS = {
         "animated_region": "Région pour l'animation",
         "anim_chart_title": "Structure sectorielle médiane - {r}",
 
-        # ── Tab 6: Data ─────────────────────────────────────────────────────
         "search_country": "🔍 Rechercher un pays",
         "filter_region": "Filtrer par région",
         "showing": "Affichage de **{n} pays** - année {y}",
@@ -412,7 +381,6 @@ TRANSLATIONS = {
         "col_country": "Pays",
         "col_region": "Région",
 
-        # ── Tab 7: Investment Score ──────────────────────────────────────────
         "invest_title": "Analyse d'attractivité à l'investissement",
         "invest_banner": "Cinq lectures coordonnées pour l'entrée sur un marché et l'allocation : un score composite d'attractivité (0-100) sur 8 indicateurs pondérés, une matrice risque/rendement, un détecteur de signaux d'alerte, une shortlist d'opportunités « propres » et une analyse de résilience aux chocs.",
         "invest_ref_year": "Année de référence",
@@ -443,7 +411,6 @@ TRANSLATIONS = {
         "invest_top3_detail": "Détail du Top 3",
         "invest_no_clean": "Aucun pays sans drapeau rouge dans la sélection actuelle.",
 
-        # ── PESTEL pillars ──────────────────────────────────────────────────
         "pestel_political": "Politique",
         "pestel_economic": "Économique",
         "pestel_social": "Social",
@@ -451,13 +418,11 @@ TRANSLATIONS = {
         "pestel_environmental": "Environnemental",
         "pestel_legal": "Légal & Gouvernance",
 
-        # ── Indicators: Political ───────────────────────────────────────────
         "military_expenditure_pct_gdp": "Dépenses militaires (% PIB)",
         "military_expenditure_pct_govt": "Dépenses militaires (% budget de l'État)",
         "govt_effectiveness_index": "Efficacité de l'État (WGI)",
         "political_stability_index": "Stabilité politique (WGI)",
 
-        # ── Indicators: Economic ────────────────────────────────────────────
         "gdp_per_capita": "PIB par habitant (USD)",
         "gdp_per_capita_ppp": "PIB par habitant (PPA)",
         "gdp_total_bn": "PIB total (Mrd USD)",
@@ -479,7 +444,6 @@ TRANSLATIONS = {
         "industry_pct": "Industrie (% PIB)",
         "services_pct": "Services (% PIB)",
 
-        # ── Indicators: Social ──────────────────────────────────────────────
         "population_mn": "Population (millions)",
         "unemployment_pct": "Taux de chômage (%)",
         "youth_unemployment_pct": "Chômage des jeunes (%)",
@@ -497,7 +461,6 @@ TRANSLATIONS = {
         "education_expenditure_pct_gdp": "Dépenses d'éducation (% PIB)",
         "hdi": "Indice de Développement Humain (IDH)",
 
-        # ── Indicators: Technological ───────────────────────────────────────
         "rd_expenditure_pct_gdp": "Dépenses R&D (% PIB)",
         "researchers_per_million": "Chercheurs (par million)",
         "high_tech_exports_pct": "Exportations high-tech (%)",
@@ -506,13 +469,11 @@ TRANSLATIONS = {
         "fixed_broadband_per_100": "Internet fixe (pour 100)",
         "bank_account_ownership_pct": "Possession d'un compte bancaire (%)",
 
-        # ── Indicators: Environmental ───────────────────────────────────────
         "pm25_air_pollution": "Pollution PM2,5 (µg/m³)",
         "electricity_access_pct": "Accès à l'électricité (%)",
         "electric_power_losses_pct": "Pertes électriques (%)",
         "cereal_yield_kg_per_ha": "Rendement céréalier (kg/ha)",
 
-        # ── Indicators: Legal & Governance ──────────────────────────────────
         "control_of_corruption": "Contrôle de la corruption (WGI)",
         "rule_of_law_index": "État de droit (WGI)",
         "regulatory_quality": "Qualité réglementaire (WGI)",
@@ -521,18 +482,15 @@ TRANSLATIONS = {
         "women_parliament_pct": "Femmes au parlement (%)",
         "corruption_perception_index": "Indice de Perception de la Corruption (0-100)",
 
-        # ── Income Groups ───────────────────────────────────────────────────
         "High income": "Revenu élevé",
         "Upper middle income": "Revenu intermédiaire supérieur",
         "Lower middle income": "Revenu intermédiaire inférieur",
         "Low income": "Faible revenu",
 
-        # ── Sectors ─────────────────────────────────────────────────────────
         "Agriculture": "Agriculture",
         "Industry": "Industrie",
         "Services": "Services",
 
-        # ── Regions ─────────────────────────────────────────────────────────
         "East Asia & Pacific": "Asie de l'Est et Pacifique",
         "Europe & Central Asia": "Europe et Asie centrale",
         "Latin America & Caribbean": "Amérique latine et Caraïbes",
@@ -541,12 +499,10 @@ TRANSLATIONS = {
         "South Asia": "Asie du Sud",
         "Sub-Saharan Africa": "Afrique subsaharienne",
 
-        # ── Timeline Events ─────────────────────────────────────────────────
         "ev_2008": "Crise\nFinancière",
         "ev_2020": "COVID-19",
         "ev_2022": "Guerre\nUkraine",
 
-        # ── Country names (FR) ─────────────────────────────────────
         "Afghanistan": "Afghanistan",
         "Albania": "Albanie",
         "Algeria": "Algérie",
@@ -765,7 +721,6 @@ TRANSLATIONS = {
         "Zambia": "Zambie",
         "Zimbabwe": "Zimbabwe",
 
-        # ── Regions (FR) ───────────────────────────────────────────
         "East Asia & Pacific": "Asie de l'Est et Pacifique",
         "Europe & Central Asia": "Europe et Asie centrale",
         "Latin America & Caribbean": "Amérique latine et Caraïbes",
@@ -774,13 +729,11 @@ TRANSLATIONS = {
         "South Asia": "Asie du Sud",
         "Sub-Saharan Africa": "Afrique subsaharienne",
 
-        # ── Income groups (FR) ─────────────────────────────────────
         "High income": "Revenu élevé",
         "Low income": "Faible revenu",
         "Lower middle income": "Revenu intermédiaire inférieur",
         "Upper middle income": "Revenu intermédiaire supérieur",
 
-        # ── Red Flags Detector ──────────────────────────────────────────────
         "flag_high_inflation": "Inflation élevée",
         "flag_high_debt": "Dette élevée",
         "flag_high_unemployment": "Chômage élevé",
@@ -815,7 +768,6 @@ def t(key: str, lang: str = "en", **kwargs) -> str:
             return text
     return text
 
-
 def validate_translations() -> dict:
     """Return a report of missing / dirty translation keys (dev helper)."""
     en = set(TRANSLATIONS.get("en", {}).keys())
@@ -831,7 +783,6 @@ def validate_translations() -> dict:
             if k != k.strip()
         ],
     }
-
 
 if __name__ == "__main__":
     report = validate_translations()

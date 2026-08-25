@@ -1,4 +1,4 @@
-# NOTE: INVESTMENT_INDICATORS is defined in core/analytics.py (single source of truth).
+
 
 """Investment attractiveness score, red flags, CAGR.
 Thin compatibility layer: re-exports from core.analytics so both

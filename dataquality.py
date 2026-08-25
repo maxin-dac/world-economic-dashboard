@@ -41,10 +41,8 @@ L = {
     },
 }
 
-
 def _inds(df):
     return [c for c in df.columns if c not in META and pd.api.types.is_numeric_dtype(df[c])]
-
 
 def _robust_z(s):
     med = s.median()
@@ -52,7 +50,6 @@ def _robust_z(s):
     if mad == 0 or pd.isna(mad):
         return pd.Series(0.0, index=s.index)
     return (s - med) / (1.4826 * mad)
-
 
 def render(df_all, lang, theme_mode="dark"):
     t = lambda k: L[lang][k]
@@ -66,7 +63,7 @@ def render(df_all, lang, theme_mode="dark"):
     fresh = pd.Series({
         c: int(df_all[df_all[c].notna()]["year"].max())
         for c in inds
-        if df_all[c].notna().any()  # skip cols with all NaN → .max() would be NaN
+        if df_all[c].notna().any()
     })
     lag = latest - fresh
 
@@ -78,7 +75,6 @@ def render(df_all, lang, theme_mode="dark"):
             rows.append({"country": tr(dl.loc[i, "country"], lang), "indicator": c,
                          "value": round(float(dl.loc[i, c]), 2), "z": round(float(z.loc[i]), 1)})
     anom = pd.DataFrame(rows)
-
 
     st.markdown(f"**{t('cov_title')}**")
     fig = go.Figure(go.Bar(x=cov.values, y=cov.index, orientation="h",

@@ -4,8 +4,7 @@ import pandas as pd
 import streamlit as st
 from translations import t
 from core.constants import INVERSE_INDICATORS
-# INDICATOR EXPLANATIONS (bilingual) - key -> (en_desc, en_tip, fr_desc, fr_tip)
-# ═══════════════════════════════════════════════════════════════════════════
+
 INDICATOR_INFO = {
     "gdp_per_capita": ("Average economic output per person.", "Higher = wealthier population.", "Production économique moyenne par personne.", "Plus élevé = population plus riche."),
     "gdp_per_capita_ppp": ("GDP per person adjusted for purchasing power.", "Better for comparing living standards.", "PIB par habitant ajusté au pouvoir d'achat.", "Plus pertinent pour comparer les niveaux de vie."),

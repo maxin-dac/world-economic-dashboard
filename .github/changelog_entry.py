@@ -11,7 +11,6 @@ n_indicators = len(num_cols)
 null_pct = df[num_cols].isna().mean().mean() * 100 if num_cols else 0
 today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
-# Indicateurs avec le moins de couverture (signal de qualité)
 coverage = df[num_cols].notna().mean().sort_values().head(3)
 weakest = ", ".join(f"{c} ({v*100:.0f}%)" for c, v in coverage.items())
 
