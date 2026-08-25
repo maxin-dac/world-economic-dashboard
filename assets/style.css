@@ -883,3 +883,35 @@ body [data-testid="stSidebar"] [data-testid="stWidgetLabel"] p:hover {
 /* sidebar-scroll-fix */
 section[data-testid="stSidebar"] { overflow-y: auto !important; }
 [data-testid="stSidebarContent"] { overflow-y: auto !important; }
+
+/* ── Champs de saisie : contraste restaure (valeurs fixes) ─────────── */
+.stSelectbox [data-baseweb="select"] > div,
+.stMultiSelect [data-baseweb="select"] > div,
+.stTextInput [data-baseweb="input"],
+.stNumberInput [data-baseweb="input"],
+.stDateInput [data-baseweb="input"],
+[data-baseweb="select"] > div,
+[data-baseweb="input"],
+[data-baseweb="base-input"],
+[data-baseweb="textarea"] {
+  background: #1E293B !important;
+  border: 1px solid rgba(248, 250, 252, 0.30) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+}
+[data-baseweb="select"] > div:hover,
+[data-baseweb="input"]:hover {
+  border-color: rgba(248, 250, 252, 0.45) !important;
+}
+[data-baseweb="select"] > div:focus-within,
+[data-baseweb="input"]:focus-within {
+  border-color: #3B82F6 !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2) !important;
+}
+[data-baseweb="select"] [data-testid="stMarkdownContainer"],
+[data-baseweb="select"] [data-testid="stMarkdownContainer"] p,
+[data-baseweb="input"] input,
+[data-baseweb="base-input"] input,
+[data-baseweb="textarea"] textarea {
+  color: #F8FAFC !important;
+}
