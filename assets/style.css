@@ -10,15 +10,15 @@
   --primary-gold: #F59E0B;
   
   /* Background Colors */
-  --bg-primary: #0F172A;
-  --bg-secondary: #1E293B;
-  --bg-tertiary: #334155;
-  --bg-card: #1E293B;
+  --bg-primary: var(--background-color, #0F172A);
+  --bg-secondary: var(--secondary-background-color, #1E293B);
+  --bg-tertiary: color-mix(in srgb, var(--secondary-background-color, #1E293B) 78%, var(--text-color, #F8FAFC));
+  --bg-card: var(--secondary-background-color, #1E293B);
   
   /* Text Colors */
-  --text-primary: #F8FAFC;
-  --text-secondary: #CBD5E1;
-  --text-muted: #94A3B8;
+  --text-primary: var(--text-color, #F8FAFC);
+  --text-secondary: color-mix(in srgb, var(--text-color, #F8FAFC) 78%, var(--background-color, #0F172A));
+  --text-muted: color-mix(in srgb, var(--text-color, #F8FAFC) 58%, var(--background-color, #0F172A));
   
   /* Accent Colors */
   --accent-success: #10B981;
@@ -27,8 +27,8 @@
   --accent-info: #3B82F6;
   
   /* Borders & Shadows */
-  --border-color: #334155;
-  --border-light: #475569;
+  --border-color: color-mix(in srgb, var(--text-color, #F8FAFC) 18%, transparent);
+  --border-light: color-mix(in srgb, var(--text-color, #F8FAFC) 30%, transparent);
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
@@ -47,8 +47,8 @@
 }
 
 html, body, .stMarkdown, .stText,
-h1, h2, h3, h4, h5, h6, p, span,
-label, button, a, small,
+h1, h2, h3, h4, h5, h6, p,
+label, a, small,
 [data-testid="stCaptionContainer"],
 [data-testid="stMetricLabel"],
 [data-testid="stMetricValue"],
@@ -196,17 +196,17 @@ h4 {
 
 /* ── Tabs ──────────────────────────────────────────────────────────────── */
 [data-baseweb="tab-list"] {
-  background: var(--bg-secondary) !important;
-  border-radius: var(--radius-md) var(--radius-md) 0 0 !important;
-  padding: 8px 8px 0 !important;
-  gap: 4px !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  padding: 10px 0 0 !important;
+  gap: 10px !important;
   border-bottom: 1px solid var(--border-color) !important;
 }
 
 [data-baseweb="tab"] {
   background: transparent !important;
-  border-radius: var(--radius-sm) var(--radius-sm) 0 0 !important;
-  padding: 12px 20px !important;
+  border-radius: 0 !important;
+  padding: 14px 18px 13px !important;
   transition: all 0.2s ease !important;
 }
 
@@ -222,10 +222,8 @@ h4 {
 }
 
 [data-baseweb="tab"][aria-selected="true"] {
-  background: linear-gradient(180deg, 
-    var(--bg-card) 0%, 
-    var(--bg-secondary) 100%) !important;
-  border-top: 2px solid var(--primary-blue) !important;
+  background: transparent !important;
+  border-bottom: 2px solid var(--primary-blue) !important;
 }
 
 [data-baseweb="tab"][aria-selected="true"] p {
@@ -483,3 +481,155 @@ h4 {
     font-size: 14px;
   }
 }
+
+/* ── Tabs: encadres style section-head ─────────────────────────────── */
+[data-baseweb="tab-list"] {
+  gap: 12px !important;
+  border-bottom: none !important;
+  padding: 14px 0 !important;
+}
+[data-baseweb="tab"] {
+  background: var(--bg-tertiary) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 14px !important;
+  padding: 12px 20px !important;
+}
+[data-baseweb="tab"] p {
+  color: var(--text-secondary) !important;
+  font-weight: 700 !important;
+  font-size: 0.8rem !important;
+  letter-spacing: 0.05em;
+}
+[data-baseweb="tab"]:hover { border-color: var(--primary-blue) !important; }
+[data-baseweb="tab"][aria-selected="true"] {
+  background: linear-gradient(135deg, var(--primary-blue), var(--primary-violet)) !important;
+  border-color: transparent !important;
+  box-shadow: var(--shadow-glow) !important;
+}
+[data-baseweb="tab"][aria-selected="true"] p { color: #ffffff !important; }
+
+/* ── Sidebar: libelles en encadres degrades ────────────────────────── */
+[data-testid="stSidebar"] [data-testid="stWidgetLabel"] label,
+[data-testid="stSidebar"] [data-testid="stWidgetLabel"] p {
+  display: inline-block !important;
+  background: linear-gradient(135deg, var(--primary-blue), var(--primary-violet)) !important;
+  color: #ffffff !important;
+  border-radius: 8px !important;
+  padding: 4px 10px !important;
+  font-size: 0.68rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  margin-bottom: 6px !important;
+  box-shadow: var(--shadow-sm);
+}
+
+/* ── Sidebar: carte copyright ──────────────────────────────────────── */
+.side-card {
+  background: linear-gradient(145deg, var(--bg-card), var(--bg-secondary));
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 14px 16px;
+  margin: 12px 0;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+.side-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--primary-blue), var(--primary-violet));
+}
+
+/* ── Boutons sociaux degrades ──────────────────────────────────────── */
+.social-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: linear-gradient(135deg, var(--primary-blue), var(--primary-violet));
+  color: #ffffff !important;
+  text-decoration: none !important;
+  border-radius: 12px;
+  padding: 8px 14px;
+  font-weight: 700;
+  font-size: 0.78rem;
+  box-shadow: var(--shadow-sm);
+  margin-right: 8px;
+  transition: all .2s ease;
+}
+.social-btn:hover { box-shadow: var(--shadow-glow); transform: translateY(-1px); }
+.social-btn span { margin-right: 0 !important; }
+
+/* ── Tabs: encadres arrondis (style section-head) ─────────────────── */
+[data-baseweb="tab-list"] {
+  gap: 12px !important;
+  border-bottom: none !important;
+  padding: 14px 0 !important;
+}
+[data-baseweb="tab"] {
+  background: var(--bg-tertiary) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 14px !important;
+  padding: 12px 20px !important;
+}
+[data-baseweb="tab"] p {
+  color: var(--text-secondary) !important;
+  font-weight: 700 !important;
+  font-size: 0.8rem !important;
+  letter-spacing: 0.05em;
+}
+[data-baseweb="tab"]:hover { border-color: var(--primary-blue) !important; }
+[data-baseweb="tab"][aria-selected="true"] {
+  background: linear-gradient(135deg, var(--primary-blue), var(--primary-violet)) !important;
+  border-color: transparent !important;
+  box-shadow: var(--shadow-glow) !important;
+}
+[data-baseweb="tab"][aria-selected="true"] p { color: #ffffff !important; }
+
+/* ── Sidebar: libelles en encadres degrades ────────────────────────── */
+[data-testid="stSidebar"] [data-testid="stWidgetLabel"] label,
+[data-testid="stSidebar"] [data-testid="stWidgetLabel"] p {
+  display: inline-block !important;
+  background: linear-gradient(135deg, var(--primary-blue), var(--primary-violet)) !important;
+  color: #ffffff !important;
+  border-radius: 8px !important;
+  padding: 4px 10px !important;
+  font-size: 0.68rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  margin-bottom: 6px !important;
+  box-shadow: var(--shadow-sm);
+}
+
+/* ── Carte copyright sidebar ───────────────────────────────────────── */
+.side-card {
+  background: linear-gradient(145deg, var(--bg-card), var(--bg-secondary));
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 14px 16px;
+  margin: 12px 0;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+.side-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--primary-blue), var(--primary-violet));
+}
+
+/* ── Boutons sociaux degrades ──────────────────────────────────────── */
+.social-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: linear-gradient(135deg, var(--primary-blue), var(--primary-violet));
+  color: #ffffff !important;
+  text-decoration: none !important;
+  border-radius: 12px;
+  padding: 8px 14px;
+  font-weight: 700;
+  font-size: 0.78rem;
+  box-shadow: var(--shadow-sm);
+  margin-right: 8px;
+  transition: all .2s ease;
+}
+.social-btn:hover { box-shadow: var(--shadow-glow); transform: translateY(-1px); }
+.social-btn span { margin-right: 0 !important; }
