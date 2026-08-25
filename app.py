@@ -15,7 +15,6 @@ from plotly.subplots import make_subplots
 import streamlit as st
 from translations import t, TRANSLATIONS
 
-
 from core.data import load_data
 from core.constants import (INCOME_ORDER, INCOME_COLORS, REGION_COLORS, SECTOR_COLORS,
     SECTOR_LABEL_KEYS, GEO_STYLE, PESTEL_PILLAR_ORDER, PESTEL_LABEL_KEYS, PESTEL_INDICATORS,
@@ -23,10 +22,6 @@ from core.constants import (INCOME_ORDER, INCOME_COLORS, REGION_COLORS, SECTOR_C
 from core.indicators import indicator_info, interpret_value, show_indicator_info
 from core.investment import compute_investment_score, detect_red_flags, compute_cagr
 from core.theme import render_table, style_plotly
-
-# ═══════════════════════════════════════════════════════════════════════════
-# SVG ICONS (Lucide/Feather style - inline for performance)
-# ═══════════════════════════════════════════════════════════════════════════
 
 SVG_ICONS = {
     "globe": '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>',
@@ -52,7 +47,6 @@ def svg_icon(name: str, size: int = 18) -> str:
     icon = SVG_ICONS.get(name, SVG_ICONS["info"])
     return f'<span style="display:inline-flex;align-items:center;vertical-align:middle;margin-right:6px;">{icon}</span>'
 
-# ── Page config ─────────────────────────────────────────────────────────────
 st.set_page_config(
     page_title="GLOBAL ECONOMIC DASHBOARD",
     page_icon="🌍",
@@ -60,8 +54,6 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-
-# ── Load external CSS ──────────────────────────────────────────────────────
 import pathlib
 
 CSS_PATH = pathlib.Path(__file__).parent / "assets" / "style.css"
@@ -93,16 +85,11 @@ if GLOBE_PATH.exists():
             pointer-events: none;
             z-index: 0;
         }}
-        .stApp > * {{ position: relative; z-index: 1; }}
+        .stApp section.main {{ position: relative; z-index: 1; }}
         </style>""",
         unsafe_allow_html=True,
     )
 
-# ── Constants ───────────────────────────────────────────────────────────────
-
-# ═══════════════════════════════════════════════════════════════════════════
-
-# ── Country name translation (static ISO3 table) ───────────────────────────
 ISO3_TO_FR = {
     "AFG": "Afghanistan", "ALB": "Albanie", "DZA": "Algérie", "ASM": "Samoa américaines", "AND": "Andorre", "AGO": "Angola", "AIA": "Anguilla", "ATG": "Antigua-et-Barbuda", "ARG": "Argentine", "ARM": "Arménie", "ABW": "Aruba", "AUS": "Australie", "AUT": "Autriche", "AZE": "Azerbaïdjan", "BHS": "Bahamas", "BHR": "Bahreïn", "BGD": "Bangladesh", "BRB": "Barbade", "BLR": "Bélarus", "BEL": "Belgique", "BLZ": "Belize", "BEN": "Bénin", "BMU": "Bermudes", "BTN": "Bhoutan", "BOL": "Bolivie", "BIH": "Bosnie-Herzégovine", "BWA": "Botswana", "BRA": "Brésil", "VGB": "Îles Vierges britanniques", "BRN": "Brunéi Darussalam", "BGR": "Bulgarie", "BFA": "Burkina Faso", "BDI": "Burundi", "CPV": "Cabo Verde", "KHM": "Cambodge", "CMR": "Cameroun", "CAN": "Canada", "CYM": "Îles Caïmans", "CAF": "République centrafricaine", "TCD": "Tchad", "CHL": "Chili", "CHI": "Îles Anglo-Normandes", "CHN": "Chine", "COL": "Colombie", "COM": "Comores", "COD": "Congo (Rép. dém.)", "COG": "Congo (Rép.)", "CRI": "Costa Rica", "CIV": "Côte d'Ivoire", "HRV": "Croatie", "CUB": "Cuba", "CUW": "Curaçao", "CYP": "Chypre", "CZE": "Tchéquie", "DNK": "Danemark", "DJI": "Djibouti", "DMA": "Dominique", "DOM": "République dominicaine", "ECU": "Équateur", "EGY": "Égypte", "SLV": "El Salvador", "GNQ": "Guinée équatoriale", "ERI": "Érythrée", "EST": "Estonie", "SWZ": "Eswatini", "ETH": "Éthiopie", "FRO": "Îles Féroé", "FJI": "Fidji", "FIN": "Finlande", "FRA": "France", "GUF": "Guyane", "PYF": "Polynésie française", "GAB": "Gabon", "GMB": "Gambie", "GEO": "Géorgie", "DEU": "Allemagne", "GHA": "Ghana", "GRC": "Grèce", "GRL": "Groenland", "GRD": "Grenade", "GUM": "Guam", "GTM": "Guatemala", "GIN": "Guinée", "GNB": "Guinée-Bissau", "GUY": "Guyana", "HTI": "Haïti", "HND": "Honduras", "HKG": "Hong Kong", "HUN": "Hongrie", "ISL": "Islande", "IND": "Inde", "IDN": "Indonésie", "IRN": "Iran", "IRQ": "Iraq", "IRL": "Irlande", "IMN": "Île de Man", "ISR": "Israël", "ITA": "Italie", "JAM": "Jamaïque", "JPN": "Japon", "JOR": "Jordanie", "KAZ": "Kazakhstan", "KEN": "Kenya", "KIR": "Kiribati", "PRK": "Corée du Nord", "KOR": "Corée du Sud", "XKX": "Kosovo", "KSV": "Kosovo", "KWT": "Koweït", "KGZ": "Kirghizistan", "LAO": "Laos", "LVA": "Lettonie", "LBN": "Liban", "LSO": "Lesotho", "LBR": "Libéria", "LBY": "Libye", "LIE": "Liechtenstein", "LTU": "Lituanie", "LUX": "Luxembourg", "MAC": "Macao", "MDG": "Madagascar", "MWI": "Malawi", "MYS": "Malaisie", "MDV": "Maldives", "MLI": "Mali", "MLT": "Malte", "MHL": "Îles Marshall", "MRT": "Mauritanie", "MUS": "Maurice", "MEX": "Mexique", "FSM": "Micronésie", "MDA": "Moldavie", "MCO": "Monaco", "MNG": "Mongolie", "MNE": "Monténégro", "MAR": "Maroc", "MOZ": "Mozambique", "MMR": "Myanmar", "NAM": "Namibie", "NRU": "Nauru", "NPL": "Népal", "NLD": "Pays-Bas", "NCL": "Nouvelle-Calédonie", "NZL": "Nouvelle-Zélande", "NIC": "Nicaragua", "NER": "Niger", "NGA": "Nigéria", "MKD": "Macédoine du Nord", "MNP": "Îles Mariannes du Nord", "NOR": "Norvège", "OMN": "Oman", "PAK": "Pakistan", "PLW": "Palaos", "PSE": "Palestine", "PAN": "Panama", "PNG": "Papouasie-Nouvelle-Guinée", "PRY": "Paraguay", "PER": "Pérou", "PHL": "Philippines", "POL": "Pologne", "PRT": "Portugal", "PRI": "Porto Rico", "QAT": "Qatar", "ROU": "Roumanie", "RUS": "Russie", "RWA": "Rwanda", "WSM": "Samoa", "SMR": "Saint-Marin", "STP": "Sao Tomé-et-Principe", "SAU": "Arabie saoudite", "SEN": "Sénégal", "SRB": "Serbie", "SYC": "Seychelles", "SLE": "Sierra Leone", "SGP": "Singapour", "SXM": "Saint-Martin (partie néerlandaise)", "SVK": "Slovaquie", "SVN": "Slovénie", "SLB": "Îles Salomon", "SOM": "Somalie", "ZAF": "Afrique du Sud", "SSD": "Soudan du Sud", "ESP": "Espagne", "LKA": "Sri Lanka", "KNA": "Saint-Kitts-et-Nevis", "LCA": "Sainte-Lucie", "MAF": "Saint-Martin (partie française)", "VCT": "Saint-Vincent-et-les-Grenadines", "SDN": "Soudan", "SUR": "Suriname", "SWE": "Suède", "CHE": "Suisse", "SYR": "Syrie", "TWN": "Taïwan", "TJK": "Tadjikistan", "TZA": "Tanzanie", "THA": "Thaïlande", "TLS": "Timor oriental", "TGO": "Togo", "TON": "Tonga", "TTO": "Trinité-et-Tobago", "TUN": "Tunisie", "TUR": "Türkiye", "TKM": "Turkménistan", "TCA": "Îles Turques-et-Caïques", "TUV": "Tuvalu", "UGA": "Ouganda", "UKR": "Ukraine", "ARE": "Émirats arabes unis", "GBR": "Royaume-Uni", "USA": "États-Unis", "URY": "Uruguay", "UZB": "Ouzbékistan", "VUT": "Vanuatu", "VEN": "Venezuela", "VNM": "Viet Nam", "VIR": "Îles Vierges américaines", "PSS": "Cisjordanie et Gaza", "YEM": "Yémen", "ZMB": "Zambie", "ZWE": "Zimbabwe",
 }
@@ -112,8 +99,6 @@ def cname(name, lang):
     iso3 = df_all.loc[df_all["country"] == name, "iso3"].iloc[0] if name in df_all["country"].values else None
     if iso3 and iso3 in ISO3_TO_FR: return ISO3_TO_FR[iso3]
     return name
-
-# ── Helpers ─────────────────────────────────────────────────────────────────
 
 def _en_label(key: str) -> str: return TRANSLATIONS.get("en", {}).get(key, key.replace("_", " ").title())
 def ind_label(key: str, current_lang: str, with_pillar: bool = False) -> str:
@@ -150,9 +135,6 @@ def get_pestel_scores(df_target: pd.DataFrame, df_world: pd.DataFrame, year: int
         scores[pillar] = round(100.0 * np.mean(norms), 1) if norms else 0.0
     return scores
 
-# ═══════════════════════════════════════════════════════════════════════════
-
-# ── Load data ──────────────────────────────────────────────────────────────
 df_all = load_data()
 INDICATOR_KEYS = [ind for pillar in PESTEL_PILLAR_ORDER for ind in sorted(PESTEL_INDICATORS[pillar], key=_en_label) if ind in df_all.columns]
 ALL_REGIONS = sorted(df_all["region"].dropna().unique()) if "region" in df_all.columns else []
@@ -161,7 +143,6 @@ YEAR_MIN = int(df_all["year"].min())
 YEAR_MAX = int(df_all["year"].max())
 ALL_YEARS = sorted(df_all["year"].unique())
 
-# ── Sidebar ─────────────────────────────────────────────────────────────────
 with st.sidebar:
     lang = st.radio("🌍 Language / Langue", ["EN", "FR"], horizontal=True, index=0, key="lang_choice").lower()
     st.markdown(f"## {t('sidebar_title', lang)}")
@@ -190,7 +171,6 @@ with st.sidebar:
 
 theme_mode = "dark"
 
-# ── Global filters ──────────────────────────────────────────────────────────
 mask = (df_all["year"].isin(sel_years) & df_all["region"].isin(sel_regions) & df_all["income_group"].isin(sel_income))
 df = df_all[mask].copy()
 if df.empty:
@@ -201,12 +181,10 @@ df_latest = df[df["year"] == latest_year]
 prev_year = previous_year(sorted(sel_years), latest_year)
 df_prev = df[df["year"] == prev_year]
 
-# ── Header ──────────────────────────────────────────────────────────────────
 st.markdown(f"## {t('app_title', lang).upper()}")
 st.caption(f"{t('app_caption', lang, n=df['country'].nunique(), y0=min(sel_years), y1=max(sel_years), ly=latest_year)}")
 st.divider()
 
-# ── Global KPIs with tooltips ───────────────────────────────────────────────
 k1, k2, k3, k4, k5 = st.columns(5)
 
 med_gdp = df_latest["gdp_per_capita"].median() if "gdp_per_capita" in df_latest else None
@@ -257,7 +235,6 @@ tab_map, tab_trend, tab_country, tab_compare, tab_struct, tab_invest, tab_data =
     t('tab_data', lang).upper(),
 ])
 
-# ── TAB 1: WORLD MAP ────────────────────────────────────────────────────────
 with tab_map:
     c1, c2, c3 = st.columns([2, 1, 1])
     with c1: map_ind = st.selectbox(f"🗺️ {t('map_indicator', lang)}", INDICATOR_KEYS, format_func=lambda x: ind_label(x, lang, with_pillar=True), key="map_ind")
@@ -306,7 +283,6 @@ with tab_map:
                 region_tooltip = f"{t(row['region'], lang)} · {ilabel}: {row[map_ind]:,.1f}"
                 cols_r[i].metric(t(row["region"], lang), f"{row[map_ind]:,.1f}", help=region_tooltip)
 
-# ── TAB 2: TRENDS ───────────────────────────────────────────────────────────
 with tab_trend:
     section_head("01", "trend_evolution_title", lang)
     t1, t2 = st.columns([2, 1])
@@ -349,7 +325,6 @@ with tab_trend:
         st.plotly_chart(style_plotly(fig_sc, theme_mode), width="stretch", theme="streamlit")
     else: st.info(t("no_data", lang))
 
-# ── TAB 3: COUNTRY PROFILE ──────────────────────────────────────────────────
 with tab_country:
     default_idx = ALL_COUNTRIES.index("Cameroon") if "Cameroon" in ALL_COUNTRIES else 0
     sel_country = st.selectbox(t("select_country", lang), ALL_COUNTRIES, index=default_idx, key="cp_country", format_func=lambda n: cname(n, lang))
@@ -493,8 +468,6 @@ with tab_country:
         import similar
         similar.render(df_all, lang, default_country=sel_country, theme_mode=theme_mode)
 
-
-# ── TAB 4: COMPARE COUNTRIES ────────────────────────────────────────────────
 with tab_compare:
     defaults = [c for c in ["Cameroon", "France", "China", "Nigeria", "Brazil", "Germany", "India", "United States"] if c in ALL_COUNTRIES]
     sel_ctry = st.multiselect(t("select_countries", lang), ALL_COUNTRIES, default=defaults, max_selections=12, format_func=lambda n: cname(n, lang))
@@ -527,7 +500,6 @@ with tab_compare:
             st.markdown(f"**{t('summary_table', lang, y=latest_year_cp)}**")
             render_table(summary, theme_mode, hide_index=True)
 
-# ── TAB 5: ECONOMIC STRUCTURE ───────────────────────────────────────────────
 with tab_struct:
     section_head("01", "struct_sectors_title", lang)
     c_left, c_right = st.columns(2)
@@ -570,7 +542,6 @@ with tab_struct:
             fig_bot.update_layout(showlegend=False, margin=dict(t=50, b=20, l=10, r=10), height=380)
             st.plotly_chart(style_plotly(fig_bot, theme_mode), width="stretch", theme="streamlit")
 
-# ── TAB 6: DATA EXPLORER ────────────────────────────────────────────────────
 with tab_data:
     import dataquality
     section_head("01", "tab_data_explorer_title", lang)
@@ -677,8 +648,6 @@ with tab_data:
 
     dataquality.render(df, lang, theme_mode=theme_mode)
 
-# ── TAB 7: INVESTMENT SCORE ────────────────────────────────────────────────
-
 with tab_invest:
 
     st.markdown(f'<div class="indicator-banner">ℹ️ {t("invest_banner", lang)}</div>', unsafe_allow_html=True)
@@ -690,7 +659,7 @@ with tab_invest:
     df_scores = df_scores[df_scores["region"].isin(sel_regions) & df_scores["income_group"].isin(sel_income)]
     df_flags = df_flags[df_flags["region"].isin(sel_regions) & df_flags["income_group"].isin(sel_income)]
     
-    # ── SECTION 1: Investment Scorecard ──
+
     section_head("01", "invest_scorecard", lang)
     st.markdown(f'<div class="indicator-banner">ℹ️ {t("invest_scorecard_tip", lang)}</div>', unsafe_allow_html=True)
     
@@ -747,14 +716,14 @@ with tab_invest:
     
     st.divider()
     
-    # ─ SECTION 2: Risk/Reward Matrix ──
+
     section_head("02", "invest_risk_reward", lang)
     st.markdown(f'<div class="indicator-banner">ℹ️ {t("invest_risk_reward_tip", lang)}</div>', unsafe_allow_html=True)
 
     df_rr = df_all[df_all["year"].isin(sel_years)].copy()
     df_rr["_cname"] = df_rr["country"].map(lambda n: cname(n, lang))
     
-    # Use the last 5 selected years consistently for both the data window and the CAGR exponent
+
     recent_years = sorted(sel_years)[-5:]
     n_years_cagr = max(len(recent_years) - 1, 1)
     df_rr_recent = df_rr[df_rr["year"].isin(recent_years)].copy()
@@ -825,16 +794,14 @@ with tab_invest:
     
     st.divider()
     
-    # ── SECTION 3: Red Flags Detector ─────────────────────────────────────────
+
     section_head("03", "invest_red_flags", lang)
     st.markdown(f'<div class="indicator-banner">ℹ️ {t("invest_red_flags_tip", lang)}</div>', unsafe_allow_html=True)
 
-    # Préparation des données
     df_flags["_cname"] = df_flags["country"].map(lambda n: cname(n, lang))
     df_flags["income_group"] = df_flags["income_group"].map(lambda x: t(x, lang))
     df_flags = df_flags.sort_values(["red_flags", "yellow_flags"], ascending=[False, False])
 
-    # Filtre par type de drapeau
     flag_filter = st.radio(
         t("invest_flag_filter", lang),
         ["all", "red", "any"],
@@ -850,7 +817,6 @@ with tab_invest:
     else:
         df_flags_show = df_flags
 
-    # Construction du tableau d'affichage
     df_flags_display = df_flags_show[["_cname", "red_flags", "yellow_flags", "total_flags", "flag_details", "income_group"]].rename(columns={
         "_cname": t("col_country", lang),
         "red_flags": "🔴",
@@ -860,12 +826,11 @@ with tab_invest:
         "income_group": t("income_level", lang),
     })
 
-    # Affichage - tous les pays filtrés, scrollable
     render_table(df_flags_display, theme_mode, hide_index=True, height=500)
 
     st.divider()
     
-    # ── SECTION 4: Top Opportunities ──
+
     section_head("04", "invest_opportunities", lang)
     st.markdown(f'<div class="indicator-banner">ℹ️ {t("invest_opportunities_tip", lang)}</div>', unsafe_allow_html=True)
 
@@ -892,7 +857,7 @@ with tab_invest:
         top3_cols = st.columns(3)
         for i, (_, row) in enumerate(df_clean.head(3).iterrows()):
             with top3_cols[i]:
-                # income_group was already translated at line 792 — use directly
+
                 st.metric(
                     f"#{i+1} {cname(row['country'], lang)}",
                     f"{row['investment_score']:.1f}/100",
@@ -903,7 +868,6 @@ with tab_invest:
 
     import resilience
     resilience.render(df_all, lang, theme_mode=theme_mode)
-# ── Footer ──────────────────────────────────────────────────────────────────
 
 st.divider()
 st.caption(t("footer", lang))

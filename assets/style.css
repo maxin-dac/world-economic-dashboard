@@ -1,4 +1,3 @@
-/* Keep navigation styling stable against duplicate legacy rules below. */
 body [data-baseweb="tab-list"] { background: transparent !important; border: 0 !important; border-bottom: 1px solid var(--border-color) !important; border-radius: 0 !important; gap: 18px !important; padding: 10px 0 0 !important; }
 body [data-baseweb="tab"] { background: var(--bg-tertiary) !important; border: 1px solid var(--border-color) !important; border-radius: 8px !important; padding: 10px 16px !important; }
 body [data-baseweb="tab"] p,
@@ -8,7 +7,6 @@ body [data-baseweb="tab"][aria-selected="true"] { background: linear-gradient(13
 body [data-baseweb="tab"][aria-selected="true"] p,
 body [data-baseweb="tab"][aria-selected="true"] span { color: #ffffff !important; font-weight: 800 !important; }
 
-/* Streamlit versions that render tabs with role=tab instead of BaseWeb. */
 body [data-testid="stTabs"] [role="tab"] {
   background: var(--bg-tertiary) !important;
   border: 1px solid var(--border-color) !important;
@@ -118,7 +116,6 @@ label, a, small,
   display: none !important;
 }
 
-/* Keep the navigation rail available throughout the session. */
 [data-testid="stSidebarCollapseButton"],
 [data-testid="collapsedControl"] {
   display: none !important;
@@ -428,7 +425,6 @@ h4 {
   background: var(--bg-tertiary);
 }
 
-/* Dataframe surfaces follow the selected application palette. */
 [data-testid="stDataFrame"] {
   background: var(--bg-card) !important;
   border: 1px solid var(--border-color) !important;
@@ -471,7 +467,6 @@ h4 {
   border-color: var(--border-light) !important;
 }
 
-/* Selectors and segmented controls must use the active app theme. */
 body [data-baseweb="select"],
 body [data-baseweb="select"] > div,
 body [data-baseweb="input"],
@@ -603,7 +598,6 @@ body [data-testid="stWidgetLabel"] p {
 }
 [data-baseweb="tab"][aria-selected="true"] p { color: #ffffff !important; }
 
-/* Final tab treatment: match the sidebar title hierarchy. */
 [data-baseweb="tab-list"] {
   background: transparent !important;
   border: 0 !important;
@@ -686,7 +680,6 @@ body [data-testid="stWidgetLabel"] p {
 .social-btn:hover { box-shadow: var(--shadow-glow); transform: translateY(-1px); }
 .social-btn span { margin-right: 0 !important; }
 
-/* Sidebar filter labels: compact framed sections. */
 body [data-testid="stSidebar"] [data-testid="stWidgetLabel"] label,
 body [data-testid="stSidebar"] [data-testid="stWidgetLabel"] p {
   display: block !important;
@@ -711,7 +704,6 @@ body [data-testid="stSidebar"] [data-testid="stWidgetLabel"] p:hover {
   box-shadow: var(--shadow-glow) !important;
 }
 
-/* Keep this override after the legacy repeated blocks. */
 [data-baseweb="tab-list"] { background: transparent !important; border: 0 !important; border-bottom: 1px solid var(--border-color) !important; border-radius: 0 !important; gap: 18px !important; padding: 10px 0 0 !important; }
 [data-baseweb="tab"] { background: transparent !important; border: 0 !important; border-bottom: 3px solid transparent !important; border-radius: 0 !important; padding: 12px 4px 14px !important; }
 [data-baseweb="tab"] p { color: var(--text-primary) !important; font-weight: 700 !important; font-size: 0.82rem !important; letter-spacing: 0.05em !important; text-transform: uppercase !important; }
@@ -719,7 +711,6 @@ body [data-testid="stSidebar"] [data-testid="stWidgetLabel"] p:hover {
 [data-baseweb="tab"][aria-selected="true"] { background: transparent !important; border-bottom-color: var(--primary-blue) !important; box-shadow: none !important; }
 [data-baseweb="tab"][aria-selected="true"] p { color: var(--primary-blue) !important; }
 
-/* Definitive navigation styles must remain last to override legacy blocks. */
 [data-baseweb="tab-list"] {
   background: transparent !important;
   border: 0 !important;
@@ -755,7 +746,6 @@ body [data-testid="stSidebar"] [data-testid="stWidgetLabel"] p:hover {
   color: var(--primary-blue) !important;
 }
 
-/* Final navigation treatment. */
 [data-baseweb="tab-list"] {
   background: transparent !important;
   border: 0 !important;
@@ -863,7 +853,6 @@ body [data-testid="stSidebar"] [data-testid="stWidgetLabel"] p:hover {
 .social-btn:hover { box-shadow: var(--shadow-glow); transform: translateY(-1px); }
 .social-btn span { margin-right: 0 !important; }
 
-/* ── Sidebar: barre de défilement restaurée ────────────────────────── */
 [data-testid="stSidebar"],
 [data-testid="stSidebarContent"],
 [data-testid="stSidebar"] > div {
@@ -890,3 +879,7 @@ body [data-testid="stSidebar"] [data-testid="stWidgetLabel"] p:hover {
 [data-testid="stSidebarContent"]::-webkit-scrollbar-thumb:hover {
   background: var(--primary-blue);
 }
+
+/* sidebar-scroll-fix */
+section[data-testid="stSidebar"] { overflow-y: auto !important; }
+[data-testid="stSidebarContent"] { overflow-y: auto !important; }
