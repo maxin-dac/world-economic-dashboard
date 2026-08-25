@@ -81,7 +81,7 @@ if GLOBE_PATH.exists():
             background-position: center;
             background-repeat: no-repeat;
             background-size: 130vw auto;
-            opacity: 0.08;
+            opacity: 0.05;
             pointer-events: none;
             z-index: 0;
         }}
