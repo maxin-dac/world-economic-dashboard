@@ -71,6 +71,7 @@ def compute_investment_score(df_world: pd.DataFrame, year: int) -> pd.DataFrame:
     scores = []
     for _, row in df_year.iterrows():
         norm_values = []
+        available_weight = 0.0
         for ind, weight in INVESTMENT_INDICATORS.items():
             if ind not in row or pd.isna(row[ind]):
                 continue
@@ -85,7 +86,8 @@ def compute_investment_score(df_world: pd.DataFrame, year: int) -> pd.DataFrame:
             if ind in INVESTMENT_INVERSE:
                 norm = 1.0 - norm
             norm_values.append(np.clip(norm, 0, 1) * weight)
-        score = sum(norm_values) * 100 if norm_values else None
+            available_weight += weight
+        score = sum(norm_values) / available_weight * 100 if available_weight else None
         scores.append(score)
     df_year["investment_score"] = scores
     return df_year[["iso3", "country", "region", "income_group",

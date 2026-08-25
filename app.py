@@ -5,9 +5,6 @@ Code is 100% in English. All user-facing text is bilingual (EN/FR).
 Modern UI/UX with dark theme, SVG icons, and Plotly integration.
 """
 import base64
-import os
-import sys
-import subprocess
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -196,6 +193,9 @@ theme_mode = "dark"
 # ── Global filters ──────────────────────────────────────────────────────────
 mask = (df_all["year"].isin(sel_years) & df_all["region"].isin(sel_regions) & df_all["income_group"].isin(sel_income))
 df = df_all[mask].copy()
+if df.empty:
+    st.warning("No data matches the selected filters. Please select at least one region and income level.")
+    st.stop()
 latest_year = int(df["year"].max()) if not df.empty else max(sel_years)
 df_latest = df[df["year"] == latest_year]
 prev_year = previous_year(sorted(sel_years), latest_year)
@@ -687,6 +687,8 @@ with tab_invest:
 
     df_scores = compute_investment_score(df_all, invest_year)
     df_flags = detect_red_flags(df_all, invest_year, lang)
+    df_scores = df_scores[df_scores["region"].isin(sel_regions) & df_scores["income_group"].isin(sel_income)]
+    df_flags = df_flags[df_flags["region"].isin(sel_regions) & df_flags["income_group"].isin(sel_income)]
     
     # ── SECTION 1: Investment Scorecard ──
     section_head("01", "invest_scorecard", lang)

@@ -51,6 +51,13 @@ class TestInvestmentScore:
         result = compute_investment_score(sample_df, 2024)
         assert result["investment_score"].notna().all()
 
+    def test_missing_indicators_are_renormalized(self, sample_df):
+        available = ["gdp_growth_pct"]
+        reduced = sample_df[["iso3", "country", "region", "income_group", "year"] + available]
+        result = compute_investment_score(reduced, 2024)
+        scores = dict(zip(result["country"], result["investment_score"]))
+        assert scores["Beta"] == 100.0
+
     def test_empty_year_returns_empty(self, sample_df):
         result = compute_investment_score(sample_df, 1999)
         assert result.empty

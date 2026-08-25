@@ -31,20 +31,15 @@ jobs:
         run: python data/fetch_data.py
 
       - name: Generate changelog entry
-        run: python scripts/changelog_entry.py
+        run: python .github/changelog_entry.py
+
+      - name: Generate Power BI Star Schema
+        run: python data/prep_powerbi.py
 
       - name: Commit & push if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/world_economic.csv CHANGELOG.md
+          git add data/world_economic.csv data/powerbi/ CHANGELOG.md
           git diff --cached --quiet || git commit -m "data: monthly refresh $(date +%Y-%m-%d)"
           git push
-      
-      - name: Generate Power BI Star Schema
-        run: python data/prep_powerbi.py
-      
-      - name: Commit Power BI datasets
-        run: |
-          git add data/powerbi/
-          git diff --staged --quiet || git commit -m "data: refresh Power BI star schema parquet files"

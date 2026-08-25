@@ -14,9 +14,9 @@ Output: data/world_economic.csv  (single unified file)
 OWID data is licensed CC-BY. Source: https://ourworldindata.org
 """
 
-import os
 import time
 import logging
+from pathlib import Path
 from io import StringIO
 
 import requests
@@ -34,12 +34,13 @@ log = logging.getLogger(__name__)
 
 
 # ── Constants ───────────────────────────────────────────────────────────────
-BASE_URL = "http://api.worldbank.org/v2"
+BASE_URL = "https://api.worldbank.org/v2"
 START_YEAR = 2000
 END_YEAR = 2024
 
 MAX_RETRIES = 3          # attempts per World Bank indicator
 REQUEST_DELAY = 0.6      # seconds between requests (avoids rate-limiting)
+MAX_FAILED_INDICATORS = 5
 
 OWID_TIMEOUT = 120
 OWID_HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; EconomicDashboard/1.0)"}
@@ -314,6 +315,10 @@ def build_dataset(countries: pd.DataFrame) -> pd.DataFrame:
         for s in sects:
             master.loc[mask, s] = (master.loc[mask, s] / row_sum.loc[mask] * 100).round(2)
 
+    if len(failed) > MAX_FAILED_INDICATORS:
+        raise RuntimeError(
+            f"Too many World Bank indicators failed ({len(failed)}): {', '.join(failed)}"
+        )
     if failed:
         log.warning(f"\n{len(failed)} World Bank indicator(s) failed: {', '.join(failed)}")
 
@@ -332,15 +337,17 @@ def main():
     countries = fetch_country_metadata()
     if countries.empty:
         log.error("Failed to retrieve country metadata. Aborting.")
-        return
+        raise RuntimeError("Country metadata is required to build the dataset.")
     log.info(f"  ✓ Country metadata retrieved: {len(countries)} countries")
 
     master = build_dataset(countries)
 
-    out_dir = "data"
-    os.makedirs(out_dir, exist_ok=True)
-    out_path = os.path.join(out_dir, "world_economic.csv")
-    master.to_csv(out_path, index=False)
+    out_dir = Path(__file__).resolve().parent
+    out_dir.mkdir(parents=True, exist_ok=True)
+    out_path = out_dir / "world_economic.csv"
+    tmp_path = out_path.with_suffix(".csv.tmp")
+    master.to_csv(tmp_path, index=False)
+    tmp_path.replace(out_path)
 
     log.info("=" * 65)
     log.info(f" SUCCESS: Dataset saved to `{out_path}`")

@@ -1,14 +1,15 @@
 """Data loading with parquet cache."""
-import os
+from pathlib import Path
 import pandas as pd
 import streamlit as st
 from core.constants import CORE_INDICATORS, INCOME_ORDER
 
 @st.cache_data(show_spinner=False)
 def load_data() -> pd.DataFrame:
-    csv_path = os.path.join("data", "world_economic.csv")
-    cache_path = os.path.join("data", "world_economic.parquet")
-    if not os.path.exists(csv_path):
+    data_dir = Path(__file__).resolve().parent.parent / "data"
+    csv_path = data_dir / "world_economic.csv"
+    cache_path = data_dir / "world_economic.parquet"
+    if not csv_path.exists():
         st.error(f"Dataset not found at `{csv_path}`. Please run `data/fetch_data.py` first.")
         st.stop()
     if os.path.exists(cache_path) and os.path.getmtime(cache_path) >= os.path.getmtime(csv_path):
