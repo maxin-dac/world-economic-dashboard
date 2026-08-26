@@ -38,8 +38,6 @@ def safe_delta(current, previous):
 
 
 @st.cache_data(show_spinner=False)
-
-
 def get_pestel_scores(df_target: pd.DataFrame, df_world: pd.DataFrame, year: int) -> dict:
     world_year = df_world[df_world["year"] == year]
     target_year = df_target[df_target["year"] == year]
@@ -63,40 +61,48 @@ def get_pestel_scores(df_target: pd.DataFrame, df_world: pd.DataFrame, year: int
 
 
 @st.cache_data(show_spinner=False)
+def compute_investment_score(df_world: pd.DataFrame, year: int,
+                             min_pop_mn: float = 1.0) -> pd.DataFrame:
+    """Composite investment attractiveness score (0-100).
 
-
-def compute_investment_score(df_world: pd.DataFrame, year: int) -> pd.DataFrame:
-    """Composite investment attractiveness score (0-100) for all countries."""
+    Methodology (aligned with the Power BI twin):
+    - Each indicator is normalized by its WORLD PERCENTILE RANK, a robust
+      order statistic: outliers (hyperinflation, offshore GDP spikes) cannot
+      distort anyone else's score, and 50/100 means exactly "world median".
+    - Inverse indicators are flipped (1 - rank).
+    - Countries below ``min_pop_mn`` inhabitants (default 1M) are excluded
+      by default (micro-states / offshore centers); pass 0 to include them.
+    """
     df_year = df_world[df_world["year"] == year].copy()
+    ranks = {
+        ind: df_year[ind].rank(pct=True)
+        for ind in INVESTMENT_INDICATORS
+        if ind in df_year.columns
+    }
     scores = []
-    for _, row in df_year.iterrows():
+    for idx, row in df_year.iterrows():
         norm_values = []
         available_weight = 0.0
         for ind, weight in INVESTMENT_INDICATORS.items():
             if ind not in row or pd.isna(row[ind]):
                 continue
-            col = df_year[ind].dropna()
-            if col.empty:
+            norm = ranks[ind].loc[idx]
+            if pd.isna(norm):
                 continue
-            vmin, vmax = col.min(), col.max()
-            if vmax <= vmin:
-                norm = 0.5
-            else:
-                norm = (row[ind] - vmin) / (vmax - vmin)
             if ind in INVESTMENT_INVERSE:
                 norm = 1.0 - norm
-            norm_values.append(np.clip(norm, 0, 1) * weight)
+            norm_values.append(norm * weight)
             available_weight += weight
-        score = sum(norm_values) / available_weight * 100 if available_weight else None
-        scores.append(score)
+        scores.append(sum(norm_values) / available_weight * 100 if available_weight else None)
     df_year["investment_score"] = scores
+    if min_pop_mn and "population_mn" in df_year.columns:
+        micro = df_year["population_mn"].fillna(0.0) < float(min_pop_mn)
+        df_year.loc[micro, "investment_score"] = np.nan
     return df_year[["iso3", "country", "region", "income_group",
                     "investment_score"]].dropna(subset=["investment_score"])
 
 
 @st.cache_data(show_spinner=False)
-
-
 def detect_red_flags(df_world: pd.DataFrame, year: int, lang: str = "en") -> pd.DataFrame:
     """Countries with risk signals based on standard thresholds."""
     df_year = df_world[df_world["year"] == year].copy()
@@ -132,8 +138,6 @@ def detect_red_flags(df_world: pd.DataFrame, year: int, lang: str = "en") -> pd.
 
 
 @st.cache_data(show_spinner=False)
-
-
 def compute_cagr(df_world: pd.DataFrame, country: str, indicator: str, years: list) -> float:
     """Compound Annual Growth Rate for a country/indicator over given years."""
     df_c = df_world[(df_world["country"] == country)
