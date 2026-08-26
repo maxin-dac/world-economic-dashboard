@@ -654,7 +654,10 @@ with tab_invest:
     
     invest_year = st.selectbox(t("invest_ref_year", lang), sorted(sel_years, reverse=True), index=0, key="inv_yr")
 
-    df_scores = compute_investment_score(df_all, invest_year)
+    include_micro = st.checkbox(t("invest_include_micro", lang), value=False, key="inv_micro")
+    if not include_micro:
+        st.caption(t("invest_micro_note", lang))
+    df_scores = compute_investment_score(df_all, invest_year, 0.0 if include_micro else 1.0)
     df_flags = detect_red_flags(df_all, invest_year, lang)
     df_scores = df_scores[df_scores["region"].isin(sel_regions) & df_scores["income_group"].isin(sel_income)]
     df_flags = df_flags[df_flags["region"].isin(sel_regions) & df_flags["income_group"].isin(sel_income)]
