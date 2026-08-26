@@ -14,16 +14,20 @@ YELLOW = chr(0x1F7E1)
 CHECK = chr(0x2705)
 
 INVESTMENT_INDICATORS = {
-    "gdp_growth_pct": 0.20,
-    "political_stability_index": 0.20,
-    "control_of_corruption": 0.15,
-    "inflation": 0.15,
-    "debt_pct_gdp": 0.10,
-    "trade_openness_pct_gdp": 0.10,
-    "electricity_access_pct": 0.05,
-    "internet_users_pct": 0.05,
+    "fdi_pct_gdp": 0.15,
+    "gdp_growth_pct": 0.15,
+    "political_stability_index": 0.15,
+    "regulatory_quality": 0.10,
+    "control_of_corruption": 0.10,
+    "inflation": 0.10,
+    "gdp_total_bn": 0.10,
+    "debt_pct_gdp": 0.05,
+    "trade_openness_pct_gdp": 0.05,
+    "reserves_months_imports": 0.05,
 }
 INVESTMENT_INVERSE = {"inflation", "debt_pct_gdp"}
+INVESTMENT_LOG = {"gdp_total_bn"}
+DEFAULT_MIN_POP_MN = 1.0
 
 
 def previous_year(years: list, current: int) -> int:
@@ -62,23 +66,26 @@ def get_pestel_scores(df_target: pd.DataFrame, df_world: pd.DataFrame, year: int
 
 @st.cache_data(show_spinner=False)
 def compute_investment_score(df_world: pd.DataFrame, year: int,
-                             min_pop_mn: float = 1.0) -> pd.DataFrame:
+                             min_pop_mn: float = DEFAULT_MIN_POP_MN) -> pd.DataFrame:
     """Composite investment attractiveness score (0-100).
 
-    Methodology (aligned with the Power BI twin):
-    - Each indicator is normalized by its WORLD PERCENTILE RANK, a robust
-      order statistic: outliers (hyperinflation, offshore GDP spikes) cannot
-      distort anyone else's score, and 50/100 means exactly "world median".
-    - Inverse indicators are flipped (1 - rank).
-    - Countries below ``min_pop_mn`` inhabitants (default 1M) are excluded
-      by default (micro-states / offshore centers); pass 0 to include them.
+    Methodology (v2, realism-oriented):
+    - Balances OPPORTUNITY (FDI inflows = revealed investor preference, growth,
+      market size in log) and SAFETY (stability, regulation, corruption,
+      inflation, debt).
+    - Each indicator normalized by world PERCENTILE RANK (robust to outliers);
+      50/100 = world median. Market size is ranked on log10(GDP).
+    - Countries below min_pop_mn (default 1M) excluded by default.
     """
     df_year = df_world[df_world["year"] == year].copy()
-    ranks = {
-        ind: df_year[ind].rank(pct=True)
-        for ind in INVESTMENT_INDICATORS
-        if ind in df_year.columns
-    }
+    ranks = {}
+    for ind in INVESTMENT_INDICATORS:
+        if ind not in df_year.columns:
+            continue
+        s = df_year[ind]
+        if ind in INVESTMENT_LOG:
+            s = np.log10(s.where(s > 0))
+        ranks[ind] = s.rank(pct=True)
     scores = []
     for idx, row in df_year.iterrows():
         norm_values = []
@@ -104,24 +111,24 @@ def compute_investment_score(df_world: pd.DataFrame, year: int,
 
 @st.cache_data(show_spinner=False)
 def detect_red_flags(df_world: pd.DataFrame, year: int, lang: str = "en") -> pd.DataFrame:
-    """Countries with risk signals based on standard thresholds."""
+    """Countries with risk signals based on stress-calibrated thresholds."""
     df_year = df_world[df_world["year"] == year].copy()
     flags = []
     for _, row in df_year.iterrows():
         country_flags = []
-        if pd.notna(row.get("inflation")) and row["inflation"] > 10:
+        if pd.notna(row.get("inflation")) and row["inflation"] > 15:
             country_flags.append(f"{RED} {t('flag_high_inflation', lang)}")
-        if pd.notna(row.get("debt_pct_gdp")) and row["debt_pct_gdp"] > 80:
+        if pd.notna(row.get("debt_pct_gdp")) and row["debt_pct_gdp"] > 150:
             country_flags.append(f"{RED} {t('flag_high_debt', lang)}")
-        if pd.notna(row.get("unemployment_pct")) and row["unemployment_pct"] > 15:
+        if pd.notna(row.get("unemployment_pct")) and row["unemployment_pct"] > 20:
             country_flags.append(f"{RED} {t('flag_high_unemployment', lang)}")
-        if pd.notna(row.get("political_stability_index")) and row["political_stability_index"] < -1:
+        if pd.notna(row.get("political_stability_index")) and row["political_stability_index"] < -1.5:
             country_flags.append(f"{RED} {t('flag_political_instability', lang)}")
         if pd.notna(row.get("corruption_perception_index")) and row["corruption_perception_index"] < 25:
             country_flags.append(f"{RED} {t('flag_high_corruption', lang)}")
-        if pd.notna(row.get("inflation")) and 5 < row["inflation"] <= 10:
+        if pd.notna(row.get("inflation")) and 8 < row["inflation"] <= 15:
             country_flags.append(f"{YELLOW} {t('flag_moderate_inflation', lang)}")
-        if pd.notna(row.get("debt_pct_gdp")) and 50 < row["debt_pct_gdp"] <= 80:
+        if pd.notna(row.get("debt_pct_gdp")) and 80 < row["debt_pct_gdp"] <= 150:
             country_flags.append(f"{YELLOW} {t('flag_moderate_debt', lang)}")
         flags.append({
             "country": row["country"],
