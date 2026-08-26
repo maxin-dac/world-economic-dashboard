@@ -144,15 +144,15 @@ YEAR_MAX = int(df_all["year"].max())
 ALL_YEARS = sorted(df_all["year"].unique())
 
 with st.sidebar:
-    lang = st.radio("🌍 Language / Langue", ["EN", "FR"], horizontal=True, index=0, key="lang_choice").lower()
+    lang = st.radio("Language / Langue", ["EN", "FR"], horizontal=True, index=0, key="lang_choice").lower()
     st.markdown(f"## {t('sidebar_title', lang)}")
     default_years = ALL_YEARS
-    sel_years = st.multiselect(f"📅 {t('years_label', lang)}", ALL_YEARS, default=default_years)
+    sel_years = st.multiselect(f"{t('years_label', lang)}", ALL_YEARS, default=default_years)
     if not sel_years:
         sel_years = ALL_YEARS
         st.warning(t("no_year_selected", lang))
-    sel_regions = st.multiselect(f"🗺️ {t('regions', lang)}", ALL_REGIONS, default=ALL_REGIONS, format_func=lambda x: t(x, lang))
-    sel_income = st.multiselect(f"🔍 {t('income_levels', lang)}", INCOME_ORDER, default=INCOME_ORDER, format_func=lambda x: t(x, lang))
+    sel_regions = st.multiselect(f"{t('regions', lang)}", ALL_REGIONS, default=ALL_REGIONS, format_func=lambda x: t(x, lang))
+    sel_income = st.multiselect(f"{t('income_levels', lang)}", INCOME_ORDER, default=INCOME_ORDER, format_func=lambda x: t(x, lang))
     st.divider()
     st.caption(t("source", lang))
 
@@ -237,9 +237,9 @@ tab_map, tab_trend, tab_country, tab_compare, tab_struct, tab_invest, tab_data =
 
 with tab_map:
     c1, c2, c3 = st.columns([2, 1, 1])
-    with c1: map_ind = st.selectbox(f"🗺️ {t('map_indicator', lang)}", INDICATOR_KEYS, format_func=lambda x: ind_label(x, lang, with_pillar=True), key="map_ind")
+    with c1: map_ind = st.selectbox(f"{t('map_indicator', lang)}", INDICATOR_KEYS, format_func=lambda x: ind_label(x, lang, with_pillar=True), key="map_ind")
     with c2: map_type = st.radio(t("map_type", lang), ["choropleth", "bubble"], format_func=lambda x: t(x, lang), horizontal=True)
-    with c3: map_year = st.selectbox(f"📅 {t('ref_year', lang)}", sorted(sel_years, reverse=True), index=0, key="map_yr")
+    with c3: map_year = st.selectbox(f"{t('ref_year', lang)}", sorted(sel_years, reverse=True), index=0, key="map_yr")
     show_indicator_info(map_ind, lang)
     
     size_choice_key = None
@@ -701,7 +701,7 @@ with tab_invest:
     )
     st.plotly_chart(style_plotly(fig_score_map, theme_mode), width="stretch", theme="streamlit")
 
-    st.markdown(f"**🏅 {t('invest_top10', lang, y=invest_year)}**")
+    st.markdown(f"** {t('invest_top10', lang, y=invest_year)}**")
     df_top = df_filtered.sort_values("investment_score", ascending=False).head(10).copy()
     df_top["_cname"] = df_top["country"].map(lambda n: cname(n, lang))
     df_top["income_group"] = df_top["income_group"].map(lambda x: t(x, lang))
@@ -853,7 +853,7 @@ with tab_invest:
         fig_opp.update_layout(margin=dict(t=50, b=20, l=10, r=10), height=400, legend=dict(orientation="h", y=-0.2))
         st.plotly_chart(style_plotly(fig_opp, theme_mode), width="stretch", theme="streamlit")
 
-        st.markdown(f"**🔍 {t('invest_top3_detail', lang)}**")
+        st.markdown(f"** {t('invest_top3_detail', lang)}**")
         top3_cols = st.columns(3)
         for i, (_, row) in enumerate(df_clean.head(3).iterrows()):
             with top3_cols[i]:
