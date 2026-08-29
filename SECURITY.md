@@ -9,8 +9,6 @@
 
 ## Reporting a Vulnerability
 
-We take the security of the Global Economic Intelligence Dashboard seriously.
-
 **Please do NOT open a public GitHub issue for security vulnerabilities.**
 
 If you discover a security issue (e.g., secret leakage, dependency vulnerability, XSS in Streamlit components), please report it privately via the **GitHub Security Advisories** tab on this repository.

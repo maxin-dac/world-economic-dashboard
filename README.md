@@ -1,6 +1,6 @@
 # 🌍 Global Economic Intelligence Dashboard
 
-Interactive bilingual platform (EN/FR) - 217 countries · 2000-2024 · 58 World Bank indicators structured around the **PESTEL** framework, plus a dedicated **Investment Intelligence** module.
+Interactive bilingual platform (EN/FR) - 217 countries · 2000-2024 · 58 World Bank indicators structured around the **PESTEL** framework.
 
 <p align="left">
 <img src="https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white" alt="Python" />
@@ -18,18 +18,6 @@ Interactive bilingual platform (EN/FR) - 217 countries · 2000-2024 · 58 World 
 <img src="https://img.shields.io/badge/GitHub_Actions-2088FF?style=flat&logo=githubactions&logoColor=white" alt="GitHub Actions" />
 <img src="https://img.shields.io/badge/API_Banque_Mondiale-0072BC?style=flat" alt="API Banque Mondiale" />
 <img src="https://img.shields.io/badge/Licence_MIT-green?style=flat" alt="Licence MIT" />
-</p>
-
-<p align="left">
-<a href="https://world-bi-dashboard.streamlit.app/">
-<img src="https://img.shields.io/badge/Live_Demo-Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Live Demo" />
-</a>
-</p>
-
-<p align="left">
-  <a href="https://world-economic-dashboard.onrender.com/">
-    <img src="https://img.shields.io/badge/Live Demo-Render-FF4B4B?style=for-the-badge&logo=render&logoColor=white" alt="Live Demo">
-  </a>
 </p>
 
 ![Overview](docs/screenshots/overview.jpeg)
@@ -55,7 +43,7 @@ Interactive bilingual platform (EN/FR) - 217 countries · 2000-2024 · 58 World 
 
 ## Features
 
-**7 coordinated views** + specialized analytical modules:
+**6 specialized analytical modules:**
 
 - **World Map** - Choropleth + bubble maps, percentile clipping, regional median cards.
 - **Trends & Correlations** - Time series by region/income, annotated shock lines (2008, 2020, 2022), OLS scatter plots.
@@ -63,7 +51,6 @@ Interactive bilingual platform (EN/FR) - 217 countries · 2000-2024 · 58 World 
 - **Country Comparison & Similarity** - Multi-country benchmarking (up to 12 countries) and peer similarity matching engine.
 - **Economic Structure & Resilience** - Sectoral treemap, log-scale violin plot of GDP/capita, resilience & shock analysis.
 - **Data Explorer & Quality Audit** - Filterable dataset with missingness audit, null-safe conditional formatting, one-click Excel (.xlsx) export.
-- **Investment Score** - Composite 0-100 attractiveness score (8 weighted indicators), risk/return 4-quadrant matrix, red-flag detector, clean-opportunity shortlist.
 
 ## Power BI Twin
 
@@ -78,7 +65,6 @@ A complete Power BI mirror of this dashboard is maintained in parallel (french o
 | World TopoJSON (choropleth) | `data/powerbi/world.topo.json` |
 
 **Pages**: World Map (quintile choropleth) · Trends · Country Profile (drillthrough) · Compare Countries · Economic Structure.
-*PCA-based country similarity is intentionally Streamlit-only.*
 
 ## PESTEL Coverage (58 indicators)
 
@@ -104,18 +90,14 @@ world-economic-dashboard/
 │ ├── style.css                 # Custom blue/navy theme CSS
 │ └── globe.png                 # Globe watermark (app background)
 ├── core/                       # Core modular Python package
-│ ├── analytics.py              # Cached statistical helpers
 │ ├── constants.py              # PESTEL schemas, palettes, inverse indicators
 │ ├── data.py                   # Cached data loading (CSV + Parquet)
 │ ├── indicators.py             # Indicator metadata & interpretation
-│ ├── investment.py             # Investment scoring & quadrant algorithms
 │ └── labels.py                 # Multilingual label resolvers
 ├── data/
 │ ├── fetch_data.py             # World Bank + OWID data ingestion pipeline
 │ ├── world_economic.csv        # Aggregated dataset (217 countries × 2000-2024)
 │ └── world_economic.parquet    # Parquet cache for fast local loading
-├── tests/
-│ └── test_investment.py        # Pytest automated test suite
 ├── docs/
 │ └── screenshots/              # Dashboard overview captures (EN + FR)
 ├── app.py                      # Streamlit entry point (7 tabs)
@@ -137,8 +119,21 @@ world-economic-dashboard/
 
 ### Option 1: Live Demo
 
-- Click **[here](https://world-bi-dashboard.streamlit.app/)** to use the dashboard, hosted on **Streamlit Cloud**.
-- For redundancy needs, the app is also hosted on **Render**. Click **[here](https://world-economic-dashboard.onrender.com/)**.
+- Click on the button below to use the dashboard, hosted on **Streamlit Cloud**.
+
+<p align="left">
+<a href="https://world-bi-dashboard.streamlit.app/">
+<img src="https://img.shields.io/badge/Live_Demo-Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white" alt="Live Demo" />
+</a>
+</p>
+
+- For redundancy needs, the app is also hosted on **Render**.
+
+<p align="left">
+  <a href="https://world-economic-dashboard.onrender.com/">
+    <img src="https://img.shields.io/badge/Live Demo-Render-FF4B4B?style=for-the-badge&logo=render&logoColor=white" alt="Live Demo">
+  </a>
+</p>
 
 ### Option 2: Local Setup
 
@@ -183,31 +178,11 @@ world-economic-dashboard/
 
 #### Global settings
 
-The sidebar lets you choose the interface language (English or French), together with the years, regions and income levels to analyse. These filters apply to every view, and medians as well as rankings are recomputed on the fly over the selected subset. Normalized scores (PESTEL radar and investment score), however, are always computed against the **whole world** for the chosen year, so that a score keeps the same meaning regardless of the active filters.
-
-#### Colors and missing values
-
-Each indicator has its own color scale. For **inverse indicators** (inflation, public debt, unemployment, PM2.5, etc.), the value is flipped when scores are computed: a high value then counts as a poor result. Maps are clipped at the 2nd–98th percentiles so that a few extreme values cannot crush the color scale. Missing cells appear as "-" in tables and "N/A" on KPI cards, on a neutral gray background.
+The sidebar lets you choose the interface language (English or French), together with the years, regions and income levels to analyse. These filters apply to every view, and medians as well as rankings are recomputed on the fly over the selected subset. 
 
 #### PESTEL radar (Country profile)
 
 Each pillar receives a 0-100 score equal to the median of the pillar's indicators, min-max normalized against the world and corrected for inverse indicators. A score of **50** therefore corresponds to the world median position; above **70** the country sits in the top tier; below **30** it is in a fragile situation. Compare the **shapes** of the radars rather than absolute values: the three displayed areas represent the country, its regional median and the world median.
-
-#### Investment score (0-100)
-
-The investment score aggregates **eight weighted macroeconomic indicators** (GDP per capita, growth, inflation, public debt, unemployment, current account, foreign direct investment, trade openness), each normalized against the world and flipped when inverse. Above 70 the country is considered very attractive; between 50 and 70 it is intermediate; below 50 it is fragile. This reading is relative to the world vintage of the selected year.
-
-#### Risk/return matrix
-
-The horizontal axis shows GDP-per-capita CAGR over the last five selected years, the vertical axis the risk (inflation mean plus standard deviation), and the bubble size the total GDP. Quadrants are split at the sample medians and follow the classic reading: ⭐ Star, ❓ Question Mark, 💰 Cash Cow, ⚠️ Dog.
-
-#### Red flags and opportunities
-
-A 🔴 flag means a critical threshold has been breached (the rules live in `core/investment.py`); a 🟡 flag signals a watch zone. The `flag_details` column lists, country by country, the reasons behind each flag. The "top opportunities" shortlist keeps only countries with **no red flag at all**, ranked by investment score.
-
-#### Resilience and shocks
-
-The resilience module measures the depth of the drop (drawdown) and the speed of recovery after the 2008, 2020 and 2022 shocks. A country is deemed resilient when the drop is limited and the pre-shock level is quickly regained.
 
 #### Similar countries
 
@@ -222,39 +197,11 @@ In the explorer, per-column gradients show whether a high value is favorable (bl
 - Correlation does not imply causation (OLS trendlines are descriptive).
 - **Central tendency**: medians by default (robust to outliers such as micro-states and hyperinflations). Means are never used for displayed aggregates; dispersion is measured with standard deviations.
 - 2024 is the latest validated year (12–18 month publication lag).
-- Finally, **scores are relative**: 60/100 means "60% of the world min-max gap", not an absolute grade.
-
-### Technical & API documentation
-
-#### Application architecture
-
-The application is organized into specialized modules:
-
-- `app.py` is the Streamlit entry point: it assembles the 7 tabs and manages the global filters.
-
-- `core/data.py` exposes `load_data()`, which loads the dataset (CSV + Parquet cache) and returns a `pd.DataFrame`.
-- `core/constants.py` centralizes the PESTEL schemas, color palettes, the list of inverse indicators (`INVERSE_INDICATORS`) and the `get_expressive_colorscale()` function.
-- `core/indicators.py` provides indicator metadata and interpretation (`indicator_info()`, `interpret_value()`, `show_indicator_info()`).
-- - `core/analytics.py` groups cached statistical helpers.
-- `similar.py`, `resilience.py` and `dataquality.py` are standalone modules, each exposing a `render(df_all, lang)` function.
-- `exports.py` generates the Excel workbook (`export_excel(df, year, lang) -> bytes`).
-- `translations.py` handles bilingualism through `t(key, lang, **fmt)`.
-
-#### Data pipeline
-
-The `data/fetch_data.py` script collects data from the World Bank API and Our World in Data, then aggregates them into `data/world_economic.csv` (217 countries × 2000–2024). This dataset is automatically refreshed on the first Monday of every month by the `.github/workflows/update-data.yml` workflow, which chains tests, data fetch, changelog generation, commit and Streamlit Cloud redeployment.
-
-#### Internal API (UI-independent functions)
-
-```Py
-    load_data() -> pd.DataFrame                     # country, iso3, region, income_group, year + 58 indicators
-    get_pestel_scores(df_target, df_world, year) -> dict  # {pillar: 0-100 score}
-    t(key, lang, **kwargs) -> str                   # formatted translation
-```
+- Finally, **PESTEL scores are relative**: 60/100 means "60% of the world min-max gap", not an absolute grade.
 
 ## Known issues & troubleshooting
 
-### The *"Failed to fetch dynamically imported module"* when launching the app
+### The *"Failed to fetch dynamically imported module"* when launching the app on Streamlit Cloud
 
 This message may appear immediately **after a redeployment** (push or reboot on Streamlit Cloud). **It is not an application bug**: on every update, the frontend JavaScript files change their fingerprint (hash). A tab left open - or a stale browser cache - still references the old addresses and receives errors, which each widget displays in its own red box. The Python server, meanwhile, runs normally.
 
