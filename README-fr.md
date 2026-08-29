@@ -78,7 +78,7 @@ Un miroir Power BI complet du dashboard est maintenu en parallèle (en français
 | TopoJSON monde (choroplèthe) | `data/powerbi/world.topo.json` |
 
 **Pages** : Carte mondiale (choroplèthe quintiles) · Tendances · Profil pays (drillthrough) · Comparatifs · Structure économique.
-*L'Intelligence Investissement reste volontairement dans l'app Streamlit (similarité PCA, drapeaux rouges, scorecard).*
+*La similarité pays (PCA) reste volontairement dans l'app Streamlit.*
 
 ## Couverture PESTEL (58 indicateurs)
 
@@ -234,8 +234,7 @@ L'application est organisée en modules spécialisés :
 - `core/data.py` expose `load_data()`, qui charge le dataset (cache CSV + Parquet) et renvoie un `pd.DataFrame`.
 - `core/constants.py` centralise les schémas PESTEL, les palettes de couleurs, la liste des indicateurs inversés (`INVERSE_INDICATORS`) et la fonction `get_expressive_colorscale()`.
 - `core/indicators.py` fournit les métadonnées et l'interprétation des indicateurs (`indicator_info()`, `interpret_value()`, `show_indicator_info()`).
-- `core/investment.py` contient les algorithmes de scoring (`compute_investment_score()`, `detect_red_flags()`, `compute_cagr()`).
-- `core/analytics.py` regroupe des helpers statistiques mis en cache.
+- - `core/analytics.py` regroupe des helpers statistiques mis en cache.
 - `similar.py`, `resilience.py` et `dataquality.py` sont des modules autonomes exposant chacun une fonction `render(df_all, lang)`.
 - `exports.py` génère le classeur Excel (`export_excel(df, year, lang) -> bytes`).
 - `translations.py` assure la bilingualité via `t(key, lang, **fmt)`.
@@ -248,9 +247,6 @@ Le script `data/fetch_data.py` collecte les données de l'API Banque Mondiale et
 
 ```Py
     load_data() -> pd.DataFrame                     # country, iso3, region, income_group, year + 58 indicateurs
-    compute_investment_score(df, year) -> DataFrame # + investment_score (0-100)
-    detect_red_flags(df, year, lang) -> DataFrame   # + red_flags, yellow_flags, total_flags, flag_details
-    compute_cagr(first, last, n) -> float           # taux de croissance annuel composé
     get_pestel_scores(df_target, df_world, year) -> dict  # {pilier: score 0-100}
     t(key, lang, **kwargs) -> str                   # traduction formatée
 ```

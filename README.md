@@ -78,7 +78,7 @@ A complete Power BI mirror of this dashboard is maintained in parallel (french o
 | World TopoJSON (choropleth) | `data/powerbi/world.topo.json` |
 
 **Pages**: World Map (quintile choropleth) · Trends · Country Profile (drillthrough) · Compare Countries · Economic Structure.
-*Investment Intelligence is intentionally Streamlit-only (PCA similarity, red flags, scorecard).*
+*PCA-based country similarity is intentionally Streamlit-only.*
 
 ## PESTEL Coverage (58 indicators)
 
@@ -235,8 +235,7 @@ The application is organized into specialized modules:
 - `core/data.py` exposes `load_data()`, which loads the dataset (CSV + Parquet cache) and returns a `pd.DataFrame`.
 - `core/constants.py` centralizes the PESTEL schemas, color palettes, the list of inverse indicators (`INVERSE_INDICATORS`) and the `get_expressive_colorscale()` function.
 - `core/indicators.py` provides indicator metadata and interpretation (`indicator_info()`, `interpret_value()`, `show_indicator_info()`).
-- `core/investment.py` contains the scoring algorithms (`compute_investment_score()`, `detect_red_flags()`, `compute_cagr()`).
-- `core/analytics.py` groups cached statistical helpers.
+- - `core/analytics.py` groups cached statistical helpers.
 - `similar.py`, `resilience.py` and `dataquality.py` are standalone modules, each exposing a `render(df_all, lang)` function.
 - `exports.py` generates the Excel workbook (`export_excel(df, year, lang) -> bytes`).
 - `translations.py` handles bilingualism through `t(key, lang, **fmt)`.
@@ -249,9 +248,6 @@ The `data/fetch_data.py` script collects data from the World Bank API and Our Wo
 
 ```Py
     load_data() -> pd.DataFrame                     # country, iso3, region, income_group, year + 58 indicators
-    compute_investment_score(df, year) -> DataFrame # + investment_score (0-100)
-    detect_red_flags(df, year, lang) -> DataFrame   # + red_flags, yellow_flags, total_flags, flag_details
-    compute_cagr(first, last, n) -> float           # compound annual growth rate
     get_pestel_scores(df_target, df_world, year) -> dict  # {pillar: 0-100 score}
     t(key, lang, **kwargs) -> str                   # formatted translation
 ```
