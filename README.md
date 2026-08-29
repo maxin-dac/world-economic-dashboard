@@ -133,7 +133,7 @@ world-economic-dashboard/
 
 <p align="left">
   <a href="https://world-economic-dashboard.onrender.com/">
-    <img src="https://img.shields.io/badge/Live Demo-Render-FF4B4B?style=for-the-badge&logo=render&logoColor=white" alt="Live Demo">
+    <img src="https://img.shields.io/badge/Live Demo-Render-46E3B7?style=for-the-badge&logo=render&logoColor=white" alt="Live Demo">
   </a>
 </p>
 
