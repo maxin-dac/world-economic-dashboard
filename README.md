@@ -2,6 +2,8 @@
 
 An integrated bilingual platform (EN/FR) analyzing global economies using a PESTEL approach. 217 countries · 2000-2024 · 58 structured World Bank indicators.
 
+> **Documentation en version française :** [README-fr.md](README-fr.md)
+
 <p align="left">
 <img src="https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white" alt="Python" />
 <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=flat&logo=streamlit&logoColor=white" alt="Streamlit" />
@@ -22,7 +24,7 @@ An integrated bilingual platform (EN/FR) analyzing global economies using a PEST
 
 ![Overview](docs/screenshots/overview.jpeg)
 
-> **French version:** [README-fr.md](README-fr.md)
+
 
 ## Table of Contents
 

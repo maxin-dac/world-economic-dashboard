@@ -2,6 +2,8 @@
 
 Plateforme bilingue intégrée (EN/FR) analysant les économies mondiales selon l'approche PESTEL. 217 pays · 2000-2024 · 58 indicateurs structurés de la Banque mondiale.
 
+> **English documentation:** [README.md](README.md)
+
 <p align="left">
 <img src="https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white" alt="Python" />
 <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=flat&logo=streamlit&logoColor=white" alt="Streamlit" />
@@ -22,7 +24,7 @@ Plateforme bilingue intégrée (EN/FR) analysant les économies mondiales selon 
 
 ![Aperçu](docs/screenshots/aperçu.jpeg)
 
-> **Version anglaise :** [README.md](README.md)
+
 
 ## Table des matières
 
