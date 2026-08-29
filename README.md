@@ -1,6 +1,6 @@
 # 🌍 Global Economic Intelligence Dashboard
 
-Interactive bilingual platform (EN/FR) - 217 countries · 2000-2024 · 58 World Bank indicators structured around the **PESTEL** framework.
+An integrated bilingual platform (EN/FR) analyzing global economies using a PESTEL approach. 217 countries · 2000-2024 · 58 structured World Bank indicators.
 
 <p align="left">
 <img src="https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white" alt="Python" />

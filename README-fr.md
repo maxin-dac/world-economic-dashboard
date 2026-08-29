@@ -1,6 +1,6 @@
 # 🌍 Tableau de Bord d'Intelligence Économique Mondiale
 
-Plateforme interactive bilingue (FR/EN) - 217 pays · 2000-2024 · 58 indicateurs Banque Mondiale structurés selon le cadre **PESTEL**.
+Plateforme bilingue intégrée (EN/FR) analysant les économies mondiales selon l'approche PESTEL. 217 pays · 2000-2024 · 58 indicateurs structurés de la Banque mondiale.
 
 <p align="left">
 <img src="https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white" alt="Python" />
