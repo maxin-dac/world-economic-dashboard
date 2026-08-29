@@ -40,7 +40,6 @@ TRANSLATIONS = {
         "tab_compare": "Compare Countries",
         "tab_struct": "Economic Structure",
         "tab_data": "Data",
-        "tab_invest": "Investment Intelligence",
         "tab_dq": "Data Quality",
         "tab_sim": "Similar Countries",
 
@@ -256,7 +255,6 @@ TRANSLATIONS = {
         "tab_compare": "Comparaison",
         "tab_struct": "Structure économique",
         "tab_data": "Données",
-        "tab_invest": "Intelligence Investissement",
         "tab_dq": "Qualite des donnees",
         "tab_sim": "Pays similaires",
 

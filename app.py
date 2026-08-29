@@ -224,13 +224,12 @@ st.divider()
 def section_head(num, key, lang):
     st.markdown(f'<div class="section-head"><span class="sh-num">{num}</span><span class="sh-title">{t(key, lang)}</span></div>', unsafe_allow_html=True)
 
-tab_map, tab_trend, tab_country, tab_compare, tab_struct, tab_invest, tab_data = st.tabs([
+tab_map, tab_trend, tab_country, tab_compare, tab_struct, tab_data = st.tabs([
     t('tab_map', lang).upper(),
     t('tab_trend', lang).upper(),
     t('tab_country', lang).upper(),
     t('tab_compare', lang).upper(),
     t('tab_struct', lang).upper(),
-    t('tab_invest', lang).upper(),
     t('tab_data', lang).upper(),
 ])
 
