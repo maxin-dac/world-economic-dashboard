@@ -1,59 +1,59 @@
 ﻿indicator_id,pillar,is_inverse,label_fr
-agriculture_pct,economic,False,Économique - Agriculture (% PIB)
-cpi_index_raw,economic,True,Économique - Indice des prix à la consommation (2010=100)
-current_account_pct_gdp,economic,False,Économique - Compte courant (% PIB)
-debt_pct_gdp,economic,True,Économique - Dette publique (% PIB)
-exchange_rate,economic,False,Économique - Taux de change (monnaie locale / USD)
-exports_pct_gdp,economic,False,Économique - Exportations (% PIB)
-fdi_pct_gdp,economic,False,Économique - IDE entrants (% PIB)
-gdp_growth_pct,economic,False,Économique - Croissance du PIB (%)
-gdp_per_capita,economic,False,Économique - PIB par habitant (USD)
-gdp_per_capita_ppp,economic,False,Économique - PIB par habitant (PPA)
-gdp_total_bn,economic,False,Économique - PIB total (Mrd USD)
-gross_fixed_capital_formation_pct_gdp,economic,False,Économique - Investissement / Capital fixe (% PIB)
-imports_pct_gdp,economic,True,Économique - Importations (% PIB)
-industry_pct,economic,False,Économique - Industrie (% PIB)
+agriculture_pct,economic,False,Économique - agriculture pct
+cpi_index_raw,economic,True,Économique - cpi index raw
+current_account_pct_gdp,economic,False,Économique - current account pct gdp
+debt_pct_gdp,economic,True,Économique - debt pct gdp
+exchange_rate,economic,False,Économique - exchange rate
+exports_pct_gdp,economic,False,Économique - exports pct gdp
+fdi_pct_gdp,economic,False,Économique - fdi pct gdp
+gdp_growth_pct,economic,False,Économique - gdp growth pct
+gdp_per_capita,economic,False,Économique - gdp per capita
+gdp_per_capita_ppp,economic,False,Économique - gdp per capita ppp
+gdp_total_bn,economic,False,Économique - gdp total bn
+gross_fixed_capital_formation_pct_gdp,economic,False,Économique - gross fixed capital formation pct gdp
+imports_pct_gdp,economic,True,Économique - imports pct gdp
+industry_pct,economic,False,Économique - industry pct
 inflation,economic,True,Économique - Inflation (%)
-remittances_pct_gdp,economic,False,Économique - Transferts de fonds (% PIB)
-reserves_months_imports,economic,False,Économique - Réserves (mois d'importations)
-services_pct,economic,False,Économique - Services (% PIB)
-tax_revenue_pct_gdp,economic,False,Économique - Recettes fiscales (% PIB)
-trade_openness_pct_gdp,economic,False,Économique - Ouverture commerciale (% PIB)
-cereal_yield_kg_per_ha,environmental,False,Environnemental - Rendement céréalier (kg/ha)
-electric_power_losses_pct,environmental,True,Environnemental - Pertes électriques (%)
-electricity_access_pct,environmental,False,Environnemental - Accès à l'électricité (%)
-pm25_air_pollution,environmental,True,"Environnemental - Pollution PM2,5 (µg/m³)"
-control_of_corruption,legal,False,Légal - Contrôle de la corruption (WGI)
-corruption_perception_index,legal,False,Légal - Indice de Perception de la Corruption (0-100)
-regulatory_quality,legal,False,Légal - Qualité réglementaire (WGI)
-rule_of_law_index,legal,False,Légal - État de droit (WGI)
-transparency_corruption_score,legal,False,Légal - Note CPIA transparence & corruption
-voice_accountability,legal,False,Légal - Voix et responsabilité (WGI)
-women_parliament_pct,legal,False,Légal - Femmes au parlement (%)
-govt_effectiveness_index,political,False,Politique - Efficacité de l'État (WGI)
-military_expenditure_pct_gdp,political,True,Politique - Dépenses militaires (% PIB)
-military_expenditure_pct_govt,political,True,Politique - Dépenses militaires (% budget de l'État)
-political_stability_index,political,False,Politique - Stabilité politique (WGI)
-basic_sanitation_access_pct,social,False,Social - Accès à l'assainissement de base (%)
-education_expenditure_pct_gdp,social,False,Social - Dépenses d'éducation (% PIB)
-fertility_rate,social,True,Social - Indice de fécondité (naissances/femme)
-gini_index,social,True,Social - Indice de Gini
+remittances_pct_gdp,economic,False,Économique - remittances pct gdp
+reserves_months_imports,economic,False,Économique - reserves months imports
+services_pct,economic,False,Économique - services pct
+tax_revenue_pct_gdp,economic,False,Économique - tax revenue pct gdp
+trade_openness_pct_gdp,economic,False,Économique - trade openness pct gdp
+cereal_yield_kg_per_ha,environmental,False,Environnemental - cereal yield kg per ha
+electric_power_losses_pct,environmental,True,Environnemental - electric power losses pct
+electricity_access_pct,environmental,False,Environnemental - electricity access pct
+pm25_air_pollution,environmental,True,Environnemental - pm25 air pollution
+control_of_corruption,legal,False,Légal - control of corruption
+corruption_perception_index,legal,False,Légal - corruption perception index
+regulatory_quality,legal,False,Légal - regulatory quality
+rule_of_law_index,legal,False,Légal - rule of law index
+transparency_corruption_score,legal,False,Légal - transparency corruption score
+voice_accountability,legal,False,Légal - voice accountability
+women_parliament_pct,legal,False,Légal - women parliament pct
+govt_effectiveness_index,political,False,Politique - govt effectiveness index
+military_expenditure_pct_gdp,political,True,Politique - military expenditure pct gdp
+military_expenditure_pct_govt,political,True,Politique - military expenditure pct govt
+political_stability_index,political,False,Politique - political stability index
+basic_sanitation_access_pct,social,False,Social - basic sanitation access pct
+education_expenditure_pct_gdp,social,False,Social - education expenditure pct gdp
+fertility_rate,social,True,Social - fertility rate
+gini_index,social,True,Social - gini index
 hdi,social,False,Social - Indice de Développement Humain (IDH)
-health_expenditure_per_capita,social,False,Social - Dépenses de santé par habitant (USD)
-labor_force_participation_pct,social,False,Social - Taux d'activité (%)
-life_expectancy,social,False,Social - Espérance de vie (années)
-literacy_rate,social,False,Social - Taux d'alphabétisation (%)
-population_mn,social,False,Social - Population (millions)
-primary_completion_rate_pct,social,False,Social - Taux d'achèvement du primaire (%)
-school_enrollment_secondary_pct,social,False,Social - Scolarisation secondaire (% brut)
-under5_mortality_per_1000,social,True,Social - Mortalité des moins de 5 ans (pour 1 000)
-unemployment_pct,social,True,Social - Taux de chômage (%)
-urban_population_pct,social,False,Social - Population urbaine (%)
-youth_unemployment_pct,social,True,Social - Chômage des jeunes (%)
-bank_account_ownership_pct,technological,False,Technologique - Possession d'un compte bancaire (%)
-fixed_broadband_per_100,technological,False,Technologique - Internet fixe (pour 100)
-high_tech_exports_pct,technological,False,Technologique - Exportations high-tech (%)
-internet_users_pct,technological,False,Technologique - Utilisateurs d'Internet (%)
-mobile_subscriptions_per_100,technological,False,Technologique - Abonnements mobiles (pour 100)
-rd_expenditure_pct_gdp,technological,False,Technologique - Dépenses R&D (% PIB)
-researchers_per_million,technological,False,Technologique - Chercheurs (par million)
+health_expenditure_per_capita,social,False,Social - health expenditure per capita
+labor_force_participation_pct,social,False,Social - labor force participation pct
+life_expectancy,social,False,Social - life expectancy
+literacy_rate,social,False,Social - literacy rate
+population_mn,social,False,Social - population mn
+primary_completion_rate_pct,social,False,Social - primary completion rate pct
+school_enrollment_secondary_pct,social,False,Social - school enrollment secondary pct
+under5_mortality_per_1000,social,True,Social - under5 mortality per 1000
+unemployment_pct,social,True,Social - unemployment pct
+urban_population_pct,social,False,Social - urban population pct
+youth_unemployment_pct,social,True,Social - youth unemployment pct
+bank_account_ownership_pct,technological,False,Technologique - bank account ownership pct
+fixed_broadband_per_100,technological,False,Technologique - fixed broadband per 100
+high_tech_exports_pct,technological,False,Technologique - high tech exports pct
+internet_users_pct,technological,False,Technologique - internet users pct
+mobile_subscriptions_per_100,technological,False,Technologique - mobile subscriptions per 100
+rd_expenditure_pct_gdp,technological,False,Technologique - rd expenditure pct gdp
+researchers_per_million,technological,False,Technologique - researchers per million
