@@ -2,7 +2,6 @@
 
 Monthly data refreshes are appended below automatically by the GitHub Actions pipeline.
 
-<!-- AUTO-GENERATED -->
 ## 2026-09-05
 - Coverage: 217 countries, 2000-2024, 58 indicators
 - Overall null rate: 23.4%
