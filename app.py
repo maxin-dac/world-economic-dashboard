@@ -16,6 +16,7 @@ import streamlit as st
 from translations import t, TRANSLATIONS
 
 from core.data import load_data
+from core import __version__
 from core.constants import (INCOME_ORDER, INCOME_COLORS, REGION_COLORS, SECTOR_COLORS,
     SECTOR_LABEL_KEYS, GEO_STYLE, PESTEL_PILLAR_ORDER, PESTEL_LABEL_KEYS, PESTEL_INDICATORS,
     INDICATOR_TO_PILLAR, CORE_INDICATORS, INVERSE_INDICATORS, get_expressive_colorscale)
