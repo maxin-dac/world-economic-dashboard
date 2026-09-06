@@ -541,6 +541,9 @@ with tab_struct:
             fig_bot.update_layout(showlegend=False, margin=dict(t=50, b=20, l=10, r=10), height=380)
             st.plotly_chart(style_plotly(fig_bot, theme_mode), width="stretch", theme="streamlit")
 
+    import resilience
+    resilience.render(df_all, lang, theme_mode=theme_mode)
+
 with tab_data:
     import dataquality
     section_head("01", "tab_data_explorer_title", lang)
