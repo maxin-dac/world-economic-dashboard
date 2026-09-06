@@ -102,7 +102,7 @@ world-economic-dashboard/
 │ └── world_economic.parquet    # Parquet cache for fast local loading
 ├── docs/
 │ └── screenshots/              # Dashboard overview captures (EN + FR)
-├── app.py                      # Streamlit entry point (7 tabs)
+├── app.py                      # Streamlit entry point (6 tabs)
 ├── dataquality.py              # Data quality auditing & coverage reporting
 ├── exports.py                  # Excel (.xlsx) export engine
 ├── resilience.py               # Economic resilience & vulnerability module

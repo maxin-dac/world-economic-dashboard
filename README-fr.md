@@ -102,7 +102,7 @@ world-economic-dashboard/
 │ └── world_economic.parquet  # Cache Parquet (chargement rapide)
 ├── docs/
 │ └── screenshots/            # Captures d'aperçu du dashboard (FR + EN)
-├── app.py                    # Point d'entrée Streamlit (7 onglets)
+├── app.py                    # Point d'entrée Streamlit (6 onglets)
 ├── dataquality.py            # Module d'audit de qualité et de couverture
 ├── exports.py                # Moteur d'export Excel (.xlsx)
 ├── resilience.py             # Module d'analyse de résilience économique
