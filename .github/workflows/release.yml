@@ -16,6 +16,7 @@ jobs:
     name: Semantic Release
     runs-on: ubuntu-latest
     timeout-minutes: 10
+
     steps:
       - name: Checkout (full history for changelog)
         uses: actions/checkout@v4

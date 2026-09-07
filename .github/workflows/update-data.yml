@@ -2,6 +2,8 @@ name: Monthly Data Refresh
 
 on:
   schedule:
+    # Runs every Monday at 06:00 UTC.
+    # The first-monday-check job below keeps only the first Monday of the month.
     - cron: '0 6 * * 1'
   workflow_dispatch:
 
@@ -9,11 +11,12 @@ permissions:
   contents: write
 
 concurrency:
-  group: monthly-refresh
+  group: monthly-data-refresh
   cancel-in-progress: false
 
 jobs:
   first-monday-check:
+    name: First Monday gate
     runs-on: ubuntu-latest
     outputs:
       run_today: ${{ steps.check.outputs.run_today }}
@@ -29,14 +32,16 @@ jobs:
           fi
 
   refresh:
-    name: Refresh dataset & redeploy
+    name: Refresh dataset
     needs: first-monday-check
     if: needs.first-monday-check.outputs.run_today == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 45
+
     environment:
       name: production
       url: https://world-economic-dashboard.onrender.com
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
@@ -57,28 +62,30 @@ jobs:
         run: python data/fetch_data.py
 
       - name: Generate changelog entry
-        run: |
-          if [ -f .github/changelog_entry.py ]; then
-            python .github/changelog_entry.py
-          else
-            echo "::warning::changelog_entry.py absent - etape ignoree"
-          fi
+        run: python .github/changelog_entry.py
 
       - name: Generate Power BI Star Schema
-        run: |
-          if [ -f data/prep_powerbi.py ]; then
-            python data/prep_powerbi.py
-          elif [ -f scripts/prep_powerbi.py ]; then
-            python scripts/prep_powerbi.py
-          else
-            echo "::warning::prep_powerbi.py absent - etape ignoree"
-          fi
+        run: python data/prep_powerbi.py
 
       - name: Commit & push if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/world_economic.csv CHANGELOG.md
-          [ -d data/powerbi ] && git add data/powerbi/
+          git add data/world_economic.csv data/powerbi/ CHANGELOG.md
           git diff --cached --quiet || git commit -m "data: monthly refresh $(date +%Y-%m-%d)"
           git push
+
+  report-streamlit-cloud:
+    name: Report Streamlit Cloud deployment
+    needs: refresh
+    if: needs.refresh.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    environment:
+      name: streamlit-cloud
+      url: https://world-bi-dashboard.streamlit.app/
+
+    steps:
+      - name: Report deployment
+        run: echo "Streamlit Cloud deployment reported to GitHub Deployments."
