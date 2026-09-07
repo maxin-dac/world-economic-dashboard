@@ -2,15 +2,41 @@ name: Monthly Data Refresh
 
 on:
   schedule:
-    - cron: '0 6 1-7 * 1'
+    - cron: '0 6 * * 1'
   workflow_dispatch:
 
 permissions:
   contents: write
 
+concurrency:
+  group: monthly-refresh
+  cancel-in-progress: false
+
 jobs:
-  refresh:
+  first-monday-check:
     runs-on: ubuntu-latest
+    outputs:
+      run_today: ${{ steps.check.outputs.run_today }}
+    steps:
+      - id: check
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "run_today=true" >> "$GITHUB_OUTPUT"
+          elif [ "$(date +%d)" -le 7 ]; then
+            echo "run_today=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "run_today=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  refresh:
+    name: Refresh dataset & redeploy
+    needs: first-monday-check
+    if: needs.first-monday-check.outputs.run_today == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    environment:
+      name: production
+      url: https://world-economic-dashboard.onrender.com
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
@@ -31,15 +57,28 @@ jobs:
         run: python data/fetch_data.py
 
       - name: Generate changelog entry
-        run: python .github/changelog_entry.py
+        run: |
+          if [ -f .github/changelog_entry.py ]; then
+            python .github/changelog_entry.py
+          else
+            echo "::warning::changelog_entry.py absent - etape ignoree"
+          fi
 
       - name: Generate Power BI Star Schema
-        run: python data/prep_powerbi.py
+        run: |
+          if [ -f data/prep_powerbi.py ]; then
+            python data/prep_powerbi.py
+          elif [ -f scripts/prep_powerbi.py ]; then
+            python scripts/prep_powerbi.py
+          else
+            echo "::warning::prep_powerbi.py absent - etape ignoree"
+          fi
 
       - name: Commit & push if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/world_economic.csv data/powerbi/ CHANGELOG.md
+          git add data/world_economic.csv CHANGELOG.md
+          [ -d data/powerbi ] && git add data/powerbi/
           git diff --cached --quiet || git commit -m "data: monthly refresh $(date +%Y-%m-%d)"
           git push
