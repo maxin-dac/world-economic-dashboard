@@ -2,8 +2,6 @@ name: Monthly Data Refresh
 
 on:
   schedule:
-    # Runs every Monday at 06:00 UTC.
-    # The first-monday-check job below keeps only the first Monday of the month.
     - cron: '0 6 * * 1'
   workflow_dispatch:
 
